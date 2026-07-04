@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Settings — Fluxa Docs</title>
+<meta name="description" content="Configure profiles, playback, addons, and account sync in Fluxa." />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Settings — Fluxa Docs" />
+<meta property="og:description" content="Configure profiles, playback, addons, and account sync in Fluxa." />
+<meta property="og:image" content="logo.png" />
+<meta name="twitter:card" content="summary" />
+<link rel="icon" type="image/png" sizes="48x48" href="favicon.png" />
+<link rel="apple-touch-icon" href="logo.png" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<div class="layout">
+<button class="menu-btn" id="menu-btn" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="sidebar">☰</button>
+<div class="overlay" id="overlay"></div>
+<aside class="sidebar" id="sidebar">
+  <a class="sidebar-logo" href="index.html">
+    <img src="logo.png" alt="Fluxa" />
+    <span>Fluxa Docs</span>
+  </a>
+  <div class="search-wrap">
+    <i data-lucide="search" class="search-icon"></i>
+    <input type="search" id="search-input" placeholder="Search docs…" aria-label="Search documentation" autocomplete="off" />
+  </div>
+  <div id="search-results" class="search-results"></div>
+  <nav>
+    <a href="index.html"><i data-lucide="home" class="nav-icon"></i>Home</a>
+    <a href="account.html"><i data-lucide="user" class="nav-icon"></i>Account</a>
+    <div class="nav-group">Overview</div>
+    <a href="what-is-fluxa.html"><i data-lucide="info" class="nav-icon"></i>What is Fluxa</a>
+    <a href="getting-started.html"><i data-lucide="rocket" class="nav-icon"></i>Getting Started</a>
+    <a href="concepts.html"><i data-lucide="book-open" class="nav-icon"></i>Concepts</a>
+    <div class="nav-group">Guides</div>
+    <a href="addons-catalogs.html"><i data-lucide="puzzle" class="nav-icon"></i>Addons &amp; Catalogs</a>
+    <a href="library-collections.html"><i data-lucide="bookmark" class="nav-icon"></i>Library &amp; Collections</a>
+    <a href="sync-accounts.html"><i data-lucide="refresh-cw" class="nav-icon"></i>Sync &amp; Accounts</a>
+    <a href="playback.html"><i data-lucide="play-circle" class="nav-icon"></i>Playback</a>
+    <div class="nav-group">Reference</div>
+    <a href="settings.html"><i data-lucide="sliders" class="nav-icon"></i>Settings</a>
+    <a href="troubleshooting.html"><i data-lucide="alert-circle" class="nav-icon"></i>Troubleshooting</a>
+    <a href="faq.html"><i data-lucide="help-circle" class="nav-icon"></i>FAQ</a>
+  </nav>
+</aside>
+<main class="main">
+<div class="content">
+
+<div class="intro">
+  <h1>Settings</h1>
+  <p>A reference for every option in Fluxa, explained in plain terms.</p>
+</div>
+
+<h2 id="general">General</h2>
+<table>
+  <thead><tr><th>Setting</th><th>What it does</th></tr></thead>
+  <tbody>
+    <tr><td>Language</td><td>Changes the language of the app's interface and catalog labels.</td></tr>
+    <tr><td>Start Page</td><td>Which screen opens first after you choose a profile — Home, Search, Library, or Discover.</td></tr>
+    <tr><td>Show Hero Section</td><td>Turns the large featured banner at the top of the Home screen on or off.</td></tr>
+    <tr><td>Notifications</td><td>Allows Fluxa to send notifications on your device.</td></tr>
+    <tr><td>New episode alerts</td><td>Sends a notification when a new episode drops for a show in your watchlist.</td></tr>
+    <tr><td>Check for updates</td><td>Shows your current version and lets you update the app from inside Fluxa.</td></tr>
+  </tbody>
+</table>
+
+<h2 id="appearance">Appearance</h2>
+<table>
+  <thead><tr><th>Setting</th><th>What it does</th></tr></thead>
+  <tbody>
+    <tr><td>Accent Color</td><td>The highlight colour used for buttons and active states throughout the app.</td></tr>
+    <tr><td>Home Catalogs</td><td>Choose which catalog rows appear on the Home screen and set their order.</td></tr>
+    <tr><td>Top 10 Catalogs</td><td>Select which rows show large ranking numbers (1–10) on their posters.</td></tr>
+    <tr><td>Hero Catalogs</td><td>Choose which catalogs supply content to the large featured banner.</td></tr>
+  </tbody>
+</table>
+
+<h2 id="playback">Playback</h2>
+<table>
+  <thead><tr><th>Setting</th><th>What it does</th></tr></thead>
+  <tbody>
+    <tr><td>Stream Source Selection</td><td>Manual shows you a list of sources to pick from. Auto picks immediately. Regex lets you set a pattern to match automatically.</td></tr>
+    <tr><td>Regex Pattern</td><td>The pattern used in Regex mode. For example: <code>1080p</code> to always pick 1080p sources first.</td></tr>
+    <tr><td>Default Player</td><td>Use Fluxa's built-in player or open streams in an external app.</td></tr>
+    <tr><td>Resume Playback</td><td>When you reopen something you've already started, jump straight to where you left off.</td></tr>
+    <tr><td>Auto-play Next Episode</td><td>Automatically starts the next episode when the current one finishes.</td></tr>
+    <tr><td>Countdown Duration</td><td>How long the auto-play countdown shows before the next episode starts.</td></tr>
+    <tr><td>Playback Speed</td><td>The default speed for all videos. 1.0 is normal.</td></tr>
+    <tr><td>Skip Amount</td><td>How far the forward and back buttons jump. Default is 10 seconds.</td></tr>
+    <tr><td>Hold to Speed Up</td><td>When held, the video plays faster. Releases back to normal speed when you let go.</td></tr>
+    <tr><td>Hold Speed</td><td>How fast the video plays while holding.</td></tr>
+    <tr><td>Skip Intro</td><td>Shows a Skip Intro button when an intro segment is detected.</td></tr>
+    <tr><td>Skip Recap</td><td>Shows a Skip Recap button for anime content.</td></tr>
+    <tr><td>MPV Options</td><td>Advanced: raw options passed to the video player. One per line. Ignore this unless you know what you're doing.</td></tr>
+    <tr><td>Scripts Directory</td><td>Advanced: a folder of player scripts to load at startup.</td></tr>
+  </tbody>
+</table>
+
+<h2 id="buffer-and-cache">Buffer &amp; Cache</h2>
+<table>
+  <thead><tr><th>Setting</th><th>What it does</th></tr></thead>
+  <tbody>
+    <tr><td>Buffer Cache</td><td>How much memory Fluxa can use to pre-load video data.</td></tr>
+    <tr><td>Forward Buffer</td><td>How many seconds ahead the player tries to keep ready.</td></tr>
+    <tr><td>Back Buffer</td><td>How many seconds behind your current position you can seek back to instantly.</td></tr>
+  </tbody>
+</table>
+
+<h2 id="subtitles">Subtitles</h2>
+<table>
+  <thead><tr><th>Setting</th><th>What it does</th></tr></thead>
+  <tbody>
+    <tr><td>Preferred Language</td><td>Automatically enables subtitle tracks in this language when available.</td></tr>
+    <tr><td>Font Size</td><td>How big the subtitle text appears on screen.</td></tr>
+    <tr><td>Outline Colour</td><td>The colour of the shadow behind the text.</td></tr>
+    <tr><td>Outline Opacity</td><td>How visible the shadow is.</td></tr>
+    <tr><td>Text Colour</td><td>The colour of the subtitle text itself.</td></tr>
+  </tbody>
+</table>
+
+<h2 id="metadata">Metadata</h2>
+<table>
+  <thead><tr><th>Setting</th><th>What it does</th></tr></thead>
+  <tbody>
+    <tr><td>TMDB API Key</td><td>Optional. Supplements your addons with additional cast photos, trailers, and recommendations from The Movie Database when your addons don't already provide them. Free to get at themoviedb.org.</td></tr>
+    <tr><td>Cast Images</td><td>Show actor photos on detail pages.</td></tr>
+    <tr><td>Trailers</td><td>Show a trailer on the detail page.</td></tr>
+    <tr><td>Recommendations</td><td>Show "You may also like" on the detail page.</td></tr>
+    <tr><td>Similar Titles</td><td>Show a "Similar" row on the detail page.</td></tr>
+    <tr><td>Episode Images</td><td>Show thumbnail images for individual episodes.</td></tr>
+    <tr><td>Logos &amp; Backdrops</td><td>Use high-quality title logos and backdrop images where available.</td></tr>
+  </tbody>
+</table>
+
+<h2 id="decoder">Decoder</h2>
+<p>These are advanced options for video quality and compatibility. Most people won't need to touch them.</p>
+<table>
+  <thead><tr><th>Setting</th><th>What it does</th></tr></thead>
+  <tbody>
+    <tr><td>FFmpeg Audio Decoder</td><td>Use an alternative audio decoder. Try this if you're getting no audio or distorted audio with certain files.</td></tr>
+    <tr><td>Dolby Vision Fallback</td><td>How to handle Dolby Vision video on hardware that doesn't fully support it. Auto is usually fine.</td></tr>
+  </tbody>
+</table>
+
+<h2 id="account">Account</h2>
+<p>This is where you connect and manage Nuvio, Trakt, MyAnimeList, and Simkl. See the <a href="sync-accounts.html">Sync &amp; Accounts</a> guide for details on each.</p>
+
+<h2 id="addons">Addons</h2>
+<p>Install new addons by pasting a manifest URL, remove ones you don't use, drag to reorder them, or toggle individual addons on and off. See <a href="addons-catalogs.html">Addons &amp; Catalogs</a> for more.</p>
+
+</div>
+</main>
+</div>
+<script src="lucide.min.js"></script>
+<script src="search-index.js"></script>
+<script src="glossary.js"></script>
+<script src="nav.js"></script>
+</body>
+</html>

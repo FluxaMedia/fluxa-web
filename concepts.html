@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Concepts — Fluxa Docs</title>
+<meta name="description" content="The core ideas behind Fluxa: addons, catalogs, streams, the library, and how they fit together." />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Concepts — Fluxa Docs" />
+<meta property="og:description" content="The core ideas behind Fluxa: addons, catalogs, streams, the library, and how they fit together." />
+<meta property="og:image" content="logo.png" />
+<meta name="twitter:card" content="summary" />
+<link rel="icon" type="image/png" sizes="48x48" href="favicon.png" />
+<link rel="apple-touch-icon" href="logo.png" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<div class="layout">
+<button class="menu-btn" id="menu-btn" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="sidebar">☰</button>
+<div class="overlay" id="overlay"></div>
+<aside class="sidebar" id="sidebar">
+  <a class="sidebar-logo" href="index.html">
+    <img src="logo.png" alt="Fluxa" />
+    <span>Fluxa Docs</span>
+  </a>
+  <div class="search-wrap">
+    <i data-lucide="search" class="search-icon"></i>
+    <input type="search" id="search-input" placeholder="Search docs…" aria-label="Search documentation" autocomplete="off" />
+  </div>
+  <div id="search-results" class="search-results"></div>
+  <nav>
+    <a href="index.html"><i data-lucide="home" class="nav-icon"></i>Home</a>
+    <a href="account.html"><i data-lucide="user" class="nav-icon"></i>Account</a>
+    <div class="nav-group">Overview</div>
+    <a href="what-is-fluxa.html"><i data-lucide="info" class="nav-icon"></i>What is Fluxa</a>
+    <a href="getting-started.html"><i data-lucide="rocket" class="nav-icon"></i>Getting Started</a>
+    <a href="concepts.html"><i data-lucide="book-open" class="nav-icon"></i>Concepts</a>
+    <div class="nav-group">Guides</div>
+    <a href="addons-catalogs.html"><i data-lucide="puzzle" class="nav-icon"></i>Addons &amp; Catalogs</a>
+    <a href="library-collections.html"><i data-lucide="bookmark" class="nav-icon"></i>Library &amp; Collections</a>
+    <a href="sync-accounts.html"><i data-lucide="refresh-cw" class="nav-icon"></i>Sync &amp; Accounts</a>
+    <a href="playback.html"><i data-lucide="play-circle" class="nav-icon"></i>Playback</a>
+    <div class="nav-group">Reference</div>
+    <a href="settings.html"><i data-lucide="sliders" class="nav-icon"></i>Settings</a>
+    <a href="troubleshooting.html"><i data-lucide="alert-circle" class="nav-icon"></i>Troubleshooting</a>
+    <a href="faq.html"><i data-lucide="help-circle" class="nav-icon"></i>FAQ</a>
+  </nav>
+</aside>
+<main class="main">
+<div class="content">
+
+<div class="intro">
+  <h1>Concepts</h1>
+  <p>Plain-English explanations of the terms and ideas that come up when using Fluxa.</p>
+</div>
+
+<h2 id="addons">Addons</h2>
+<p>An addon is a small online service that Fluxa connects to in the background. You install one by giving Fluxa its address (a URL ending in <code>/manifest.json</code>), and Fluxa starts talking to it automatically from that point on. Most addons run on someone else's server — you just link to them.</p>
+<p>Addons come in a few distinct types, though many addons combine more than one type in a single package.</p>
+
+<h3 id="catalog-addon">Catalog addon</h3>
+<p>A catalog addon provides lists of titles: trending movies, top-rated shows, new anime releases, by genre, and so on. These are the rows that appear on your home screen and the results you see when you search. A catalog addon tells Fluxa <em>what exists</em> — it doesn't provide the actual video.</p>
+<p>You can have as many catalog addons as you want. Each one adds more rows and more content to discover. In Settings → Home Catalogs, you choose which rows appear and in what order.</p>
+
+<h3 id="stream-addon">Stream addon</h3>
+<p>A stream addon provides the actual video links when you press Play. When you tap Play on a title, Fluxa sends a request to all your stream addons at once, asking for available sources. Each addon replies with whatever it has — direct HTTP video links, torrent magnet links, or nothing. Fluxa shows you the combined list (or picks automatically, depending on your settings).</p>
+<p>Without at least one stream addon, you can browse content but can't play anything. Stream addons are the most important type to have installed.</p>
+
+<h3 id="metadata-addon">Metadata addon</h3>
+<p>A metadata addon provides extra information about titles: cast, synopsis, episode lists, trailers, ratings, posters, and artwork. Fluxa uses this to fill in the detail page when you tap on a title.</p>
+<p>Many addons bundle metadata alongside their catalog and stream data. But some addons specialize in metadata only — for example, an addon that pulls detailed anime data from a specific database. These can be installed on top of other addons to enrich the information you see without duplicating their streams.</p>
+
+<h3 id="subtitle-addon">Subtitle addon</h3>
+<p>A subtitle addon provides subtitle files for videos you're already playing. When you open the subtitle menu in the player, Fluxa checks your installed subtitle addons for available tracks and adds them to the list alongside any subtitles already embedded in the video file itself.</p>
+<p>Subtitle addons often specialize by language or content type. If you watch content in a language that doesn't have many embedded subtitles, a subtitle addon is worth looking for.</p>
+
+<h3 id="combined-addons">Combined addons</h3>
+<p>Most popular addons do more than one thing. A single addon might provide catalog rows, supply streams when you press Play, and include metadata like cast and synopsis — all in one. This is very common. When you install such an addon, Fluxa uses it for all the things it offers.</p>
+
+<div class="note">
+  <strong>Where to find addons.</strong> Fluxa uses the same addon format as Stremio. Search for <a href="https://www.google.com/search?q=stremio+addon+list" target="_blank" rel="noopener noreferrer">"Stremio addon list"</a> to find community-maintained directories. Each addon's page will show its manifest URL.
+</div>
+
+<h2 id="debrid-services">Debrid services</h2>
+<p>A debrid service (also called a "premium link generator" or just "debrid") is a paid third-party service that dramatically improves streaming performance. It's one of the most impactful things you can add to a setup like Fluxa if you watch frequently.</p>
+
+<h3 id="how-it-works">How it works</h3>
+<p>Many stream addons return torrent links rather than direct video files. Without debrid, playing a torrent requires your device to connect to a swarm of other users sharing that file — which can be slow, unreliable, or blocked by your ISP.</p>
+<p>A debrid service works differently: it downloads the torrent to its own fast servers and gives you a plain HTTP stream URL instead. You then stream directly from the debrid provider's server, not from random peers. The result is:</p>
+<ul>
+  <li><strong>Speed</strong> — You're pulling from a data center, not a peer swarm. Even 4K files start in seconds.</li>
+  <li><strong>Reliability</strong> — Popular content is cached on the debrid server already. You get it instantly.</li>
+  <li><strong>No ISP issues</strong> — Your traffic looks like a normal HTTPS download. Torrent throttling doesn't apply.</li>
+  <li><strong>Better quality</strong> — Full-quality remux and 4K sources that would be impractical to torrent stream fine over HTTP.</li>
+</ul>
+<p>The tradeoff is cost — debrid services are paid subscriptions, typically €3–5 per month. They're not required to use Fluxa, but users who care about stream quality often find them worth it.</p>
+
+<h3 id="common-debrid-providers">Common debrid providers</h3>
+<table>
+  <thead><tr><th>Service</th><th>Notes</th></tr></thead>
+  <tbody>
+    <tr><td><a href="https://real-debrid.com" target="_blank" rel="noopener noreferrer">Real-Debrid</a></td><td>The most widely supported. Almost every stream addon has Real-Debrid integration. ~3€/month.</td></tr>
+    <tr><td><a href="https://alldebrid.com" target="_blank" rel="noopener noreferrer">AllDebrid</a></td><td>Similar feature set to Real-Debrid, also very popular. ~3€/month.</td></tr>
+    <tr><td><a href="https://www.premiumize.me" target="_blank" rel="noopener noreferrer">Premiumize</a></td><td>Includes cloud storage and a VPN in addition to debrid. ~10€/month.</td></tr>
+    <tr><td><a href="https://debrid-link.com" target="_blank" rel="noopener noreferrer">Debrid-Link</a></td><td>Alternative with a similar feature set to Real-Debrid.</td></tr>
+    <tr><td><a href="https://torbox.app" target="_blank" rel="noopener noreferrer">TorBox</a></td><td>Newer provider with a generous free tier and strong torrent support. Popular choice for getting started.</td></tr>
+  </tbody>
+</table>
+
+<h3 id="how-to-use-debrid-with-fluxa">How to use Debrid with Fluxa</h3>
+<p>Debrid integration is handled by your stream addons, not by Fluxa itself. Most popular stream addons — like Torrentio — have a configuration page where you paste your debrid API key. After that, when you press Play, the addon automatically checks your debrid account for a cached version of the content and returns a fast HTTP link instead of a raw torrent.</p>
+<p>To get your API key: sign up for a debrid service, then find the API key in your account settings on their website. Paste it into the addon's configuration page (usually found by opening the addon's manifest URL in a browser).</p>
+
+<div class="note">
+  Fluxa itself doesn't know about your debrid account — it just receives whatever link the addon provides. The addon is what talks to debrid on your behalf.
+</div>
+
+<h2 id="usenet">Usenet</h2>
+<p>Usenet is a decades-old, decentralized network of newsgroups. Outside its original purpose, it's become a fast and reliable way to get media — and like debrid, some stream addons can pull from it directly so you get a streamable link without downloading anything yourself.</p>
+
+<h3 id="how-it-works-2">How it works</h3>
+<p>Files on Usenet are uploaded as binary data spread across many small articles, described by a small text file called an NZB. The NZB doesn't contain the file itself — it's a set of pointers telling a Usenet client which articles to fetch and how to put them back together, similar to how a torrent file points at peers instead of containing the video.</p>
+<p>To use Usenet you need a paid Usenet provider (the server that actually stores the articles) and usually an indexer that searches for NZBs and hands the right one to your downloader.</p>
+<ul>
+  <li><strong>Speed</strong> — providers run high-bandwidth servers with many parallel connections, so downloads often max out a home connection.</li>
+  <li><strong>Privacy</strong> — there's no peer swarm to join. You only ever connect to your provider's servers over an encrypted connection.</li>
+  <li><strong>Long retention</strong> — most providers keep content for over a decade, so older or niche releases stay available long after they'd have died out on torrents.</li>
+</ul>
+<p>The tradeoff, like debrid, is cost — a Usenet provider subscription typically runs €5–10 per month, and a separate indexer subscription is often needed on top of that.</p>
+
+<h3 id="common-usenet-providers">Common Usenet providers</h3>
+<table>
+  <thead><tr><th>Service</th><th>Notes</th></tr></thead>
+  <tbody>
+    <tr><td><a href="https://www.easynews.com" target="_blank" rel="noopener noreferrer">Easynews</a></td><td>Bundles provider, indexer, and direct web streaming in one. No separate downloader needed — closest experience to debrid. ~10€/month.</td></tr>
+    <tr><td><a href="https://www.newshosting.com" target="_blank" rel="noopener noreferrer">Newshosting</a></td><td>Long-standing provider with high retention and a bundled VPN option.</td></tr>
+    <tr><td><a href="https://www.eweka.nl" target="_blank" rel="noopener noreferrer">Eweka</a></td><td>European provider, popular for its EU-based servers and consistent speeds.</td></tr>
+    <tr><td><a href="https://www.usenetserver.com" target="_blank" rel="noopener noreferrer">UsenetServer</a></td><td>Established provider with a generous trial and good completion rates.</td></tr>
+  </tbody>
+</table>
+
+<h3 id="how-to-use-usenet-with-fluxa">How to use Usenet with Fluxa</h3>
+<p>As with debrid, Usenet support is handled entirely by your stream addons, not by Fluxa itself. A handful of addons support Usenet directly — Easynews is the most popular since it streams straight from its own servers without any separate download client, much like a debrid service returns a direct link. Other addons expect you to configure an NZB indexer and a download client (like SABnzbd) that they call out to behind the scenes.</p>
+<p>Where an addon supports it, you'll find Usenet or NZB fields on its configuration page alongside any debrid settings — paste in your provider or indexer details the same way you would a debrid API key.</p>
+
+<div class="note">
+  Usenet and debrid solve the same problem — a fast, direct stream instead of waiting on a torrent swarm — through different mechanisms. Plenty of people use only one or the other; some addons support both side by side.
+</div>
+
+<h2 id="manifest-url">Manifest URL</h2>
+<p>Every addon has a manifest URL — a web address ending in <code>/manifest.json</code>. This is the addon's "address" that you paste into Fluxa to install it (Settings → Addons). When Fluxa reads this file, it learns everything about the addon: its name, what types of content it provides (catalogs, streams, metadata, subtitles), and how to ask it for data.</p>
+<p>Think of the manifest URL like a phone number — it's what Fluxa dials to reach the addon. The addon itself runs on a remote server; the manifest URL just tells Fluxa where to look.</p>
+<p>If an addon has configuration options (like a debrid API key or content filters), its configuration page is usually found by opening the manifest URL in a browser and removing the <code>/manifest.json</code> part from the end.</p>
+
+<h2 id="stremio-compatibility">Stremio compatibility</h2>
+<p>Fluxa uses the same addon protocol as Stremio. This means every Stremio-compatible addon works in Fluxa without any changes — you can install them exactly the same way by pasting the manifest URL. Communities that have built addons for Stremio have effectively built them for Fluxa too.</p>
+<p>This is intentional. Rather than building a proprietary addon ecosystem from scratch, Fluxa taps into the large existing ecosystem of community addons that Stremio users have built and maintained over the years.</p>
+
+<h2 id="direct-streams-vs-torrents">Direct streams vs torrents</h2>
+<p>When you press Play, each stream source has a type:</p>
+<ul>
+  <li><strong>Direct (HTTP/HTTPS)</strong> — A plain video file served from a web server. Playback starts immediately. These come from hosting sites, debrid services (which convert torrents to direct links), or CDNs that addons have access to.</li>
+  <li><strong>Torrent (magnet link)</strong> — A torrent that Fluxa's built-in download engine connects to. Requires downloading the beginning of the file from a peer swarm before playback can start. Slower to begin, and quality depends on how many people are sharing.</li>
+</ul>
+<p>In the source list, you can usually tell them apart by looking at the quality label. If a source says something like "via RD" or has a debrid service name in it, that's a direct link that was originally a torrent but has been converted by the addon using your debrid account.</p>
+
+<h2 id="cached-vs-uncached-debrid">Cached vs uncached debrid</h2>
+<p>When a debrid service has already downloaded a specific torrent file, it's "cached" — meaning everyone with a debrid account can stream it immediately as a direct link. When it's "uncached", the debrid service would have to download it first, which can take minutes.</p>
+<p>Most popular content is cached on Real-Debrid and AllDebrid within hours of a new release. Niche content, older films, or very new releases may not be cached yet. Addons that support debrid typically mark sources as cached or uncached so you know what to expect before you pick one.</p>
+
+<h2 id="mpv">mpv</h2>
+<p>mpv is a free, open-source video player that Fluxa uses as its playback engine on desktop. It's what actually decodes and renders the video — Fluxa wraps it to provide the app interface. Because mpv supports virtually every video codec and format (MKV, MP4, AVI, H.264, H.265/HEVC, AV1, Dolby Vision, HDR, etc.), Fluxa inherits that compatibility without needing separate codec packs or plugins.</p>
+<p>The required libraries are bundled with Fluxa on every platform, including Linux — there's nothing extra to install.</p>
+<p>Advanced users can pass raw mpv options through <strong>Settings → Playback → MPV Options</strong> (one per line, e.g. <code>video-sync=display-resample</code>). Only do this if you know what you're doing — wrong options can break playback.</p>
+
+<h2 id="what-is-a-4k-remux">What is a "4K remux"?</h2>
+<p>You'll see terms like "remux", "BluRay", "WEB-DL", and "encode" in stream source names. They describe where the video came from and how much it's been compressed:</p>
+<ul>
+  <li><strong>Remux</strong> — The original video track from a Blu-ray or streaming source, with no additional compression. Largest file size, best quality. A 4K remux can be 60–100GB.</li>
+  <li><strong>BluRay encode / BDRip</strong> — Re-encoded from a Blu-ray source. Smaller than a remux, slightly lower quality, still very good.</li>
+  <li><strong>WEB-DL</strong> — Downloaded directly from a streaming service (Netflix, Amazon, etc.). Quality depends on the source bitrate.</li>
+  <li><strong>WEBRip</strong> — Screen-captured from a streaming service. Generally lower quality than WEB-DL.</li>
+  <li><strong>CAM / HDCAM</strong> — Recorded in a cinema. Poor quality. Avoid these.</li>
+</ul>
+<p>For daily watching, a 1080p WEB-DL or BluRay encode is indistinguishable from a remux on most screens. 4K remuxes only make a visible difference on large 4K TVs with HDR.</p>
+
+</div>
+</main>
+</div>
+<script src="lucide.min.js"></script>
+<script src="search-index.js"></script>
+<script src="glossary.js"></script>
+<script src="nav.js"></script>
+</body>
+</html>

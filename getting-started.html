@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Getting Started — Fluxa Docs</title>
+<meta name="description" content="Install Fluxa, add your first addon, and start watching in a few minutes." />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Getting Started — Fluxa Docs" />
+<meta property="og:description" content="Install Fluxa, add your first addon, and start watching in a few minutes." />
+<meta property="og:image" content="logo.png" />
+<meta name="twitter:card" content="summary" />
+<link rel="icon" type="image/png" sizes="48x48" href="favicon.png" />
+<link rel="apple-touch-icon" href="logo.png" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<div class="layout">
+<button class="menu-btn" id="menu-btn" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="sidebar">☰</button>
+<div class="overlay" id="overlay"></div>
+<aside class="sidebar" id="sidebar">
+  <a class="sidebar-logo" href="index.html">
+    <img src="logo.png" alt="Fluxa" />
+    <span>Fluxa Docs</span>
+  </a>
+  <div class="search-wrap">
+    <i data-lucide="search" class="search-icon"></i>
+    <input type="search" id="search-input" placeholder="Search docs…" aria-label="Search documentation" autocomplete="off" />
+  </div>
+  <div id="search-results" class="search-results"></div>
+  <nav>
+    <a href="index.html"><i data-lucide="home" class="nav-icon"></i>Home</a>
+    <a href="account.html"><i data-lucide="user" class="nav-icon"></i>Account</a>
+    <div class="nav-group">Overview</div>
+    <a href="what-is-fluxa.html"><i data-lucide="info" class="nav-icon"></i>What is Fluxa</a>
+    <a href="getting-started.html"><i data-lucide="rocket" class="nav-icon"></i>Getting Started</a>
+    <a href="concepts.html"><i data-lucide="book-open" class="nav-icon"></i>Concepts</a>
+    <div class="nav-group">Guides</div>
+    <a href="addons-catalogs.html"><i data-lucide="puzzle" class="nav-icon"></i>Addons &amp; Catalogs</a>
+    <a href="library-collections.html"><i data-lucide="bookmark" class="nav-icon"></i>Library &amp; Collections</a>
+    <a href="sync-accounts.html"><i data-lucide="refresh-cw" class="nav-icon"></i>Sync &amp; Accounts</a>
+    <a href="playback.html"><i data-lucide="play-circle" class="nav-icon"></i>Playback</a>
+    <div class="nav-group">Reference</div>
+    <a href="settings.html"><i data-lucide="sliders" class="nav-icon"></i>Settings</a>
+    <a href="troubleshooting.html"><i data-lucide="alert-circle" class="nav-icon"></i>Troubleshooting</a>
+    <a href="faq.html"><i data-lucide="help-circle" class="nav-icon"></i>FAQ</a>
+  </nav>
+</aside>
+<main class="main">
+<div class="content">
+
+<div class="intro">
+  <h1>Getting Started</h1>
+  <p>From download to your first stream, step by step.</p>
+</div>
+
+<h2 id="download-and-install">Download and install</h2>
+<p>Go to the <a href="https://github.com/KhooLy/fluxa-desktop/releases/latest" target="_blank">releases page</a> and download the file for your operating system.</p>
+
+<ul class="platform-list">
+  <li><span class="os">Windows</span><span class="pkg">Fluxa_x.x.x_x64-setup.exe</span></li>
+  <li><span class="os">macOS</span><span class="pkg">Fluxa_x.x.x_universal.dmg</span></li>
+  <li><span class="os">Ubuntu / Debian</span><span class="pkg">fluxa_x.x.x_amd64.deb</span></li>
+  <li><span class="os">Fedora / RHEL</span><span class="pkg">fluxa-x.x.x-1.x86_64.rpm</span></li>
+  <li><span class="os">Linux portable</span><span class="pkg">fluxa_x.x.x_amd64.AppImage</span></li>
+</ul>
+
+<p><strong>Windows:</strong> Run the installer and follow the prompts. No admin rights needed.</p>
+<p><strong>macOS:</strong> Open the .dmg and drag Fluxa into Applications. The first time you open it, macOS may show a security warning — go to System Settings → Privacy &amp; Security and click <em>Open Anyway</em>.</p>
+<p><strong>Linux:</strong> Install the .deb or .rpm with your package manager, or make the .AppImage executable and run it directly. mpv is bundled with the app, so there's nothing else to install.</p>
+
+<h2 id="first-launch">First launch</h2>
+<p>When you open Fluxa for the first time, you'll be asked to create a profile. Give it a name and pick an avatar — that's all you need to get in. You can create more profiles later, and each one has its own completely separate library and settings.</p>
+<p>After your profile is set up you'll see the home screen. It will look mostly empty at first, and that's normal — you need to add an addon before anything shows up.</p>
+
+<h2 id="adding-your-first-addon">Adding your first addon</h2>
+<p>Addons are what bring content into Fluxa. Each addon has a link — a web address ending in <code>/manifest.json</code> — that you paste into Fluxa to install it.</p>
+<p>To add one, go to <strong>Settings → Addons</strong>, paste the addon link into the field, and confirm. The home screen will fill in immediately with content from that addon.</p>
+<p>You can install as many addons as you like. Each one can add more content, more stream sources, or subtitles on top of what you already have.</p>
+
+<div class="note">
+  <strong>Where do I find addon links?</strong> Search for "Stremio addon list" — Fluxa uses the same addon format. Community-maintained lists are easy to find online.
+</div>
+
+<h2 id="finding-something-to-watch">Finding something to watch</h2>
+<p>Browse the home screen rows, use the <strong>Search</strong> screen to look for a specific title, or open <strong>Discover</strong> to explore a catalog by genre. Tap any poster to open the detail page, where you can read the synopsis, see the cast, and hit Play.</p>
+
+<h2 id="playing-something">Playing something</h2>
+<p>When you tap Play, Fluxa asks your addons for available sources and either shows you a list to choose from or starts automatically, depending on your settings. Once a source is picked, the video starts playing in the built-in player.</p>
+<p>If one source doesn't work, you can switch to another without going back to the detail page — there's a source button in the player itself.</p>
+
+<h2 id="screens-at-a-glance">Screens at a glance</h2>
+
+<table>
+  <thead><tr><th>Screen</th><th>What it's for</th></tr></thead>
+  <tbody>
+    <tr><td>Home</td><td>Content rows from your installed addons.</td></tr>
+    <tr><td>Search</td><td>Look up any title across all your addons at once.</td></tr>
+    <tr><td>Discover</td><td>Browse one catalog at a time with genre and type filters.</td></tr>
+    <tr><td>Library</td><td>Your saved titles, continue watching, and collections.</td></tr>
+    <tr><td>Calendar</td><td>Upcoming episode dates for shows in your watchlist.</td></tr>
+    <tr><td>Settings</td><td>Everything configurable — playback, appearance, accounts, addons.</td></tr>
+  </tbody>
+</table>
+
+</div>
+</main>
+</div>
+<script src="lucide.min.js"></script>
+<script src="search-index.js"></script>
+<script src="glossary.js"></script>
+<script src="nav.js"></script>
+</body>
+</html>

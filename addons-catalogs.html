@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Addons &amp; Catalogs — Fluxa Docs</title>
+<meta name="description" content="How to install addons, manage catalogs, and bring content into Fluxa." />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Addons & Catalogs — Fluxa Docs" />
+<meta property="og:description" content="How to install addons, manage catalogs, and bring content into Fluxa." />
+<meta property="og:image" content="logo.png" />
+<meta name="twitter:card" content="summary" />
+<link rel="icon" type="image/png" sizes="48x48" href="favicon.png" />
+<link rel="apple-touch-icon" href="logo.png" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<div class="layout">
+<button class="menu-btn" id="menu-btn" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="sidebar">☰</button>
+<div class="overlay" id="overlay"></div>
+<aside class="sidebar" id="sidebar">
+  <a class="sidebar-logo" href="index.html">
+    <img src="logo.png" alt="Fluxa" />
+    <span>Fluxa Docs</span>
+  </a>
+  <div class="search-wrap">
+    <i data-lucide="search" class="search-icon"></i>
+    <input type="search" id="search-input" placeholder="Search docs…" aria-label="Search documentation" autocomplete="off" />
+  </div>
+  <div id="search-results" class="search-results"></div>
+  <nav>
+    <a href="index.html"><i data-lucide="home" class="nav-icon"></i>Home</a>
+    <a href="account.html"><i data-lucide="user" class="nav-icon"></i>Account</a>
+    <div class="nav-group">Overview</div>
+    <a href="what-is-fluxa.html"><i data-lucide="info" class="nav-icon"></i>What is Fluxa</a>
+    <a href="getting-started.html"><i data-lucide="rocket" class="nav-icon"></i>Getting Started</a>
+    <a href="concepts.html"><i data-lucide="book-open" class="nav-icon"></i>Concepts</a>
+    <div class="nav-group">Guides</div>
+    <a href="addons-catalogs.html"><i data-lucide="puzzle" class="nav-icon"></i>Addons &amp; Catalogs</a>
+    <a href="library-collections.html"><i data-lucide="bookmark" class="nav-icon"></i>Library &amp; Collections</a>
+    <a href="sync-accounts.html"><i data-lucide="refresh-cw" class="nav-icon"></i>Sync &amp; Accounts</a>
+    <a href="playback.html"><i data-lucide="play-circle" class="nav-icon"></i>Playback</a>
+    <div class="nav-group">Reference</div>
+    <a href="settings.html"><i data-lucide="sliders" class="nav-icon"></i>Settings</a>
+    <a href="troubleshooting.html"><i data-lucide="alert-circle" class="nav-icon"></i>Troubleshooting</a>
+    <a href="faq.html"><i data-lucide="help-circle" class="nav-icon"></i>FAQ</a>
+  </nav>
+</aside>
+<main class="main">
+<div class="content">
+
+<div class="intro">
+  <h1>Addons &amp; Catalogs</h1>
+  <p>Addons are the source of everything in Fluxa. Here's how they work and what you can do with them.</p>
+</div>
+
+<h2 id="what-addons-do">What addons do</h2>
+<p>An addon is a small online service that Fluxa talks to behind the scenes. Different addons do different things — some bring catalogs of movies and shows, some provide the actual video streams when you press Play, and some add subtitles. Many do more than one of these at once.</p>
+<p>You can have as many addons installed as you like. They stack on top of each other, so one addon might show you what to watch and another provides the stream when you pick something.</p>
+
+<h2 id="installing-an-addon">Installing an addon</h2>
+<p>Every addon has a link — a web address that ends in <code>/manifest.json</code>. To install one, go to <strong>Settings → Addons</strong>, paste that link into the field, and confirm. The addon shows up in your list right away and its content appears on the home screen immediately.</p>
+<p>To remove an addon, find it in the addon list in Settings and tap the remove button. To temporarily disable one without removing it, toggle it off in the same list.</p>
+
+<h3 id="addon-order-matters-for-streams">Addon order matters for streams</h3>
+<p>When you press Play on a title, Fluxa asks all your stream addons at once and combines everything they return. The order your addons are in (which you can change by dragging in Settings → Addons) determines how the source list is sorted. If you have a preferred addon, put it at the top.</p>
+
+<h2 id="catalogs">Catalogs</h2>
+<p>A catalog is a named list of content that an addon exposes — for example "Trending Movies" or "Top Rated Anime". One addon can offer many catalogs.</p>
+<p>Each catalog can show up as a row on your home screen. You choose which ones are visible and in what order from <strong>Settings → Home Catalogs</strong>. Turning off a row doesn't remove the addon — it just hides that particular list from your home screen.</p>
+
+<h3 id="the-featured-banner">The featured banner</h3>
+<p>The large banner at the top of the home screen pulls from catalogs you select in <strong>Settings → Hero Catalogs</strong>. It rotates through featured titles from those catalogs. You can disable it entirely from the same settings screen if you prefer to skip straight to the rows.</p>
+
+<h2 id="search">Search</h2>
+<p>The Search screen queries all your addons at the same time and shows you combined results. You can narrow things down with the type filter (Movies or Series) and genre chips above the results.</p>
+<p>Your recent searches are saved so you can quickly repeat them. Tap one to search again, or tap the clear button to remove it.</p>
+
+<h2 id="discover">Discover</h2>
+<p>Discover lets you browse a single catalog in full, with filters. Choose the catalog from the list at the top, then use the type and genre options to narrow down. It's useful when you want to properly explore one source rather than scrolling through the home screen.</p>
+
+<h2 id="the-detail-page">The detail page</h2>
+<p>Tapping any title opens its detail page. Here you'll see the synopsis, release year, genres, rating, cast, and trailers. Cast photos and trailers can come from your installed metadata addons — many addons include this information. If yours don't, you can add a TMDB API key in <strong>Settings → Metadata</strong> as an additional source.</p>
+<p>For TV shows, all the seasons and episodes are listed here. You can play any episode directly from this page, add the show to your library, or mark individual episodes as watched.</p>
+
+<div class="note">
+  <strong>Cast photos or trailers not showing?</strong> Check if your installed addons provide metadata. If not, adding a free TMDB API key in <a href="settings.html">Settings → Metadata</a> will pull in additional cast and trailer data from The Movie Database.
+</div>
+
+</div>
+</main>
+</div>
+<script src="lucide.min.js"></script>
+<script src="search-index.js"></script>
+<script src="glossary.js"></script>
+<script src="nav.js"></script>
+</body>
+</html>

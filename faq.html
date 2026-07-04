@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>FAQ — Fluxa Docs</title>
+<meta name="description" content="Frequently asked questions about Fluxa — installation, addons, legality, syncing, and platforms." />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="FAQ — Fluxa Docs" />
+<meta property="og:description" content="Frequently asked questions about Fluxa — installation, addons, legality, syncing, and platforms." />
+<meta property="og:image" content="logo.png" />
+<meta name="twitter:card" content="summary" />
+<link rel="icon" type="image/png" sizes="48x48" href="favicon.png" />
+<link rel="apple-touch-icon" href="logo.png" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<div class="layout">
+<button class="menu-btn" id="menu-btn" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="sidebar">☰</button>
+<div class="overlay" id="overlay"></div>
+<aside class="sidebar" id="sidebar">
+  <a class="sidebar-logo" href="index.html">
+    <img src="logo.png" alt="Fluxa" />
+    <span>Fluxa Docs</span>
+  </a>
+  <div class="search-wrap">
+    <i data-lucide="search" class="search-icon"></i>
+    <input type="search" id="search-input" placeholder="Search docs…" aria-label="Search documentation" autocomplete="off" />
+  </div>
+  <div id="search-results" class="search-results"></div>
+  <nav>
+    <a href="index.html"><i data-lucide="home" class="nav-icon"></i>Home</a>
+    <a href="account.html"><i data-lucide="user" class="nav-icon"></i>Account</a>
+    <div class="nav-group">Overview</div>
+    <a href="what-is-fluxa.html"><i data-lucide="info" class="nav-icon"></i>What is Fluxa</a>
+    <a href="getting-started.html"><i data-lucide="rocket" class="nav-icon"></i>Getting Started</a>
+    <a href="concepts.html"><i data-lucide="book-open" class="nav-icon"></i>Concepts</a>
+    <div class="nav-group">Guides</div>
+    <a href="addons-catalogs.html"><i data-lucide="puzzle" class="nav-icon"></i>Addons &amp; Catalogs</a>
+    <a href="library-collections.html"><i data-lucide="bookmark" class="nav-icon"></i>Library &amp; Collections</a>
+    <a href="sync-accounts.html"><i data-lucide="refresh-cw" class="nav-icon"></i>Sync &amp; Accounts</a>
+    <a href="playback.html"><i data-lucide="play-circle" class="nav-icon"></i>Playback</a>
+    <div class="nav-group">Reference</div>
+    <a href="settings.html"><i data-lucide="sliders" class="nav-icon"></i>Settings</a>
+    <a href="troubleshooting.html"><i data-lucide="alert-circle" class="nav-icon"></i>Troubleshooting</a>
+    <a href="faq.html"><i data-lucide="help-circle" class="nav-icon"></i>FAQ</a>
+  </nav>
+</aside>
+<main class="main">
+<div class="content">
+
+<div class="intro">
+  <h1>FAQ</h1>
+  <p>Answers to the most common questions.</p>
+</div>
+
+<div class="faq-item" id="is-fluxa-free">
+  <button class="faq-q">Is Fluxa free?<span class="ch">▾</span></button>
+  <div class="faq-a">Yes. Fluxa is completely free to download and use. The optional third-party services you can connect — Trakt, MyAnimeList, Simkl, Nuvio — are separate products with their own accounts and pricing. Fluxa itself has no subscription or paid features.</div>
+</div>
+
+<div class="faq-item" id="is-it-legal">
+  <button class="faq-q">Is it legal?<span class="ch">▾</span></button>
+  <div class="faq-a">Fluxa itself is a legal, open-source app. It doesn't host or provide any content. What you can actually watch depends entirely on the addons you install — Fluxa has no control over what addon developers make available. You're responsible for the addons you use and the content you access through them.</div>
+</div>
+
+<div class="faq-item" id="do-i-need-to-create-an-account">
+  <button class="faq-q">Do I need to create an account?<span class="ch">▾</span></button>
+  <div class="faq-a">No. Fluxa works completely without any account. Trakt, MAL, Simkl, and Nuvio are all optional third-party services — you can connect any or none of them. You can stream, save to your library, make collections, and use profiles without ever signing in to anything.</div>
+</div>
+
+<div class="faq-item" id="why-is-the-home-screen-empty-after-i-install-the-app">
+  <button class="faq-q">Why is the home screen empty after I install the app?<span class="ch">▾</span></button>
+  <div class="faq-a">Fluxa doesn't come with any built-in content. You need to install an addon first. Go to <strong>Settings → Addons</strong>, paste in an addon link, and the home screen fills up right away. See <a href="getting-started.html">Getting Started</a> for a full walkthrough.</div>
+</div>
+
+<div class="faq-item" id="where-do-i-find-addon-links">
+  <button class="faq-q">Where do I find addon links?<span class="ch">▾</span></button>
+  <div class="faq-a">Fluxa uses the same addon format as Stremio, so searching for "Stremio addon list" will turn up plenty of community-maintained lists. Each addon has its own link — a web address ending in <code>/manifest.json</code> — that you paste into Fluxa to install it.</div>
+</div>
+
+<div class="faq-item" id="what-s-the-difference-between-catalog-addons-and-stream-addons">
+  <button class="faq-q">What's the difference between catalog addons and stream addons?<span class="ch">▾</span></button>
+  <div class="faq-a">Catalog addons provide the lists of movies and shows that fill your home screen and search results. Stream addons provide the actual video when you press Play. Many addons do both at once. You need at least one stream addon to actually watch anything.</div>
+</div>
+
+<div class="faq-item" id="why-does-it-say-trying-for-a-while-before-playback-starts">
+  <button class="faq-q">Why does it say "Trying…" for a while before playback starts?<span class="ch">▾</span></button>
+  <div class="faq-a">Fluxa is asking your addons for stream sources. How long this takes depends on how fast your addons respond. If some are slow or offline, it takes longer. Disabling addons you rarely use in <strong>Settings → Addons</strong> can speed this up noticeably.</div>
+</div>
+
+<div class="faq-item" id="why-is-the-video-quality-low">
+  <button class="faq-q">Why is the video quality low?<span class="ch">▾</span></button>
+  <div class="faq-a">In <strong>Manual</strong> source selection mode you can pick any source from the list, including higher-quality ones. In <strong>Auto</strong> mode, switch to <strong>Regex</strong> and enter a pattern like <code>1080p</code> — Fluxa will automatically prefer sources whose names match it. Both settings are in <strong>Settings → Playback → Stream Source Selection</strong>.</div>
+</div>
+
+<div class="faq-item" id="can-i-use-an-external-video-player-instead">
+  <button class="faq-q">Can I use an external video player instead?<span class="ch">▾</span></button>
+  <div class="faq-a">Yes. Go to <strong>Settings → Playback → Default Player</strong> and set it to an external app. When you press Play, Fluxa sends the stream link to that app instead of playing it internally.</div>
+</div>
+
+<div class="faq-item" id="how-do-i-set-up-fluxa-for-anime">
+  <button class="faq-q">How do I set up Fluxa for anime?<span class="ch">▾</span></button>
+  <div class="faq-a">Install an anime catalog addon to browse and discover titles, and at least one streaming addon that provides anime sources. Connect MyAnimeList or Simkl from <strong>Settings → Account</strong> to track what you watch. The <strong>Skip Recap</strong> setting in <strong>Settings → Playback</strong> is also useful for anime.</div>
+</div>
+
+<div class="faq-item" id="why-don-t-i-see-cast-photos-or-trailers">
+  <button class="faq-q">Why don't I see cast photos or trailers?<span class="ch">▾</span></button>
+  <div class="faq-a">Cast photos and trailers can come from your installed metadata addons — many addons include this information alongside streams. If yours don't provide them, you can add a free TMDB API key in <strong>Settings → Metadata</strong> to pull in additional data from The Movie Database. Get a free key at <a href="https://www.themoviedb.org/settings/api" target="_blank">themoviedb.org</a>.</div>
+</div>
+
+<div class="faq-item" id="can-i-import-my-trakt-or-mal-watch-history-into-fluxa">
+  <button class="faq-q">Can I import my Trakt or MAL watch history into Fluxa?<span class="ch">▾</span></button>
+  <div class="faq-a">Yes. When you first connect Trakt or MyAnimeList, your existing watch history is pulled into Fluxa's Library automatically.</div>
+</div>
+
+<div class="faq-item" id="how-do-i-update-fluxa">
+  <button class="faq-q">How do I update Fluxa?<span class="ch">▾</span></button>
+  <div class="faq-a">Go to <strong>Settings → General → Check for updates</strong>. The app shows your current version and downloads the latest one automatically. You can also download a new version manually from the releases page.</div>
+</div>
+
+<div class="faq-item" id="can-i-download-content-to-watch-offline">
+  <button class="faq-q">Can I download content to watch offline?<span class="ch">▾</span></button>
+  <div class="faq-a">No. Fluxa doesn't support offline downloads — everything plays live from online sources. The app caches some data while playing, but you can't save content for later.</div>
+</div>
+
+<div class="faq-item" id="what-video-formats-does-fluxa-support">
+  <button class="faq-q">What video formats does Fluxa support?<span class="ch">▾</span></button>
+  <div class="faq-a">Fluxa uses mpv to play video, which supports virtually every format: MKV, MP4, AVI, H.264, H.265/HEVC, AV1, and more. If a video plays in mpv, it will play in Fluxa.</div>
+</div>
+
+<div class="faq-item" id="can-i-use-a-vpn-with-fluxa">
+  <button class="faq-q">Can I use a VPN with Fluxa?<span class="ch">▾</span></button>
+  <div class="faq-a">Yes, VPNs work normally with Fluxa. A VPN may affect how individual addons and stream sources behave — some sources may be slower or unavailable depending on your exit location — but the app itself works fine with one running.</div>
+</div>
+
+<div class="faq-item" id="how-do-keyboard-shortcuts-work">
+  <button class="faq-q">How do keyboard shortcuts work?<span class="ch">▾</span></button>
+  <div class="faq-a">In the player: Space to play/pause, left/right arrow keys to seek, up/down arrow keys to adjust volume, F to toggle fullscreen. The skip amount for the arrow keys is configurable in <strong>Settings → Playback → Skip Amount</strong>.</div>
+</div>
+
+<div class="faq-item" id="can-i-change-subtitles-or-audio-language-while-watching">
+  <button class="faq-q">Can I change subtitles or audio language while watching?<span class="ch">▾</span></button>
+  <div class="faq-a">Yes. Both the subtitle menu and audio track menu are always available in the player toolbar while something is playing. You can switch tracks or turn subtitles off without pausing.</div>
+</div>
+
+<div class="faq-item" id="why-are-episode-numbers-wrong-for-some-shows">
+  <button class="faq-q">Why are episode numbers wrong for some shows?<span class="ch">▾</span></button>
+  <div class="faq-a">Different addons sometimes use different episode numbering, especially common with anime that aired as split-cour seasons. If the numbers don't match, try a different stream addon — the catalog and stream addon may be counting episodes by different conventions.</div>
+</div>
+
+<div class="faq-item" id="what-is-nuvio-and-do-i-need-it">
+  <button class="faq-q">What is Nuvio and do I need it?<span class="ch">▾</span></button>
+  <div class="faq-a">Nuvio is an optional third-party sync service, not part of Fluxa itself. It lets you keep your library, watch progress, and settings in sync between Fluxa on desktop and Fluxa on Android. If you only use one device, or don't mind setting up each device separately, you don't need Nuvio — Fluxa works exactly the same without it.</div>
+</div>
+
+<div class="faq-item" id="can-multiple-people-use-fluxa-on-the-same-computer">
+  <button class="faq-q">Can multiple people use Fluxa on the same computer?<span class="ch">▾</span></button>
+  <div class="faq-a">Yes. Fluxa supports up to five profiles per installation, each with its own completely separate library, addon list, and accounts. You can set a PIN on a profile to keep it private.</div>
+</div>
+
+<div class="faq-item" id="can-each-profile-have-different-settings-and-addons">
+  <button class="faq-q">Can each profile have different settings and addons?<span class="ch">▾</span></button>
+  <div class="faq-a">Yes, every profile is fully independent — separate addons, appearance settings, accounts, and library. A profile can also be optionally configured to share the addon list with your main profile. Useful for a second profile for a family member.</div>
+</div>
+
+<div class="faq-item" id="how-do-i-move-my-data-to-a-new-device">
+  <button class="faq-q">How do I move my data to a new device?<span class="ch">▾</span></button>
+  <div class="faq-a">If you use Nuvio sync, just sign in on the new device and everything syncs over. Without Nuvio, you can export your collections as a file from the collection editor and import them on the new device. Watch history can be recovered by reconnecting Trakt or MAL if you have those set up.</div>
+</div>
+
+<div class="faq-item" id="where-does-fluxa-store-my-data">
+  <button class="faq-q">Where does Fluxa store my data?<span class="ch">▾</span></button>
+  <div class="faq-a">
+    Everything is stored in your system's standard app data folder:<br><br>
+    Windows: <code>%APPDATA%\fluxa-desktop</code><br>
+    macOS: <code>~/Library/Application Support/fluxa-desktop</code><br>
+    Linux: <code>~/.local/share/fluxa-desktop</code>
+  </div>
+</div>
+
+<div class="faq-item" id="can-i-use-fluxa-without-an-internet-connection">
+  <button class="faq-q">Can I use Fluxa without an internet connection?<span class="ch">▾</span></button>
+  <div class="faq-a">The app opens offline and your saved library and collections are readable without internet. But actually watching something requires a connection — streams come from online sources and catalogs are fetched live from your addons.</div>
+</div>
+
+<div class="faq-item" id="what-s-the-difference-between-fluxa-desktop-and-fluxa-for-android">
+  <button class="faq-q">What's the difference between Fluxa Desktop and Fluxa for Android?<span class="ch">▾</span></button>
+  <div class="faq-a">They're the same app on different platforms. The features, addon support, and sync are identical — the interface is adapted for desktop vs. mobile. Watch progress and library sync between them if you have Nuvio or the same tracking accounts connected.</div>
+</div>
+
+<div class="faq-item" id="how-do-i-report-a-problem-or-suggest-something">
+  <button class="faq-q">How do I report a problem or suggest something?<span class="ch">▾</span></button>
+  <div class="faq-a">Open an issue on <a href="https://github.com/KhooLy/fluxa-desktop/issues" target="_blank">GitHub</a>. Include your OS, your Fluxa version (Settings → Advanced → Version), and a clear description of what happened. For playback issues, mentioning which addon and source you were using helps a lot.</div>
+</div>
+
+</div>
+</main>
+</div>
+<script src="lucide.min.js"></script>
+<script src="search-index.js"></script>
+<script src="glossary.js"></script>
+<script src="nav.js"></script>
+</body>
+</html>
