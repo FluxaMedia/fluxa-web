@@ -1,16 +1,40 @@
 const { NuvioClient, StremioClient, loadSession, saveSession, NUVIO_MAX_PROFILES } = window.FluxaAccount;
 
 const app = document.getElementById('app');
-const NUVIO_LOGO = 'https://nuvio.tv//assets/Logo_1080x1080.png';
+const NUVIO_LOGO = 'nuvio-logo.png';
+const STREMIO_LOGO = 'stremio-logo.png';
+const NUVIO_STORAGE = 'https://api.nuvio.tv/storage/v1/object/public/avatars/';
 
 const state = {
   session: loadSession(),
   authProvider: 'nuvio',
   authTab: 'login',
   profiles: [],
+  avatars: [],
   activeIndex: null,
   section: 'overview',
 };
+
+async function ensureAvatars() {
+  if (state.avatars.length) return;
+  try { state.avatars = (await NuvioClient.listAvatars()) || []; } catch { state.avatars = []; }
+}
+
+function avatarUrl(p) {
+  if (!p) return null;
+  if (p.avatar_url) return p.avatar_url;
+  if (p.avatar_id) {
+    const e = state.avatars.find(a => a.id === p.avatar_id);
+    if (e) return NUVIO_STORAGE + e.storage_path;
+  }
+  return null;
+}
+
+function avatarHtml(p, size) {
+  const url = avatarUrl(p);
+  const st = size ? `style="width:${size}px;height:${size}px"` : '';
+  return `<div class="avatar" ${st}>${url ? `<img src="${esc(url)}" alt="" loading="lazy" />` : esc(initials(p && p.name))}</div>`;
+}
 
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 
@@ -88,7 +112,9 @@ function renderAuth() {
         <button data-provider="nuvio" class="${p === 'nuvio' ? 'active' : ''}">
           <img src="${NUVIO_LOGO}" alt="" onerror="this.style.display='none'" /> Nuvio
         </button>
-        <button data-provider="stremio" class="${p === 'stremio' ? 'active' : ''}">Stremio</button>
+        <button data-provider="stremio" class="${p === 'stremio' ? 'active' : ''}">
+          <img src="${STREMIO_LOGO}" alt="" onerror="this.style.display='none'" /> Stremio
+        </button>
       </div>
 
       <div class="tabs">
@@ -245,13 +271,20 @@ function renderPanel() {
     <div class="panel-overlay" id="panel-overlay"></div>
     <aside class="panel-side" id="panel-side">
       <div class="acct-card">
-        <div class="acct-email">${esc(s.email || 'Signed in')}</div>
-        <div class="acct-provider">${s.provider} account</div>
+        <img class="acct-logo" src="${s.provider === 'nuvio' ? NUVIO_LOGO : STREMIO_LOGO}" alt="" onerror="this.style.display='none'" />
+        <div class="acct-info">
+          <div class="acct-email">${esc(s.email || 'Signed in')}</div>
+          <div class="acct-provider">${s.provider} account</div>
+        </div>
       </div>
       ${s.provider === 'nuvio' ? `
-      <div class="profile-select" id="profile-picker" style="${showProfilePicker ? '' : 'display:none'}">
+      <div class="profile-switcher" id="profile-picker" style="${showProfilePicker ? '' : 'display:none'}">
         <label>Active profile</label>
-        <select id="profile-select"></select>
+        <button class="ps-trigger" id="ps-trigger" aria-haspopup="listbox" aria-expanded="false">
+          <span class="ps-current" id="ps-current">…</span>
+          <i data-lucide="chevrons-up-down" class="ps-chev"></i>
+        </button>
+        <div class="ps-menu" id="ps-menu" role="listbox"></div>
       </div>` : ''}
       <nav class="side-nav">
         ${secs.map(([id, label, ic]) => `
@@ -303,16 +336,40 @@ async function ensureProfiles() {
 }
 
 function setupProfilePicker() {
-  const sel = document.getElementById('profile-select');
-  if (!sel) return;
+  const trigger = document.getElementById('ps-trigger');
+  const menu = document.getElementById('ps-menu');
+  const current = document.getElementById('ps-current');
+  if (!trigger || !menu) return;
+
   const paint = () => {
-    sel.innerHTML = state.profiles.map(p =>
-      `<option value="${p.profile_index}" ${p.profile_index === state.activeIndex ? 'selected' : ''}>${esc(p.name || ('Profile ' + p.profile_index))}</option>`
-    ).join('');
+    const active = state.profiles.find(p => p.profile_index === state.activeIndex) || state.profiles[0];
+    if (active) current.innerHTML = `${avatarHtml(active, 22)}<span class="ps-cur-name">${esc(active.name || 'Profile ' + active.profile_index)}</span>`;
+    menu.innerHTML = state.profiles.map(p => `
+      <button class="ps-item ${p.profile_index === state.activeIndex ? 'active' : ''}" role="option" data-pi="${p.profile_index}">
+        ${avatarHtml(p, 26)}
+        <span class="ps-item-name">${esc(p.name || 'Profile ' + p.profile_index)}</span>
+        ${p.profile_index === state.activeIndex ? '<i data-lucide="check" class="ps-check"></i>' : ''}
+      </button>`).join('');
+    icons();
+    menu.querySelectorAll('[data-pi]').forEach(b => b.onclick = () => {
+      state.activeIndex = Number(b.dataset.pi);
+      closeMenu();
+      paint();
+      loadSection();
+    });
   };
-  if (state.profiles.length) paint();
-  else ensureProfiles().then(() => { paint(); if (['addons','plugins','library','watch','settings','collections'].includes(state.section)) loadSection(); }).catch(() => {});
-  sel.onchange = () => { state.activeIndex = Number(sel.value); loadSection(); };
+
+  const closeMenu = () => { menu.classList.remove('open'); trigger.setAttribute('aria-expanded', 'false'); };
+  trigger.onclick = e => {
+    e.stopPropagation();
+    const open = menu.classList.toggle('open');
+    trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
+  };
+  document.addEventListener('click', e => { if (!e.target.closest('#profile-picker')) closeMenu(); });
+
+  const ready = () => { paint(); if (['addons', 'plugins', 'library', 'watch', 'settings', 'collections'].includes(state.section)) loadSection(); };
+  if (state.profiles.length && state.avatars.length) paint();
+  else Promise.all([ensureProfiles(), ensureAvatars()]).then(ready).catch(() => {});
 }
 
 const sec = () => document.getElementById('sec');
@@ -401,6 +458,7 @@ function initials(name) {
 
 async function secProfiles() {
   secLoading('Profiles');
+  await ensureAvatars();
   const token = await nuvioToken();
   const profiles = await NuvioClient.pullProfiles(token);
   state.profiles = (profiles || []).sort((a, b) => a.profile_index - b.profile_index);
@@ -416,7 +474,7 @@ async function secProfiles() {
     <div class="list">
       ${state.profiles.map(p => `
         <div class="row">
-          <div class="avatar">${p.avatar_url ? `<img src="${esc(p.avatar_url)}" alt="" />` : esc(initials(p.name))}</div>
+          ${avatarHtml(p, 42)}
           <div class="row-main">
             <div class="row-title">${esc(p.name || 'Profile ' + p.profile_index)} ${p.profile_index === 1 ? '<span class="tag">Primary</span>' : ''}</div>
             <div class="row-sub">Index ${p.profile_index}${p.pin_enabled ? ' · PIN locked' : ''}</div>
@@ -719,6 +777,17 @@ async function secWatch() {
   });
 }
 
+function settingValue(v) {
+  if (v == null) return '—';
+  if (typeof v === 'boolean') return v ? 'On' : 'Off';
+  if (typeof v === 'object') return Array.isArray(v) ? `${v.length} item${v.length === 1 ? '' : 's'}` : `${Object.keys(v).length} field${Object.keys(v).length === 1 ? '' : 's'}`;
+  return String(v);
+}
+
+function prettyKey(k) {
+  return k.replace(/([a-z])([A-Z])/g, '$1 $2').replace(/[_-]+/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+}
+
 async function secSettings() {
   secLoading('Settings');
   await ensureProfiles();
@@ -727,15 +796,36 @@ async function secSettings() {
   const rows = await NuvioClient.pullSettings(token, pid);
   const row = Array.isArray(rows) ? rows[0] : rows;
   const settings = (row && row.settings_json) || {};
-  sec().innerHTML = `
-    <div class="sec-head"><h1>Settings</h1><p>Raw synced settings for the active profile. Edit the JSON and save.</p></div>
-    <div class="note-box">Advanced: this is the exact settings blob Fluxa syncs. Invalid JSON won't save.</div>
-    <textarea class="json-edit" id="settings-json" spellcheck="false">${esc(JSON.stringify(settings, null, 2))}</textarea>
-    <div class="toolbar" style="margin-top:14px">
-      <div class="grow"></div>
-      <button class="btn btn-ghost" id="settings-reset">Reset</button>
-      <button class="btn btn-primary" id="settings-save"><i data-lucide="save" style="width:14px;height:14px"></i> Save</button>
+  const keys = Object.keys(settings);
+  const updated = row && row.updated_at ? new Date(row.updated_at).toLocaleString() : null;
+
+  const body = keys.length ? `
+    <div class="list">
+      ${keys.map(k => `
+        <div class="row">
+          <div class="row-main"><div class="row-title">${esc(prettyKey(k))}</div><div class="row-sub">${esc(k)}</div></div>
+          <span class="tag">${esc(settingValue(settings[k]))}</span>
+        </div>`).join('')}
+    </div>` : `
+    <div class="empty-panel">
+      <i data-lucide="sliders" class="empty-icon"></i>
+      <div class="empty-title">No settings synced yet</div>
+      <div class="empty-desc">Settings appear here after you change them in the Fluxa app for this profile. You can also add them manually below.</div>
     </div>`;
+
+  sec().innerHTML = `
+    <div class="sec-head"><h1>Settings</h1><p>Synced settings for the active profile${updated ? ` · updated ${esc(updated)}` : ''}.</p></div>
+    ${body}
+    <details class="adv" ${keys.length ? '' : 'open'}>
+      <summary><i data-lucide="code" style="width:14px;height:14px"></i> Edit raw JSON</summary>
+      <div class="note-box" style="margin-top:12px">This is the exact settings blob Fluxa syncs. Invalid JSON won't save.</div>
+      <textarea class="json-edit" id="settings-json" spellcheck="false">${esc(JSON.stringify(settings, null, 2))}</textarea>
+      <div class="toolbar" style="margin-top:14px">
+        <div class="grow"></div>
+        <button class="btn btn-ghost" id="settings-reset">Reset</button>
+        <button class="btn btn-primary" id="settings-save"><i data-lucide="save" style="width:14px;height:14px"></i> Save</button>
+      </div>
+    </details>`;
   icons();
 
   document.getElementById('settings-reset').onclick = () => secSettings();
@@ -746,7 +836,48 @@ async function secSettings() {
     const tok = await nuvioToken();
     await NuvioClient.pushSettings(tok, pid, parsed);
     toast('Settings saved');
+    secSettings();
   };
+}
+
+function folderCard(f) {
+  const shape = (f.tileShape || 'poster').toLowerCase();
+  const wide = shape === 'landscape' || shape === 'wide';
+  const cover = f.coverImageUrl;
+  const sources = (f.sources || f.catalogSources || []);
+  return `
+    <div class="fcard ${wide ? 'wide' : ''}">
+      <div class="fcard-art">
+        ${cover ? `<img src="${esc(cover)}" alt="" loading="lazy" onerror="this.style.display='none';this.parentNode.classList.add('noimg')" />` : ''}
+        <span class="fcard-emoji">${esc(f.coverEmoji || '📁')}</span>
+      </div>
+      <div class="fcard-title">${esc(f.title || 'Untitled')}</div>
+      <div class="fcard-sub">${sources.length} source${sources.length === 1 ? '' : 's'} · ${esc(shape)}</div>
+    </div>`;
+}
+
+function collectionsPreview(collections) {
+  if (!collections.length) {
+    return `
+    <div class="empty-panel">
+      <i data-lucide="folder" class="empty-icon"></i>
+      <div class="empty-title">No collections yet</div>
+      <div class="empty-desc">Build collections in the Fluxa app, or import a collections JSON below.</div>
+    </div>`;
+  }
+  return collections.map(c => {
+    const folders = c.folders || [];
+    return `
+    <div class="col-block">
+      <div class="col-block-head">
+        <span class="col-block-title">${esc(c.title || 'Collection')}</span>
+        <span class="tag">${folders.length} folder${folders.length === 1 ? '' : 's'}</span>
+      </div>
+      <div class="frow">
+        ${folders.length ? folders.map(folderCard).join('') : '<div class="row-sub" style="padding:8px 2px">No folders</div>'}
+      </div>
+    </div>`;
+  }).join('');
 }
 
 async function secCollections() {
@@ -756,28 +887,84 @@ async function secCollections() {
   const token = await nuvioToken();
   const rows = await NuvioClient.pullCollections(token, pid);
   const row = Array.isArray(rows) ? rows[0] : rows;
-  const collections = (row && row.collections_json) || [];
-  sec().innerHTML = `
-    <div class="sec-head"><h1>Collections</h1><p>Your custom collections for the active profile.</p></div>
-    <div class="note-box">Edit the collections JSON and save. This mirrors what the Fluxa app stores.</div>
-    <textarea class="json-edit" id="col-json" spellcheck="false">${esc(JSON.stringify(collections, null, 2))}</textarea>
-    <div class="toolbar" style="margin-top:14px">
-      <div class="grow"></div>
-      <button class="btn btn-ghost" id="col-reset">Reset</button>
-      <button class="btn btn-primary" id="col-save"><i data-lucide="save" style="width:14px;height:14px"></i> Save</button>
-    </div>`;
-  icons();
+  let collections = (row && row.collections_json) || [];
+  let mode = 'preview';
 
-  document.getElementById('col-reset').onclick = () => secCollections();
-  document.getElementById('col-save').onclick = async () => {
-    let parsed;
-    try { parsed = JSON.parse(document.getElementById('col-json').value); }
-    catch { toast('Invalid JSON', true); return; }
-    if (!Array.isArray(parsed)) { toast('Collections must be a JSON array', true); return; }
-    const tok = await nuvioToken();
-    await NuvioClient.pushCollections(tok, pid, parsed);
-    toast('Collections saved');
+  const paint = () => {
+    sec().innerHTML = `
+      <div class="sec-head"><h1>Collections</h1><p>Custom collections and folders for the active profile.</p></div>
+      <div class="toolbar">
+        <div class="seg">
+          <button data-mode="preview" class="${mode === 'preview' ? 'active' : ''}"><i data-lucide="eye" style="width:14px;height:14px"></i> Preview</button>
+          <button data-mode="json" class="${mode === 'json' ? 'active' : ''}"><i data-lucide="code" style="width:14px;height:14px"></i> JSON</button>
+        </div>
+        <div class="grow"></div>
+        <button class="btn btn-ghost btn-sm" id="col-import"><i data-lucide="upload" style="width:14px;height:14px"></i> Import</button>
+        <button class="btn btn-ghost btn-sm" id="col-export"><i data-lucide="download" style="width:14px;height:14px"></i> Export</button>
+      </div>
+      <input type="file" id="col-file" accept="application/json,.json" style="display:none" />
+      ${mode === 'preview'
+        ? `<div class="col-preview">${collectionsPreview(collections)}</div>`
+        : `<textarea class="json-edit" id="col-json" spellcheck="false">${esc(JSON.stringify(collections, null, 2))}</textarea>
+           <div class="toolbar" style="margin-top:14px">
+             <div class="grow"></div>
+             <button class="btn btn-ghost" id="col-reset">Reset</button>
+             <button class="btn btn-primary" id="col-save"><i data-lucide="save" style="width:14px;height:14px"></i> Save</button>
+           </div>`}`;
+    icons();
+    wire();
   };
+
+  const wire = () => {
+    sec().querySelectorAll('[data-mode]').forEach(b => b.onclick = () => {
+      if (mode === 'json') { const ta = document.getElementById('col-json'); try { collections = JSON.parse(ta.value); } catch {} }
+      mode = b.dataset.mode; paint();
+    });
+
+    document.getElementById('col-export').onclick = () => {
+      const blob = new Blob([JSON.stringify(collections, null, 2)], { type: 'application/json' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'fluxa-collections.json';
+      a.click();
+      URL.revokeObjectURL(a.href);
+    };
+
+    const fileInput = document.getElementById('col-file');
+    document.getElementById('col-import').onclick = () => fileInput.click();
+    fileInput.onchange = () => {
+      const file = fileInput.files && fileInput.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = () => {
+        let parsed;
+        try { parsed = JSON.parse(String(reader.result)); }
+        catch { toast('That file is not valid JSON', true); return; }
+        if (!Array.isArray(parsed)) { toast('Collections file must be a JSON array', true); return; }
+        collections = parsed;
+        mode = 'json';
+        paint();
+        toast('Imported — review, then Save to sync');
+      };
+      reader.readAsText(file);
+    };
+
+    const saveBtn = document.getElementById('col-save');
+    if (saveBtn) saveBtn.onclick = async () => {
+      let parsed;
+      try { parsed = JSON.parse(document.getElementById('col-json').value); }
+      catch { toast('Invalid JSON', true); return; }
+      if (!Array.isArray(parsed)) { toast('Collections must be a JSON array', true); return; }
+      const tok = await nuvioToken();
+      await NuvioClient.pushCollections(tok, pid, parsed);
+      collections = parsed;
+      toast('Collections saved');
+    };
+    const resetBtn = document.getElementById('col-reset');
+    if (resetBtn) resetBtn.onclick = () => secCollections();
+  };
+
+  paint();
 }
 
 render();
