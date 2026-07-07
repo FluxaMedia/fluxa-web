@@ -105,16 +105,34 @@ function renderDocsNav(page) {
   if (!nav) return;
 
   const sections = ['Start', 'How it works', 'Core workflows', 'Operations', 'Reference'];
+  const activeSection = DOC_PAGES.find(item => item.page === page)?.section;
+
   nav.innerHTML = `
     <div class="nav-group">Site</div>
     <a href="index.html"><i data-lucide="home" class="nav-icon"></i>Site home</a>
     <a href="account.html"><i data-lucide="user" class="nav-icon"></i>Account</a>
-    ${sections.map(section => `
-      <div class="nav-group">${section}</div>
-      ${DOC_PAGES.filter(item => item.section === section).map(item => `
-        <a href="${item.page}" class="${item.page === page ? 'active' : ''}">
-          <i data-lucide="${item.icon || 'file-text'}" class="nav-icon"></i>${escHtml(item.title)}
-        </a>`).join('')}`).join('')}`;
+    ${sections.map(section => {
+      const open = section === activeSection;
+      return `
+      <button type="button" class="nav-group nav-group-toggle" aria-expanded="${open ? 'true' : 'false'}">
+        ${section}
+        <i data-lucide="chevron-down" class="nav-group-chevron"></i>
+      </button>
+      <div class="nav-group-links${open ? ' open' : ''}">
+        ${DOC_PAGES.filter(item => item.section === section).map(item => `
+          <a href="${item.page}" class="${item.page === page ? 'active' : ''}">
+            <i data-lucide="${item.icon || 'file-text'}" class="nav-icon"></i>${escHtml(item.title)}
+          </a>`).join('')}
+      </div>`;
+    }).join('')}`;
+
+  nav.querySelectorAll('.nav-group-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const links = btn.nextElementSibling;
+      const open = links.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  });
 }
 
 function initSidebar() {
