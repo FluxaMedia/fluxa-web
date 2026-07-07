@@ -1,7 +1,7 @@
 const DOC_PAGES = [
   { page: 'docs.html', title: 'Docs Home', section: 'Start', icon: 'book-open', updated: '2026-07-05', badges: ['Desktop', 'Android', 'Web'] },
   { page: 'what-is-fluxa.html', title: 'What is Fluxa', section: 'Start', icon: 'info', updated: '2026-07-05', badges: ['Desktop', 'Android', 'Web'] },
-  { page: 'getting-started.html', title: 'Getting Started', section: 'Start', icon: 'rocket', updated: '2026-07-05', badges: ['Desktop', 'Android', 'Windows', 'macOS', 'Linux'] },
+  { page: 'getting-started.html', title: 'Getting Started', section: 'Start', icon: 'rocket', updated: '2026-07-05', badges: ['Desktop', 'Android', 'Web', 'Windows', 'macOS', 'Linux', 'webOS'] },
   { page: 'concepts.html', title: 'Concepts', section: 'Start', icon: 'library', updated: '2026-07-05', badges: ['Addons', 'Stremio', 'Nuvio'] },
   { page: 'architecture.html', title: 'Architecture', section: 'How it works', icon: 'git-branch', updated: '2026-07-05', badges: ['Core', 'Desktop', 'Android'] },
   { page: 'addon-deep-dive.html', title: 'Addon Deep Dive', section: 'How it works', icon: 'blocks', updated: '2026-07-05', badges: ['Addons', 'Stremio'] },

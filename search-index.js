@@ -9,24 +9,9 @@ window.SEARCH_INDEX = [
         "content": "What Fluxa is The short explanation, platform support, and content model. Install and first stream Download, create a profile, install an addon, and play something. Terms and concepts Addons, catalogs, manifests, debrid, Usenet, mpv, and source quality. Quick answers Short answers for common account, addon, playback, and library questions."
       },
       {
-        "title": "How it works",
-        "anchor": "how-it-works",
-        "content": "Architecture Desktop, Android, fluxa-core, addons, player, and sync data flow. Addon deep dive Manifest basics, endpoint types, Stremio compatibility, and addon failure modes. Account comparison No account, Nuvio, Stremio, Trakt, MyAnimeList, and Simkl. Privacy and security Local storage, third-party services, addon trust, and API key handling."
-      },
-      {
         "title": "Common tasks",
         "anchor": "common-tasks",
-        "content": "Install your first addon Paste a manifest URL and make content rows appear. Set up Nuvio sync Keep library, profiles, collections, and progress aligned across devices. Import Stremio addons Use the same Stremio-compatible manifest links in Fluxa. Create a collection Build custom library sections and optionally pin them to Home. Pick better sources Choose manual, auto, or regex source selection for quality control. Fix playback issues Use symptom-based fixes for empty source lists, buffering, audio, and subtitles. Fluxa does not provide content. The app connects to addons you install. If the Home screen is empty or nothing plays, start with the addon guide and troubleshooting page."
-      },
-      {
-        "title": "Deep guides",
-        "anchor": "deep-guides",
-        "content": "Nuvio sync details What syncs, what does not, conflict behavior, and privacy notes. Playback advanced mpv options, hardware decoding, HDR, Dolby Vision, subtitles, and external players. Debrid and Usenet setup Generic provider setup flow, cached sources, direct streams, and API keys. Collections cookbook Recipes for seasonal anime, kids profiles, top-rated rows, and JSON sharing. Recommended settings Suggested settings for low-end devices, 4K/HDR, slow internet, and anime. Troubleshooting flows Decision trees for empty Home, no streams, buffering, sync, and login callbacks."
-      },
-      {
-        "title": "Reference",
-        "anchor": "reference",
-        "content": "Settings reference Every major setting, grouped by General, Appearance, Playback, Buffer, Subtitles, Metadata, Decoder, Account, and Addons. Troubleshooting Symptom-first fixes for playback, addons, sync, macOS, Linux, subtitles, and performance. Data locations Where Fluxa stores local data and how to back up or move it. Updates and releases Official downloads, update flow, version checks, and bad update recovery. Platform install notes Windows, macOS, Linux, and Android install edge cases. Keyboard shortcuts Docs and playback shortcuts for desktop users. Glossary Definitions for addon, source, sync, playback, and quality terms. Known limitations Content, addon reliability, offline use, and platform behavior limits. Contributing docs How to report docs issues and write useful docs changes."
+        "content": "Install your first addon Paste a manifest URL and make content rows appear. Set up Nuvio sync Keep library, profiles, collections, and progress aligned across devices. Create a collection Build custom library sections and optionally pin them to Home. Fix playback issues Use symptom-based fixes for empty source lists, buffering, audio, and subtitles. Fluxa does not provide content. The app connects to addons you install. If the Home screen is empty or nothing plays, start with the addon guide and troubleshooting page."
       }
     ]
   },
@@ -68,7 +53,7 @@ window.SEARCH_INDEX = [
       {
         "title": "Download and install",
         "anchor": "download-and-install",
-        "content": "Go to the releases page and download the file for your operating system. Windows Fluxa_x.x.x_x64-setup.exe macOS Fluxa_x.x.x_universal.dmg Ubuntu / Debian fluxa_x.x.x_amd64.deb Fedora / RHEL fluxa-x.x.x-1.x86_64.rpm Linux portable fluxa_x.x.x_amd64.AppImage Windows: Run the installer and follow the prompts. No admin rights needed. macOS: Open the .dmg and drag Fluxa into Applications. The first time you open it, macOS may show a security warning — go to System Settings → Privacy & Security and click Open Anyway . Linux: Install the .deb or .rpm with your package manager, or make the .AppImage executable and run it directly. mpv is bundled with the app, so there's nothing else to install."
+        "content": "Grab the file for your platform from the release page and install it. Windows Fluxa_x.x.x_x64-setup.exe macOS Fluxa_x.x.x_universal.dmg Ubuntu / Debian fluxa_x.x.x_amd64.deb Fedora / RHEL fluxa-x.x.x-1.x86_64.rpm Linux portable fluxa_x.x.x_amd64.AppImage Android fluxa-x.x.x.apk LG webOS TV fluxa-x.x.x.ipk Windows, macOS, Linux: from the fluxa-desktop releases page. Run the Windows installer and follow the prompts; open the macOS .dmg and drag Fluxa into Applications; install the Linux .deb/.rpm with your package manager, or run the .AppImage directly — mpv is bundled. Android: download the APK from the fluxa-android releases page. Web / webOS: the web app needs no install — open it in any browser. For LG TVs, get the native app from the fluxa-web releases page and sideload it via Developer Mode."
       },
       {
         "title": "First launch",
