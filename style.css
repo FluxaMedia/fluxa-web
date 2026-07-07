@@ -202,6 +202,7 @@ a:hover { text-decoration: underline; }
   top: var(--topbar-h); left: 0;
   height: calc(100vh - var(--topbar-h));
   overflow-y: auto;
+  overflow-x: hidden;
   display: flex;
   flex-direction: column;
   z-index: 100;
