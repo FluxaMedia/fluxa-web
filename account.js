@@ -207,7 +207,9 @@ function renderAuth() {
       <div class="auth-hint">
         ${p === 'nuvio'
           ? 'Nuvio is Fluxa\'s built-in sync account. Same credentials as the desktop and Android apps.'
-          : 'Use your existing Stremio account. Fluxa connects to Stremio\'s public API.'}
+          : tab === 'login'
+            ? 'Use your existing Stremio account. Fluxa connects to Stremio\'s public API.'
+            : 'Creates a real Stremio account, usable in Fluxa, Stremio, and any other Stremio-compatible app.'}
       </div>
     </div>
   </div>`;
@@ -220,6 +222,7 @@ function renderAuth() {
     const inp = document.getElementById('auth-password');
     inp.type = inp.type === 'password' ? 'text' : 'password';
     pwToggle.innerHTML = `<i data-lucide="${inp.type === 'password' ? 'eye' : 'eye-off'}" style="width:16px;height:16px"></i>`;
+    pwToggle.setAttribute('aria-label', inp.type === 'password' ? 'Show password' : 'Hide password');
     icons();
   };
 
@@ -259,6 +262,10 @@ async function onAuthSubmit(e) {
   } catch (err) {
     btn.disabled = false;
     btn.textContent = state.authTab === 'login' ? 'Log in' : 'Create account';
+    if (err.isNotice) {
+      document.getElementById('auth-error').innerHTML = `<div class="auth-notice">${esc(err.message)}</div>`;
+      return;
+    }
     const msg = friendlyAuthError(err);
     document.getElementById('auth-error').innerHTML = `<div class="auth-error">${esc(msg)}</div>`;
   }
@@ -276,7 +283,9 @@ async function nuvioAuth(email, password) {
   const fn = state.authTab === 'login' ? NuvioClient.signIn : NuvioClient.signUp;
   const r = await fn(email, password);
   if (!r || !r.access_token) {
-    throw new Error('Account created. Check your email to confirm, then log in.');
+    const notice = new Error('Account created. Check your email to confirm, then log in.');
+    notice.isNotice = true;
+    throw notice;
   }
   state.session = {
     provider: 'nuvio',
@@ -424,7 +433,9 @@ function setupProfilePicker() {
 
   const ready = () => { paint(); if (['addons', 'plugins', 'library', 'watch', 'settings', 'collections'].includes(state.section)) loadSection(); };
   if (state.profiles.length && state.avatars.length) paint();
-  else Promise.all([ensureProfiles(), ensureAvatars()]).then(ready).catch(() => {});
+  else Promise.all([ensureProfiles(), ensureAvatars()]).then(ready).catch(err => {
+    secError(titleFor(state.section), friendlyAuthError(err));
+  });
 }
 
 const sec = () => document.getElementById('sec');
