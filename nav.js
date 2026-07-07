@@ -408,19 +408,21 @@ function addHeadingAnchors(content) {
 function addOnThisPage(content) {
   if (content.classList.contains('docs-home')) return;
   if (content.querySelector('.on-this-page')) return;
-  const headings = [...content.querySelectorAll('h2[id]')].slice(0, 8);
-  if (headings.length < 3) return;
+  const allHeadings = [...content.querySelectorAll('h2[id]')];
+  if (allHeadings.length < 3) return;
+  const headings = allHeadings.slice(0, 8);
   const box = document.createElement('div');
   box.className = 'on-this-page';
   box.innerHTML = `
     <div class="on-this-page-title">On this page</div>
     <div class="on-this-page-links">
       ${headings.map(h => `<a href="#${h.id}">${escHtml(h.childNodes[0]?.textContent || h.textContent)}</a>`).join('')}
+      ${allHeadings.length > headings.length ? `<span class="on-this-page-more">+${allHeadings.length - headings.length} more</span>` : ''}
     </div>`;
   const intro = content.querySelector('.intro, .docs-hero-grid, .home-hero');
   if (intro) intro.insertAdjacentElement('afterend', box);
 
-  addTocRail(content, headings);
+  addTocRail(content, allHeadings);
 }
 
 function addTocRail(content, headings) {
