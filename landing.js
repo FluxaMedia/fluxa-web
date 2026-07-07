@@ -1,4 +1,9 @@
-const REPOS = ['KhooLy/fluxa-desktop', 'KhooLy/fluxa', 'KhooLy/fluxa-core'];
+const REPOS = [
+  { id: 'fluxa-desktop', slug: 'FluxaMedia/fluxa-desktop', release: true },
+  { id: 'fluxa-android', slug: 'KhooLy/Fluxa', release: true },
+  { id: 'fluxa-web', slug: 'FluxaMedia/fluxa-web', release: true },
+  { id: 'fluxa-core', slug: 'FluxaMedia/fluxa-core', release: false },
+];
 
 const topNav = document.querySelector('.top-nav');
 window.addEventListener('scroll', () => {
@@ -44,7 +49,7 @@ attachReveal('.section-header');
 attachReveal('.feature-card', true);
 attachReveal('.platform-card', true);
 attachReveal('.repo-card', true);
-attachReveal('.release-card');
+attachReveal('.release-grid');
 attachReveal('.screenshots-wrap');
 attachReveal('.contributors-section-inner');
 
@@ -88,11 +93,10 @@ async function gh(path) {
 
 // Repo stats
 async function loadRepoStats() {
-  const ids = ['fluxa-desktop', 'fluxa', 'fluxa-core'];
-  for (const [i, repo] of REPOS.entries()) {
+  for (const repo of REPOS) {
     try {
-      const data = await gh('repos/' + repo);
-      const card = document.getElementById('repo-' + ids[i]);
+      const data = await gh('repos/' + repo.slug);
+      const card = document.getElementById('repo-' + repo.id);
       if (!card) continue;
       const stars = card.querySelector('.repo-stars');
       const forks = card.querySelector('.repo-forks');
@@ -129,26 +133,39 @@ function renderReleaseBody(raw) {
   return html.join('');
 }
 
-// Latest release
+// Latest release, one card per shipping repo
 async function loadRelease() {
   const el = document.getElementById('release-content');
   if (!el) return;
-  try {
-    const d = await gh('repos/KhooLy/fluxa-desktop/releases/latest');
+  const repos = REPOS.filter(r => r.release);
+  const results = await Promise.allSettled(repos.map(r => gh('repos/' + r.slug + '/releases/latest')));
+
+  el.innerHTML = repos.map((repo, i) => {
+    const result = results[i];
+    if (result.status !== 'fulfilled') {
+      return `
+        <div class="release-card">
+          <div class="release-header"><div class="release-tag">${escHtml(repo.id)}</div></div>
+          <div class="release-error">Could not load release info. <a href="https://github.com/${repo.slug}/releases" target="_blank" style="color:rgba(255,255,255,0.6)">View on GitHub</a></div>
+        </div>`;
+    }
+    const d = result.value;
     const date = new Date(d.published_at).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
     const body = renderReleaseBody(d.body || '');
-    el.innerHTML = `
-      <div class="release-header">
-        <div class="release-tag"><i data-lucide="tag" class="inline-icon"></i>${escHtml(d.tag_name)}</div>
-        <div class="release-date">${date}</div>
-      </div>
-      <div class="release-body">${body || '<p>See GitHub for release notes.</p>'}
-        <p style="margin-top:14px"><a href="${d.html_url}" target="_blank" style="color:rgba(255,255,255,0.7);font-size:13px;">View on GitHub →</a></p>
+    return `
+      <div class="release-card">
+        <div class="release-header">
+          <div class="release-tag"><i data-lucide="tag" class="inline-icon"></i>${escHtml(d.tag_name)}</div>
+          <div class="release-date">${date}</div>
+        </div>
+        <div class="release-repo">${escHtml(repo.id)}</div>
+        <div class="release-body">${body || '<p>See GitHub for release notes.</p>'}
+          <p style="margin-top:14px"><a href="${d.html_url}" target="_blank" style="color:rgba(255,255,255,0.7);font-size:13px;">View on GitHub →</a></p>
+        </div>
       </div>`;
-    if (window.lucide) lucide.createIcons({ nodes: [el] });
-  } catch {
-    el.innerHTML = '<div class="release-error">Could not load release info. <a href="https://github.com/KhooLy/fluxa-desktop/releases" target="_blank" style="color:rgba(255,255,255,0.6)">View on GitHub</a></div>';
-  }
+  }).join('');
+
+  if (window.lucide) lucide.createIcons({ nodes: [el] });
 }
 
 // Contributors
@@ -157,7 +174,7 @@ async function loadContributors() {
   if (!grid) return;
   try {
     const seen = new Map();
-    const results = await Promise.allSettled(REPOS.map(r => gh('repos/' + r + '/contributors?per_page=50')));
+    const results = await Promise.allSettled(REPOS.map(r => gh('repos/' + r.slug + '/contributors?per_page=50')));
     for (const r of results) {
       if (r.status !== 'fulfilled') continue;
       for (const c of r.value) {

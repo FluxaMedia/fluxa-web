@@ -1,6 +1,6 @@
 const DOC_PAGES = [
-  { page: 'docs.html', title: 'Docs Home', section: 'Start', icon: 'book-open', updated: '2026-07-05', badges: ['Desktop', 'Android'] },
-  { page: 'what-is-fluxa.html', title: 'What is Fluxa', section: 'Start', icon: 'info', updated: '2026-07-05', badges: ['Desktop', 'Android'] },
+  { page: 'docs.html', title: 'Docs Home', section: 'Start', icon: 'book-open', updated: '2026-07-05', badges: ['Desktop', 'Android', 'Web'] },
+  { page: 'what-is-fluxa.html', title: 'What is Fluxa', section: 'Start', icon: 'info', updated: '2026-07-05', badges: ['Desktop', 'Android', 'Web'] },
   { page: 'getting-started.html', title: 'Getting Started', section: 'Start', icon: 'rocket', updated: '2026-07-05', badges: ['Desktop', 'Android', 'Windows', 'macOS', 'Linux'] },
   { page: 'concepts.html', title: 'Concepts', section: 'Start', icon: 'library', updated: '2026-07-05', badges: ['Addons', 'Stremio', 'Nuvio'] },
   { page: 'architecture.html', title: 'Architecture', section: 'How it works', icon: 'git-branch', updated: '2026-07-05', badges: ['Core', 'Desktop', 'Android'] },
@@ -17,7 +17,7 @@ const DOC_PAGES = [
   { page: 'debrid-usenet-setup.html', title: 'Debrid & Usenet Setup', section: 'Operations', icon: 'server', updated: '2026-07-05', badges: ['Debrid', 'Usenet'] },
   { page: 'data-locations.html', title: 'Data Locations', section: 'Operations', icon: 'database', updated: '2026-07-05', badges: ['Backup', 'Desktop', 'Android'] },
   { page: 'updates-releases.html', title: 'Updates & Releases', section: 'Operations', icon: 'package', updated: '2026-07-05', badges: ['Updates', 'Releases'] },
-  { page: 'platform-install.html', title: 'Platform Install Notes', section: 'Operations', icon: 'monitor-smartphone', updated: '2026-07-05', badges: ['Windows', 'macOS', 'Linux', 'Android'] },
+  { page: 'platform-install.html', title: 'Platform Install Notes', section: 'Operations', icon: 'monitor-smartphone', updated: '2026-07-05', badges: ['Windows', 'macOS', 'Linux', 'Android', 'webOS'] },
   { page: 'recommended-settings.html', title: 'Recommended Settings', section: 'Operations', icon: 'check-square', updated: '2026-07-05', badges: ['Profiles', 'Playback'] },
   { page: 'settings.html', title: 'Settings', section: 'Reference', icon: 'sliders', updated: '2026-07-05', badges: ['Desktop', 'Android'] },
   { page: 'keyboard-shortcuts.html', title: 'Keyboard Shortcuts', section: 'Reference', icon: 'keyboard', updated: '2026-07-05', badges: ['Desktop', 'Playback'] },
