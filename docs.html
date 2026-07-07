@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Docs — Fluxa Docs</title>
+<meta name="description" content="Fluxa documentation: start here, common tasks, troubleshooting, settings, addons, playback, sync, and account guides." />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Docs — Fluxa Docs" />
+<meta property="og:description" content="Fluxa documentation: start here, common tasks, troubleshooting, settings, addons, playback, sync, and account guides." />
+<meta property="og:image" content="logo.png" />
+<meta name="twitter:card" content="summary" />
+<link rel="icon" type="image/png" sizes="48x48" href="favicon.png" />
+<link rel="apple-touch-icon" href="logo.png" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<nav class="docs-topbar">
+  <div class="docs-topbar-inner">
+    <button class="menu-btn" id="menu-btn" aria-label="Toggle documentation menu" aria-expanded="false" aria-controls="sidebar"><i data-lucide="panel-left" style="width:18px;height:18px"></i></button>
+    <a class="docs-brand" href="index.html" aria-label="Fluxa home">
+      <img src="logo.png" alt="" />
+      <span>Fluxa</span>
+      <span class="docs-pill">Docs</span>
+    </a>
+    <button class="docs-nav-toggle" id="docs-nav-toggle" aria-label="Open site menu" aria-expanded="false" aria-controls="docs-top-links">
+      <i data-lucide="menu" style="width:20px;height:20px"></i>
+    </button>
+    <div class="docs-top-links" id="docs-top-links">
+      <a class="docs-top-link" href="index.html#features"><i data-lucide="layout-grid" style="width:13px;height:13px"></i> Features</a>
+      <a class="docs-top-link" href="index.html#platforms"><i data-lucide="download" style="width:13px;height:13px"></i> Download</a>
+      <a class="docs-top-link active" href="docs.html"><i data-lucide="book-open" style="width:13px;height:13px"></i> Docs</a>
+      <a class="docs-top-link" href="account.html"><i data-lucide="user" style="width:13px;height:13px"></i> Account</a>
+      <a class="docs-top-link" href="https://github.com/KhooLy/fluxa-desktop" target="_blank" rel="noreferrer"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg> GitHub</a>
+      <a class="docs-top-btn" href="index.html#platforms"><i data-lucide="download" style="width:13px;height:13px"></i> Download</a>
+    </div>
+  </div>
+</nav>
+<div class="layout">
+<div class="overlay" id="overlay"></div>
+<aside class="sidebar" id="sidebar">
+  <a class="sidebar-logo" href="docs.html">
+    <img src="logo.png" alt="Fluxa" />
+    <span>Fluxa Docs<small>Guides and reference</small></span>
+  </a>
+  <div class="search-wrap">
+    <i data-lucide="search" class="search-icon"></i>
+    <input type="search" id="search-input" placeholder="Search docs..." aria-label="Search documentation" autocomplete="off" />
+    <span class="search-kbd">/</span>
+  </div>
+  <div id="search-results" class="search-results"></div>
+  <nav>
+    <div class="nav-group">Site</div>
+    <a href="index.html"><i data-lucide="home" class="nav-icon"></i>Site home</a>
+    <a href="account.html"><i data-lucide="user" class="nav-icon"></i>Account</a>
+    <div class="nav-group">Start</div>
+    <a href="docs.html"><i data-lucide="book-open" class="nav-icon"></i>Docs Home</a>
+    <a href="what-is-fluxa.html"><i data-lucide="info" class="nav-icon"></i>What is Fluxa</a>
+    <a href="getting-started.html"><i data-lucide="rocket" class="nav-icon"></i>Getting Started</a>
+    <a href="concepts.html"><i data-lucide="library" class="nav-icon"></i>Concepts</a>
+    <div class="nav-group">Core workflows</div>
+    <a href="addons-catalogs.html"><i data-lucide="puzzle" class="nav-icon"></i>Addons &amp; Catalogs</a>
+    <a href="sync-accounts.html"><i data-lucide="refresh-cw" class="nav-icon"></i>Sync &amp; Accounts</a>
+    <a href="playback.html"><i data-lucide="play-circle" class="nav-icon"></i>Playback</a>
+    <a href="library-collections.html"><i data-lucide="bookmark" class="nav-icon"></i>Library &amp; Collections</a>
+    <div class="nav-group">Reference</div>
+    <a href="settings.html"><i data-lucide="sliders" class="nav-icon"></i>Settings</a>
+    <a href="troubleshooting.html"><i data-lucide="alert-circle" class="nav-icon"></i>Troubleshooting</a>
+    <a href="faq.html"><i data-lucide="help-circle" class="nav-icon"></i>FAQ</a>
+  </nav>
+</aside>
+<main class="main">
+<div class="content docs-home">
+
+<div class="docs-hero-grid">
+  <div class="home-hero">
+    <div class="logo-row">
+      <img src="logo.png" alt="Fluxa" />
+      <h1>Fluxa Docs</h1>
+    </div>
+    <p class="sub">Start here for setup, addons, playback, sync, library workflows, settings, and troubleshooting.</p>
+    <div class="btn-row">
+      <a class="btn btn-primary" href="getting-started.html">Start setup</a>
+      <a class="btn btn-ghost" href="troubleshooting.html">Fix a problem</a>
+      <a class="btn btn-ghost" href="concepts.html">Learn terms</a>
+    </div>
+  </div>
+  <div class="ui-shot" aria-hidden="true">
+    <div class="ui-shot-bar">
+      <span class="ui-shot-dot"></span>
+      <span class="ui-shot-dot"></span>
+      <span class="ui-shot-dot"></span>
+      <span class="ui-shot-title">Fluxa Home</span>
+    </div>
+    <div class="ui-shot-body">
+      <div class="ui-shot-hero"></div>
+      <div class="ui-shot-row-title"></div>
+      <div class="ui-shot-posters">
+        <span class="ui-shot-poster"></span>
+        <span class="ui-shot-poster"></span>
+        <span class="ui-shot-poster"></span>
+        <span class="ui-shot-poster"></span>
+        <span class="ui-shot-poster"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h2 id="start-here">Start here</h2>
+<div class="doc-card-grid">
+  <a class="doc-card" href="what-is-fluxa.html"><strong>What Fluxa is</strong><span>The short explanation, platform support, and content model.</span></a>
+  <a class="doc-card" href="getting-started.html"><strong>Install and first stream</strong><span>Download, create a profile, install an addon, and play something.</span></a>
+  <a class="doc-card" href="concepts.html"><strong>Terms and concepts</strong><span>Addons, catalogs, manifests, debrid, Usenet, mpv, and source quality.</span></a>
+  <a class="doc-card" href="faq.html"><strong>Quick answers</strong><span>Short answers for common account, addon, playback, and library questions.</span></a>
+</div>
+
+<h2 id="how-it-works">How it works</h2>
+<div class="doc-card-grid">
+  <a class="doc-card" href="architecture.html"><strong>Architecture</strong><span>Desktop, Android, fluxa-core, addons, player, and sync data flow.</span></a>
+  <a class="doc-card" href="addon-deep-dive.html"><strong>Addon deep dive</strong><span>Manifest basics, endpoint types, Stremio compatibility, and addon failure modes.</span></a>
+  <a class="doc-card" href="accounts-comparison.html"><strong>Account comparison</strong><span>No account, Nuvio, Stremio, Trakt, MyAnimeList, and Simkl.</span></a>
+  <a class="doc-card" href="privacy-security.html"><strong>Privacy and security</strong><span>Local storage, third-party services, addon trust, and API key handling.</span></a>
+</div>
+
+<h2 id="common-tasks">Common tasks</h2>
+<div class="task-grid">
+  <a class="task-card" href="addons-catalogs.html#installing-an-addon"><strong>Install your first addon</strong><span>Paste a manifest URL and make content rows appear.</span></a>
+  <a class="task-card" href="sync-accounts.html#nuvio-cross-device-sync"><strong>Set up Nuvio sync</strong><span>Keep library, profiles, collections, and progress aligned across devices.</span></a>
+  <a class="task-card" href="addons-catalogs.html#installing-an-addon"><strong>Import Stremio addons</strong><span>Use the same Stremio-compatible manifest links in Fluxa.</span></a>
+  <a class="task-card" href="library-collections.html#creating-a-collection"><strong>Create a collection</strong><span>Build custom library sections and optionally pin them to Home.</span></a>
+  <a class="task-card" href="playback.html#picking-a-source"><strong>Pick better sources</strong><span>Choose manual, auto, or regex source selection for quality control.</span></a>
+  <a class="task-card" href="troubleshooting.html#nothing-plays-when-i-press-play"><strong>Fix playback issues</strong><span>Use symptom-based fixes for empty source lists, buffering, audio, and subtitles.</span></a>
+</div>
+
+<div class="callout callout-info">
+  <i data-lucide="info"></i>
+  <div><strong>Fluxa does not provide content.</strong> The app connects to addons you install. If the Home screen is empty or nothing plays, start with the addon guide and troubleshooting page.</div>
+</div>
+
+<h2 id="deep-guides">Deep guides</h2>
+<div class="doc-card-grid">
+  <a class="doc-card" href="nuvio-sync-details.html"><strong>Nuvio sync details</strong><span>What syncs, what does not, conflict behavior, and privacy notes.</span></a>
+  <a class="doc-card" href="playback-advanced.html"><strong>Playback advanced</strong><span>mpv options, hardware decoding, HDR, Dolby Vision, subtitles, and external players.</span></a>
+  <a class="doc-card" href="debrid-usenet-setup.html"><strong>Debrid and Usenet setup</strong><span>Generic provider setup flow, cached sources, direct streams, and API keys.</span></a>
+  <a class="doc-card" href="collections-cookbook.html"><strong>Collections cookbook</strong><span>Recipes for seasonal anime, kids profiles, top-rated rows, and JSON sharing.</span></a>
+  <a class="doc-card" href="recommended-settings.html"><strong>Recommended settings</strong><span>Suggested settings for low-end devices, 4K/HDR, slow internet, and anime.</span></a>
+  <a class="doc-card" href="troubleshooting-flows.html"><strong>Troubleshooting flows</strong><span>Decision trees for empty Home, no streams, buffering, sync, and login callbacks.</span></a>
+</div>
+
+<h2 id="reference">Reference</h2>
+<div class="doc-card-grid">
+  <a class="doc-card" href="settings.html"><strong>Settings reference</strong><span>Every major setting, grouped by General, Appearance, Playback, Buffer, Subtitles, Metadata, Decoder, Account, and Addons.</span></a>
+  <a class="doc-card" href="troubleshooting.html"><strong>Troubleshooting</strong><span>Symptom-first fixes for playback, addons, sync, macOS, Linux, subtitles, and performance.</span></a>
+  <a class="doc-card" href="data-locations.html"><strong>Data locations</strong><span>Where Fluxa stores local data and how to back up or move it.</span></a>
+  <a class="doc-card" href="updates-releases.html"><strong>Updates and releases</strong><span>Official downloads, update flow, version checks, and bad update recovery.</span></a>
+  <a class="doc-card" href="platform-install.html"><strong>Platform install notes</strong><span>Windows, macOS, Linux, and Android install edge cases.</span></a>
+  <a class="doc-card" href="keyboard-shortcuts.html"><strong>Keyboard shortcuts</strong><span>Docs and playback shortcuts for desktop users.</span></a>
+  <a class="doc-card" href="glossary.html"><strong>Glossary</strong><span>Definitions for addon, source, sync, playback, and quality terms.</span></a>
+  <a class="doc-card" href="known-limitations.html"><strong>Known limitations</strong><span>Content, addon reliability, offline use, and platform behavior limits.</span></a>
+  <a class="doc-card" href="contributing-docs.html"><strong>Contributing docs</strong><span>How to report docs issues and write useful docs changes.</span></a>
+</div>
+
+</div>
+</main>
+</div>
+<script src="lucide.min.js"></script>
+<script src="search-index.js"></script>
+<script src="glossary.js"></script>
+<script src="nav.js"></script>
+</body>
+</html>

@@ -15,31 +15,54 @@
 <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+<nav class="docs-topbar">
+  <div class="docs-topbar-inner">
+    <button class="menu-btn" id="menu-btn" aria-label="Toggle documentation menu" aria-expanded="false" aria-controls="sidebar"><i data-lucide="panel-left" style="width:18px;height:18px"></i></button>
+    <a class="docs-brand" href="index.html" aria-label="Fluxa home">
+      <img src="logo.png" alt="" />
+      <span>Fluxa</span>
+      <span class="docs-pill">Docs</span>
+    </a>
+    <button class="docs-nav-toggle" id="docs-nav-toggle" aria-label="Open site menu" aria-expanded="false" aria-controls="docs-top-links">
+      <i data-lucide="menu" style="width:20px;height:20px"></i>
+    </button>
+    <div class="docs-top-links" id="docs-top-links">
+      <a class="docs-top-link" href="index.html#features"><i data-lucide="layout-grid" style="width:13px;height:13px"></i> Features</a>
+      <a class="docs-top-link" href="index.html#platforms"><i data-lucide="download" style="width:13px;height:13px"></i> Download</a>
+      <a class="docs-top-link active" href="docs.html"><i data-lucide="book-open" style="width:13px;height:13px"></i> Docs</a>
+      <a class="docs-top-link" href="account.html"><i data-lucide="user" style="width:13px;height:13px"></i> Account</a>
+      <a class="docs-top-link" href="https://github.com/KhooLy/fluxa-desktop" target="_blank" rel="noreferrer"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg> GitHub</a>
+      <a class="docs-top-btn" href="index.html#platforms"><i data-lucide="download" style="width:13px;height:13px"></i> Download</a>
+    </div>
+  </div>
+</nav>
 <div class="layout">
-<button class="menu-btn" id="menu-btn" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="sidebar">☰</button>
 <div class="overlay" id="overlay"></div>
 <aside class="sidebar" id="sidebar">
-  <a class="sidebar-logo" href="index.html">
+  <a class="sidebar-logo" href="docs.html">
     <img src="logo.png" alt="Fluxa" />
-    <span>Fluxa Docs</span>
+    <span>Fluxa Docs<small>Guides and reference</small></span>
   </a>
   <div class="search-wrap">
     <i data-lucide="search" class="search-icon"></i>
-    <input type="search" id="search-input" placeholder="Search docs…" aria-label="Search documentation" autocomplete="off" />
+    <input type="search" id="search-input" placeholder="Search docs..." aria-label="Search documentation" autocomplete="off" />
+    <span class="search-kbd">/</span>
   </div>
   <div id="search-results" class="search-results"></div>
   <nav>
-    <a href="index.html"><i data-lucide="home" class="nav-icon"></i>Home</a>
+    <div class="nav-group">Site</div>
+    <a href="index.html"><i data-lucide="home" class="nav-icon"></i>Site home</a>
     <a href="account.html"><i data-lucide="user" class="nav-icon"></i>Account</a>
-    <div class="nav-group">Overview</div>
+    <div class="nav-group">Start</div>
+    <a href="docs.html"><i data-lucide="book-open" class="nav-icon"></i>Docs Home</a>
     <a href="what-is-fluxa.html"><i data-lucide="info" class="nav-icon"></i>What is Fluxa</a>
     <a href="getting-started.html"><i data-lucide="rocket" class="nav-icon"></i>Getting Started</a>
-    <a href="concepts.html"><i data-lucide="book-open" class="nav-icon"></i>Concepts</a>
-    <div class="nav-group">Guides</div>
+    <a href="concepts.html"><i data-lucide="library" class="nav-icon"></i>Concepts</a>
+    <div class="nav-group">Core workflows</div>
     <a href="addons-catalogs.html"><i data-lucide="puzzle" class="nav-icon"></i>Addons &amp; Catalogs</a>
-    <a href="library-collections.html"><i data-lucide="bookmark" class="nav-icon"></i>Library &amp; Collections</a>
     <a href="sync-accounts.html"><i data-lucide="refresh-cw" class="nav-icon"></i>Sync &amp; Accounts</a>
     <a href="playback.html"><i data-lucide="play-circle" class="nav-icon"></i>Playback</a>
+    <a href="library-collections.html"><i data-lucide="bookmark" class="nav-icon"></i>Library &amp; Collections</a>
     <div class="nav-group">Reference</div>
     <a href="settings.html"><i data-lucide="sliders" class="nav-icon"></i>Settings</a>
     <a href="troubleshooting.html"><i data-lucide="alert-circle" class="nav-icon"></i>Troubleshooting</a>
@@ -52,6 +75,11 @@
 <div class="intro">
   <h1>Getting Started</h1>
   <p>From download to your first stream, step by step.</p>
+</div>
+
+<div class="callout callout-tip">
+  <i data-lucide="route"></i>
+  <div><strong>Fast path:</strong> install Fluxa, create one profile, add one Stremio-compatible manifest URL, then play a title from Home or Search.</div>
 </div>
 
 <h2 id="download-and-install">Download and install</h2>
@@ -73,13 +101,35 @@
 <p>When you open Fluxa for the first time, you'll be asked to create a profile. Give it a name and pick an avatar — that's all you need to get in. You can create more profiles later, and each one has its own completely separate library and settings.</p>
 <p>After your profile is set up you'll see the home screen. It will look mostly empty at first, and that's normal — you need to add an addon before anything shows up.</p>
 
+<div class="ui-shot" aria-hidden="true">
+  <div class="ui-shot-bar">
+    <span class="ui-shot-dot"></span>
+    <span class="ui-shot-dot"></span>
+    <span class="ui-shot-dot"></span>
+    <span class="ui-shot-title">Home after adding catalogs</span>
+  </div>
+  <div class="ui-shot-body">
+    <div class="ui-shot-hero"></div>
+    <div class="ui-shot-row-title"></div>
+    <div class="ui-shot-posters">
+      <span class="ui-shot-poster"></span>
+      <span class="ui-shot-poster"></span>
+      <span class="ui-shot-poster"></span>
+      <span class="ui-shot-poster"></span>
+      <span class="ui-shot-poster"></span>
+    </div>
+  </div>
+</div>
+
 <h2 id="adding-your-first-addon">Adding your first addon</h2>
 <p>Addons are what bring content into Fluxa. Each addon has a link — a web address ending in <code>/manifest.json</code> — that you paste into Fluxa to install it.</p>
+<pre><code>https://example-addon.example/manifest.json</code></pre>
 <p>To add one, go to <strong>Settings → Addons</strong>, paste the addon link into the field, and confirm. The home screen will fill in immediately with content from that addon.</p>
 <p>You can install as many addons as you like. Each one can add more content, more stream sources, or subtitles on top of what you already have.</p>
 
-<div class="note">
-  <strong>Where do I find addon links?</strong> Search for "Stremio addon list" — Fluxa uses the same addon format. Community-maintained lists are easy to find online.
+<div class="callout callout-info">
+  <i data-lucide="puzzle"></i>
+  <div><strong>Where do I find addon links?</strong> Search for "Stremio addon list" — Fluxa uses the same addon format. Community-maintained lists are easy to find online.</div>
 </div>
 
 <h2 id="finding-something-to-watch">Finding something to watch</h2>

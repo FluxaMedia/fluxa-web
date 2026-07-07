@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Account Comparison - Fluxa Docs</title>
+<meta name="description" content="Which accounts are optional, what each one unlocks, and when to use them." />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Account Comparison - Fluxa Docs" />
+<meta property="og:description" content="Which accounts are optional, what each one unlocks, and when to use them." />
+<meta property="og:image" content="logo.png" />
+<meta name="twitter:card" content="summary" />
+<link rel="icon" type="image/png" sizes="48x48" href="favicon.png" />
+<link rel="apple-touch-icon" href="logo.png" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<nav class="docs-topbar">
+  <div class="docs-topbar-inner">
+    <button class="menu-btn" id="menu-btn" aria-label="Toggle documentation menu" aria-expanded="false" aria-controls="sidebar"><i data-lucide="panel-left" style="width:18px;height:18px"></i></button>
+    <a class="docs-brand" href="index.html" aria-label="Fluxa home">
+      <img src="logo.png" alt="" />
+      <span>Fluxa</span>
+      <span class="docs-pill">Docs</span>
+    </a>
+    <button class="docs-nav-toggle" id="docs-nav-toggle" aria-label="Open site menu" aria-expanded="false" aria-controls="docs-top-links">
+      <i data-lucide="menu" style="width:20px;height:20px"></i>
+    </button>
+    <div class="docs-top-links" id="docs-top-links">
+      <a class="docs-top-link" href="index.html#features"><i data-lucide="layout-grid" style="width:13px;height:13px"></i> Features</a>
+      <a class="docs-top-link" href="index.html#platforms"><i data-lucide="download" style="width:13px;height:13px"></i> Download</a>
+      <a class="docs-top-link active" href="docs.html"><i data-lucide="book-open" style="width:13px;height:13px"></i> Docs</a>
+      <a class="docs-top-link" href="account.html"><i data-lucide="user" style="width:13px;height:13px"></i> Account</a>
+      <a class="docs-top-link" href="https://github.com/KhooLy/fluxa-desktop" target="_blank" rel="noreferrer">GitHub</a>
+      <a class="docs-top-btn" href="index.html#platforms"><i data-lucide="download" style="width:13px;height:13px"></i> Download</a>
+    </div>
+  </div>
+</nav>
+<div class="layout">
+<div class="overlay" id="overlay"></div>
+<aside class="sidebar" id="sidebar">
+  <a class="sidebar-logo" href="docs.html"><img src="logo.png" alt="Fluxa" /><span>Fluxa Docs<small>Guides and reference</small></span></a>
+  <div class="search-wrap">
+    <i data-lucide="search" class="search-icon"></i>
+    <input type="search" id="search-input" placeholder="Search docs..." aria-label="Search documentation" autocomplete="off" />
+    <span class="search-kbd">/</span>
+  </div>
+  <div id="search-results" class="search-results"></div>
+  <nav></nav>
+</aside>
+<main class="main">
+<div class="content">
+
+<div class="intro">
+  <h1>Account Comparison</h1>
+  <p>Which accounts are optional, what each one unlocks, and when to use them.</p>
+</div>
+
+<h2 id="quick-comparison">Quick comparison</h2>
+<table><thead><tr><th>Account</th><th>Required?</th><th>Use it for</th></tr></thead><tbody><tr><td>No account</td><td>No</td><td>Local profiles, local addons, local playback, local library.</td></tr><tr><td>Nuvio</td><td>No</td><td>Cross-device Fluxa sync for profiles, library, progress, addons, and collections.</td></tr><tr><td>Stremio</td><td>No</td><td>Using a Stremio account from the web account page when supported.</td></tr><tr><td>Trakt</td><td>No</td><td>Movies and TV watch history, lists, scrobbling.</td></tr><tr><td>MyAnimeList</td><td>No</td><td>Anime lists and episode progress.</td></tr><tr><td>Simkl</td><td>No</td><td>Movies, TV, and anime in one tracking account.</td></tr></tbody></table>
+
+<h2 id="recommended-setups">Recommended setups</h2>
+<ul><li><strong>Single device:</strong> no account is required. Add tracking only if you want external history.</li><li><strong>Desktop plus Android:</strong> use Nuvio if you want Fluxa state to follow you.</li><li><strong>Anime-heavy use:</strong> connect MyAnimeList or Simkl.</li><li><strong>TV and movie tracking:</strong> connect Trakt or Simkl.</li></ul>
+
+<h2 id="profile-scope">Profile scope</h2>
+<p>Accounts are profile-scoped. One profile can connect a Trakt account while another profile uses a different account or no account at all. Switching profiles changes addons, library, settings, and connected services.</p>
+
+</div>
+</main>
+</div>
+<script src="lucide.min.js"></script>
+<script src="search-index.js"></script>
+<script src="glossary.js"></script>
+<script src="nav.js"></script>
+</body>
+</html>

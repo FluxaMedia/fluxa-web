@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Architecture - Fluxa Docs</title>
+<meta name="description" content="How Fluxa Desktop, Android, fluxa-core, addons, playback, and sync fit together." />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Architecture - Fluxa Docs" />
+<meta property="og:description" content="How Fluxa Desktop, Android, fluxa-core, addons, playback, and sync fit together." />
+<meta property="og:image" content="logo.png" />
+<meta name="twitter:card" content="summary" />
+<link rel="icon" type="image/png" sizes="48x48" href="favicon.png" />
+<link rel="apple-touch-icon" href="logo.png" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<nav class="docs-topbar">
+  <div class="docs-topbar-inner">
+    <button class="menu-btn" id="menu-btn" aria-label="Toggle documentation menu" aria-expanded="false" aria-controls="sidebar"><i data-lucide="panel-left" style="width:18px;height:18px"></i></button>
+    <a class="docs-brand" href="index.html" aria-label="Fluxa home">
+      <img src="logo.png" alt="" />
+      <span>Fluxa</span>
+      <span class="docs-pill">Docs</span>
+    </a>
+    <button class="docs-nav-toggle" id="docs-nav-toggle" aria-label="Open site menu" aria-expanded="false" aria-controls="docs-top-links">
+      <i data-lucide="menu" style="width:20px;height:20px"></i>
+    </button>
+    <div class="docs-top-links" id="docs-top-links">
+      <a class="docs-top-link" href="index.html#features"><i data-lucide="layout-grid" style="width:13px;height:13px"></i> Features</a>
+      <a class="docs-top-link" href="index.html#platforms"><i data-lucide="download" style="width:13px;height:13px"></i> Download</a>
+      <a class="docs-top-link active" href="docs.html"><i data-lucide="book-open" style="width:13px;height:13px"></i> Docs</a>
+      <a class="docs-top-link" href="account.html"><i data-lucide="user" style="width:13px;height:13px"></i> Account</a>
+      <a class="docs-top-link" href="https://github.com/KhooLy/fluxa-desktop" target="_blank" rel="noreferrer">GitHub</a>
+      <a class="docs-top-btn" href="index.html#platforms"><i data-lucide="download" style="width:13px;height:13px"></i> Download</a>
+    </div>
+  </div>
+</nav>
+<div class="layout">
+<div class="overlay" id="overlay"></div>
+<aside class="sidebar" id="sidebar">
+  <a class="sidebar-logo" href="docs.html"><img src="logo.png" alt="Fluxa" /><span>Fluxa Docs<small>Guides and reference</small></span></a>
+  <div class="search-wrap">
+    <i data-lucide="search" class="search-icon"></i>
+    <input type="search" id="search-input" placeholder="Search docs..." aria-label="Search documentation" autocomplete="off" />
+    <span class="search-kbd">/</span>
+  </div>
+  <div id="search-results" class="search-results"></div>
+  <nav></nav>
+</aside>
+<main class="main">
+<div class="content">
+
+<div class="intro">
+  <h1>Architecture</h1>
+  <p>How Fluxa Desktop, Android, fluxa-core, addons, playback, and sync fit together.</p>
+</div>
+
+<h2 id="repos-and-responsibilities">Repos and responsibilities</h2>
+<p>Fluxa is split into app shells and shared logic. <strong>fluxa-desktop</strong> owns the desktop interface, windows, installers, and OS integration. <strong>fluxa</strong> owns the Android interface and Android platform integration. <strong>fluxa-core</strong> is the shared Rust layer for addon resolution, library state, search behavior, source handling, and playback policy.</p><p>This split keeps platform code close to each app while keeping the media logic consistent across desktop and Android.</p>
+
+<h2 id="local-vs-remote">What runs locally vs remotely</h2>
+<table><thead><tr><th>Part</th><th>Where it runs</th><th>What it does</th></tr></thead><tbody><tr><td>Fluxa app</td><td>Your device</td><td>UI, profiles, settings, playback controls, library views.</td></tr><tr><td>fluxa-core</td><td>Your device</td><td>Addon calls, source selection, local state, playback decisions.</td></tr><tr><td>Addons</td><td>Remote servers</td><td>Catalogs, metadata, streams, subtitles.</td></tr><tr><td>Nuvio</td><td>Remote sync service</td><td>Optional cross-device account sync.</td></tr><tr><td>Tracking services</td><td>Third-party services</td><td>Optional watch history and list sync.</td></tr></tbody></table>
+
+<h2 id="data-flow">Data flow</h2>
+<ol><li>A catalog addon provides rows or search results.</li><li>Metadata fills detail pages with posters, summaries, cast, episodes, and trailers.</li><li>When you press Play, stream addons return direct links, torrents, or addon-specific source labels.</li><li>Fluxa applies your source selection settings, starts playback, and saves progress locally.</li><li>Optional services such as Nuvio, Trakt, MyAnimeList, or Simkl receive sync updates.</li></ol>
+
+<h2 id="failure-boundaries">Failure boundaries</h2>
+<div class="callout callout-info"><i data-lucide="info"></i><div><strong>Most empty or missing content issues are addon-side.</strong> If a catalog, stream, image, or subtitle is missing, Fluxa can only show what the installed addons return.</div></div><p>Fluxa can recover from many addon failures by combining results from multiple addons, but it cannot force an unavailable addon server to respond or create content that an addon does not provide.</p>
+
+</div>
+</main>
+</div>
+<script src="lucide.min.js"></script>
+<script src="search-index.js"></script>
+<script src="glossary.js"></script>
+<script src="nav.js"></script>
+</body>
+</html>

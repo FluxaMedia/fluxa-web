@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Platform Install Notes - Fluxa Docs</title>
+<meta name="description" content="Install and platform-specific notes for Windows, macOS, Linux, and Android." />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Platform Install Notes - Fluxa Docs" />
+<meta property="og:description" content="Install and platform-specific notes for Windows, macOS, Linux, and Android." />
+<meta property="og:image" content="logo.png" />
+<meta name="twitter:card" content="summary" />
+<link rel="icon" type="image/png" sizes="48x48" href="favicon.png" />
+<link rel="apple-touch-icon" href="logo.png" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<nav class="docs-topbar">
+  <div class="docs-topbar-inner">
+    <button class="menu-btn" id="menu-btn" aria-label="Toggle documentation menu" aria-expanded="false" aria-controls="sidebar"><i data-lucide="panel-left" style="width:18px;height:18px"></i></button>
+    <a class="docs-brand" href="index.html" aria-label="Fluxa home">
+      <img src="logo.png" alt="" />
+      <span>Fluxa</span>
+      <span class="docs-pill">Docs</span>
+    </a>
+    <button class="docs-nav-toggle" id="docs-nav-toggle" aria-label="Open site menu" aria-expanded="false" aria-controls="docs-top-links">
+      <i data-lucide="menu" style="width:20px;height:20px"></i>
+    </button>
+    <div class="docs-top-links" id="docs-top-links">
+      <a class="docs-top-link" href="index.html#features"><i data-lucide="layout-grid" style="width:13px;height:13px"></i> Features</a>
+      <a class="docs-top-link" href="index.html#platforms"><i data-lucide="download" style="width:13px;height:13px"></i> Download</a>
+      <a class="docs-top-link active" href="docs.html"><i data-lucide="book-open" style="width:13px;height:13px"></i> Docs</a>
+      <a class="docs-top-link" href="account.html"><i data-lucide="user" style="width:13px;height:13px"></i> Account</a>
+      <a class="docs-top-link" href="https://github.com/KhooLy/fluxa-desktop" target="_blank" rel="noreferrer">GitHub</a>
+      <a class="docs-top-btn" href="index.html#platforms"><i data-lucide="download" style="width:13px;height:13px"></i> Download</a>
+    </div>
+  </div>
+</nav>
+<div class="layout">
+<div class="overlay" id="overlay"></div>
+<aside class="sidebar" id="sidebar">
+  <a class="sidebar-logo" href="docs.html"><img src="logo.png" alt="Fluxa" /><span>Fluxa Docs<small>Guides and reference</small></span></a>
+  <div class="search-wrap">
+    <i data-lucide="search" class="search-icon"></i>
+    <input type="search" id="search-input" placeholder="Search docs..." aria-label="Search documentation" autocomplete="off" />
+    <span class="search-kbd">/</span>
+  </div>
+  <div id="search-results" class="search-results"></div>
+  <nav></nav>
+</aside>
+<main class="main">
+<div class="content">
+
+<div class="intro">
+  <h1>Platform Install Notes</h1>
+  <p>Install and platform-specific notes for Windows, macOS, Linux, and Android.</p>
+</div>
+
+<h2 id="windows">Windows</h2>
+<p>Use the EXE installer from the release page. If Windows SmartScreen appears, confirm the publisher/source and choose to run anyway only if you downloaded from the official release.</p><p>Uninstall from Windows Settings like any other app. App data may remain unless you remove it manually.</p>
+
+<h2 id="macos">macOS</h2>
+<p>Open the DMG and drag Fluxa into Applications. If macOS blocks first launch, go to System Settings -> Privacy & Security and choose Open Anyway for Fluxa.</p>
+
+<h2 id="linux">Linux</h2>
+<p>Use DEB for Debian/Ubuntu, RPM for Fedora/RHEL, or AppImage for portable use. If video output is black, test Wayland vs X11 and see the playback troubleshooting notes.</p>
+
+<h2 id="android">Android</h2>
+<p>Download the APK from official releases. Android may ask for permission to install unknown apps for your browser or file manager. Disable that permission again after installing if you prefer a stricter setup.</p>
+
+</div>
+</main>
+</div>
+<script src="lucide.min.js"></script>
+<script src="search-index.js"></script>
+<script src="glossary.js"></script>
+<script src="nav.js"></script>
+</body>
+</html>

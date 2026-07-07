@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Collections Cookbook - Fluxa Docs</title>
+<meta name="description" content="Practical collection recipes for common library setups." />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Collections Cookbook - Fluxa Docs" />
+<meta property="og:description" content="Practical collection recipes for common library setups." />
+<meta property="og:image" content="logo.png" />
+<meta name="twitter:card" content="summary" />
+<link rel="icon" type="image/png" sizes="48x48" href="favicon.png" />
+<link rel="apple-touch-icon" href="logo.png" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<nav class="docs-topbar">
+  <div class="docs-topbar-inner">
+    <button class="menu-btn" id="menu-btn" aria-label="Toggle documentation menu" aria-expanded="false" aria-controls="sidebar"><i data-lucide="panel-left" style="width:18px;height:18px"></i></button>
+    <a class="docs-brand" href="index.html" aria-label="Fluxa home">
+      <img src="logo.png" alt="" />
+      <span>Fluxa</span>
+      <span class="docs-pill">Docs</span>
+    </a>
+    <button class="docs-nav-toggle" id="docs-nav-toggle" aria-label="Open site menu" aria-expanded="false" aria-controls="docs-top-links">
+      <i data-lucide="menu" style="width:20px;height:20px"></i>
+    </button>
+    <div class="docs-top-links" id="docs-top-links">
+      <a class="docs-top-link" href="index.html#features"><i data-lucide="layout-grid" style="width:13px;height:13px"></i> Features</a>
+      <a class="docs-top-link" href="index.html#platforms"><i data-lucide="download" style="width:13px;height:13px"></i> Download</a>
+      <a class="docs-top-link active" href="docs.html"><i data-lucide="book-open" style="width:13px;height:13px"></i> Docs</a>
+      <a class="docs-top-link" href="account.html"><i data-lucide="user" style="width:13px;height:13px"></i> Account</a>
+      <a class="docs-top-link" href="https://github.com/KhooLy/fluxa-desktop" target="_blank" rel="noreferrer">GitHub</a>
+      <a class="docs-top-btn" href="index.html#platforms"><i data-lucide="download" style="width:13px;height:13px"></i> Download</a>
+    </div>
+  </div>
+</nav>
+<div class="layout">
+<div class="overlay" id="overlay"></div>
+<aside class="sidebar" id="sidebar">
+  <a class="sidebar-logo" href="docs.html"><img src="logo.png" alt="Fluxa" /><span>Fluxa Docs<small>Guides and reference</small></span></a>
+  <div class="search-wrap">
+    <i data-lucide="search" class="search-icon"></i>
+    <input type="search" id="search-input" placeholder="Search docs..." aria-label="Search documentation" autocomplete="off" />
+    <span class="search-kbd">/</span>
+  </div>
+  <div id="search-results" class="search-results"></div>
+  <nav></nav>
+</aside>
+<main class="main">
+<div class="content">
+
+<div class="intro">
+  <h1>Collections Cookbook</h1>
+  <p>Practical collection recipes for common library setups.</p>
+</div>
+
+<h2 id="seasonal-anime">Seasonal anime collection</h2>
+<ol><li>Create a collection called Seasonal Anime.</li><li>Add folders for currently airing, popular, and completed anime catalogs.</li><li>Use poster layout for title browsing.</li><li>Connect MyAnimeList or Simkl if you want tracking.</li></ol>
+
+<h2 id="kids-profile">Kids profile collection</h2>
+<ol><li>Create a separate profile.</li><li>Install only addons and catalogs appropriate for that profile.</li><li>Create collections by age range or genre.</li><li>Keep account connections separate from adult profiles.</li></ol>
+
+<h2 id="top-rated-movies">Top-rated movies row</h2>
+<ol><li>Create a Movies collection.</li><li>Add a folder from a top-rated movie catalog.</li><li>Filter by genre if needed.</li><li>Pin it near the top of Home for quick access.</li></ol>
+
+<h2 id="sharing-json">Export and import examples</h2>
+<p>Use export when moving collections between devices or profiles. Review imported JSON before saving if you received it from someone else.</p>
+
+</div>
+</main>
+</div>
+<script src="lucide.min.js"></script>
+<script src="search-index.js"></script>
+<script src="glossary.js"></script>
+<script src="nav.js"></script>
+</body>
+</html>

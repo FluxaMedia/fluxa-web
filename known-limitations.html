@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Known Limitations - Fluxa Docs</title>
+<meta name="description" content="Important constraints and tradeoffs to understand before troubleshooting." />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Known Limitations - Fluxa Docs" />
+<meta property="og:description" content="Important constraints and tradeoffs to understand before troubleshooting." />
+<meta property="og:image" content="logo.png" />
+<meta name="twitter:card" content="summary" />
+<link rel="icon" type="image/png" sizes="48x48" href="favicon.png" />
+<link rel="apple-touch-icon" href="logo.png" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<nav class="docs-topbar">
+  <div class="docs-topbar-inner">
+    <button class="menu-btn" id="menu-btn" aria-label="Toggle documentation menu" aria-expanded="false" aria-controls="sidebar"><i data-lucide="panel-left" style="width:18px;height:18px"></i></button>
+    <a class="docs-brand" href="index.html" aria-label="Fluxa home">
+      <img src="logo.png" alt="" />
+      <span>Fluxa</span>
+      <span class="docs-pill">Docs</span>
+    </a>
+    <button class="docs-nav-toggle" id="docs-nav-toggle" aria-label="Open site menu" aria-expanded="false" aria-controls="docs-top-links">
+      <i data-lucide="menu" style="width:20px;height:20px"></i>
+    </button>
+    <div class="docs-top-links" id="docs-top-links">
+      <a class="docs-top-link" href="index.html#features"><i data-lucide="layout-grid" style="width:13px;height:13px"></i> Features</a>
+      <a class="docs-top-link" href="index.html#platforms"><i data-lucide="download" style="width:13px;height:13px"></i> Download</a>
+      <a class="docs-top-link active" href="docs.html"><i data-lucide="book-open" style="width:13px;height:13px"></i> Docs</a>
+      <a class="docs-top-link" href="account.html"><i data-lucide="user" style="width:13px;height:13px"></i> Account</a>
+      <a class="docs-top-link" href="https://github.com/KhooLy/fluxa-desktop" target="_blank" rel="noreferrer">GitHub</a>
+      <a class="docs-top-btn" href="index.html#platforms"><i data-lucide="download" style="width:13px;height:13px"></i> Download</a>
+    </div>
+  </div>
+</nav>
+<div class="layout">
+<div class="overlay" id="overlay"></div>
+<aside class="sidebar" id="sidebar">
+  <a class="sidebar-logo" href="docs.html"><img src="logo.png" alt="Fluxa" /><span>Fluxa Docs<small>Guides and reference</small></span></a>
+  <div class="search-wrap">
+    <i data-lucide="search" class="search-icon"></i>
+    <input type="search" id="search-input" placeholder="Search docs..." aria-label="Search documentation" autocomplete="off" />
+    <span class="search-kbd">/</span>
+  </div>
+  <div id="search-results" class="search-results"></div>
+  <nav></nav>
+</aside>
+<main class="main">
+<div class="content">
+
+<div class="intro">
+  <h1>Known Limitations</h1>
+  <p>Important constraints and tradeoffs to understand before troubleshooting.</p>
+</div>
+
+<h2 id="no-hosted-content">No hosted content</h2>
+<p>Fluxa does not host, bundle, or provide media. Content availability depends entirely on the addons you install.</p>
+
+<h2 id="addon-reliability">Addon reliability</h2>
+<p>Addons are third-party services. They can change, go offline, rate-limit, return incomplete data, or stop supporting a provider without Fluxa changing.</p>
+
+<h2 id="offline-use">Offline use</h2>
+<p>Fluxa can open locally and show existing local state, but watching requires network access because streams come from online sources. Offline downloads are not currently supported.</p>
+
+<h2 id="platform-differences">Platform differences</h2>
+<p>Desktop and Android aim for feature parity, but playback behavior can vary because hardware decoding, OS permissions, and video output systems differ by platform.</p>
+
+</div>
+</main>
+</div>
+<script src="lucide.min.js"></script>
+<script src="search-index.js"></script>
+<script src="glossary.js"></script>
+<script src="nav.js"></script>
+</body>
+</html>

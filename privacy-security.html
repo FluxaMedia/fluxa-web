@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Privacy & Security - Fluxa Docs</title>
+<meta name="description" content="What Fluxa stores locally, what third-party services see, and how addon trust works." />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Privacy & Security - Fluxa Docs" />
+<meta property="og:description" content="What Fluxa stores locally, what third-party services see, and how addon trust works." />
+<meta property="og:image" content="logo.png" />
+<meta name="twitter:card" content="summary" />
+<link rel="icon" type="image/png" sizes="48x48" href="favicon.png" />
+<link rel="apple-touch-icon" href="logo.png" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<nav class="docs-topbar">
+  <div class="docs-topbar-inner">
+    <button class="menu-btn" id="menu-btn" aria-label="Toggle documentation menu" aria-expanded="false" aria-controls="sidebar"><i data-lucide="panel-left" style="width:18px;height:18px"></i></button>
+    <a class="docs-brand" href="index.html" aria-label="Fluxa home">
+      <img src="logo.png" alt="" />
+      <span>Fluxa</span>
+      <span class="docs-pill">Docs</span>
+    </a>
+    <button class="docs-nav-toggle" id="docs-nav-toggle" aria-label="Open site menu" aria-expanded="false" aria-controls="docs-top-links">
+      <i data-lucide="menu" style="width:20px;height:20px"></i>
+    </button>
+    <div class="docs-top-links" id="docs-top-links">
+      <a class="docs-top-link" href="index.html#features"><i data-lucide="layout-grid" style="width:13px;height:13px"></i> Features</a>
+      <a class="docs-top-link" href="index.html#platforms"><i data-lucide="download" style="width:13px;height:13px"></i> Download</a>
+      <a class="docs-top-link active" href="docs.html"><i data-lucide="book-open" style="width:13px;height:13px"></i> Docs</a>
+      <a class="docs-top-link" href="account.html"><i data-lucide="user" style="width:13px;height:13px"></i> Account</a>
+      <a class="docs-top-link" href="https://github.com/KhooLy/fluxa-desktop" target="_blank" rel="noreferrer">GitHub</a>
+      <a class="docs-top-btn" href="index.html#platforms"><i data-lucide="download" style="width:13px;height:13px"></i> Download</a>
+    </div>
+  </div>
+</nav>
+<div class="layout">
+<div class="overlay" id="overlay"></div>
+<aside class="sidebar" id="sidebar">
+  <a class="sidebar-logo" href="docs.html"><img src="logo.png" alt="Fluxa" /><span>Fluxa Docs<small>Guides and reference</small></span></a>
+  <div class="search-wrap">
+    <i data-lucide="search" class="search-icon"></i>
+    <input type="search" id="search-input" placeholder="Search docs..." aria-label="Search documentation" autocomplete="off" />
+    <span class="search-kbd">/</span>
+  </div>
+  <div id="search-results" class="search-results"></div>
+  <nav></nav>
+</aside>
+<main class="main">
+<div class="content">
+
+<div class="intro">
+  <h1>Privacy & Security</h1>
+  <p>What Fluxa stores locally, what third-party services see, and how addon trust works.</p>
+</div>
+
+<h2 id="local-data">Local data</h2>
+<p>Fluxa stores app settings, profiles, installed addon URLs, library entries, collections, and playback progress locally on your device. See <a href="data-locations.html">Data Locations</a> for platform paths.</p>
+
+<h2 id="third-party-services">Third-party services</h2>
+<p>Addons see the requests needed to provide catalogs, metadata, streams, or subtitles. Tracking services see the titles you sync to them. Nuvio sees the account data required for Fluxa cross-device sync. Debrid or Usenet providers see API requests made by the addon that you configured with that provider.</p>
+
+<h2 id="addon-trust-model">Addon trust model</h2>
+<div class="callout callout-warning"><i data-lucide="triangle-alert"></i><div><strong>Only install addons you trust.</strong> Addons are remote services. Fluxa can call them, but it does not control what they log, how long they stay online, or what sources they return.</div></div><p>Prefer addon links from maintainers or communities you recognize. If an addon asks for API keys, understand which service receives those keys.</p>
+
+<h2 id="tokens-and-keys">Tokens and API keys</h2>
+<p>Service tokens and API keys should be treated like passwords. Do not paste them into random pages. If a key leaks, revoke it from the provider dashboard and generate a new one.</p>
+
+</div>
+</main>
+</div>
+<script src="lucide.min.js"></script>
+<script src="search-index.js"></script>
+<script src="glossary.js"></script>
+<script src="nav.js"></script>
+</body>
+</html>

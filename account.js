@@ -36,9 +36,64 @@ function avatarHtml(p, size) {
   return `<div class="avatar" ${st}>${url ? `<img src="${esc(url)}" alt="" loading="lazy" />` : esc(initials(p && p.name))}</div>`;
 }
 
+const META_CACHE_KEY = 'fluxa.meta.cache';
+let metaCache = {};
+try { metaCache = JSON.parse(localStorage.getItem(META_CACHE_KEY)) || {}; } catch {}
+
+async function resolveMeta(type, id) {
+  if (!id || !/^tt\d+/.test(id)) return null;
+  const t = type === 'movie' ? 'movie' : 'series';
+  const key = t + ':' + id;
+  if (metaCache[key]) return metaCache[key];
+  try {
+    const r = await fetch(`https://v3-cinemeta.strem.io/meta/${t}/${id}.json`);
+    if (!r.ok) return null;
+    const m = (await r.json()).meta || {};
+    const out = { name: m.name || null, poster: m.poster || null };
+    metaCache[key] = out;
+    try { localStorage.setItem(META_CACHE_KEY, JSON.stringify(metaCache)); } catch {}
+    return out;
+  } catch { return null; }
+}
+
+function enhanceRows(root, cap = 80) {
+  const els = [...root.querySelectorAll('[data-cid]')].slice(0, cap);
+  els.forEach(async el => {
+    const meta = await resolveMeta(el.dataset.type, el.dataset.cid);
+    if (!meta) return;
+    const nameEl = el.querySelector('.rt-name');
+    if (nameEl && meta.name) nameEl.textContent = meta.name;
+    const posterEl = el.querySelector('.poster');
+    if (posterEl && meta.poster) {
+      posterEl.style.backgroundImage = `url("${meta.poster}")`;
+      posterEl.style.backgroundSize = 'cover';
+      posterEl.style.backgroundPosition = 'center';
+    }
+  });
+}
+
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 
 function icons() { if (window.lucide) lucide.createIcons(); }
+
+function initTopNav() {
+  const navToggle = document.getElementById('nav-toggle');
+  const navLinks = document.getElementById('nav-links');
+  if (!navToggle || !navLinks) return;
+
+  navToggle.addEventListener('click', () => {
+    const open = navLinks.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    navToggle.setAttribute('aria-label', open ? 'Close site menu' : 'Open site menu');
+  });
+
+  navLinks.addEventListener('click', e => {
+    if (!e.target.closest('a')) return;
+    navLinks.classList.remove('open');
+    navToggle.setAttribute('aria-expanded', 'false');
+    navToggle.setAttribute('aria-label', 'Open site menu');
+  });
+}
 
 let toastTimer;
 function toast(msg, isErr) {
@@ -967,4 +1022,5 @@ async function secCollections() {
   paint();
 }
 
+initTopNav();
 render();

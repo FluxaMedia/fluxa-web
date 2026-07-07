@@ -102,6 +102,33 @@ async function loadRepoStats() {
   }
 }
 
+function escHtml(s) {
+  return s.replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+}
+
+// Turns a GitHub release body (markdown-ish) into a short HTML snippet:
+// escapes first, then linkifies [text](url) and groups leading "- " lines into a <ul>.
+function renderReleaseBody(raw) {
+  const lines = escHtml(raw.slice(0, 600)).split('\n');
+  const html = [];
+  let inList = false;
+  for (let line of lines) {
+    line = line.trim();
+    if (!line) continue;
+    line = line.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank">$1</a>');
+    const bullet = line.match(/^[-*]\s+(.*)/);
+    if (bullet) {
+      if (!inList) { html.push('<ul>'); inList = true; }
+      html.push(`<li>${bullet[1]}</li>`);
+    } else {
+      if (inList) { html.push('</ul>'); inList = false; }
+      html.push(`<p>${line}</p>`);
+    }
+  }
+  if (inList) html.push('</ul>');
+  return html.join('');
+}
+
 // Latest release
 async function loadRelease() {
   const el = document.getElementById('release-content');
@@ -109,13 +136,13 @@ async function loadRelease() {
   try {
     const d = await gh('repos/KhooLy/fluxa-desktop/releases/latest');
     const date = new Date(d.published_at).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-    const body = (d.body || '').slice(0, 600).replace(/\n/g, '<br>');
+    const body = renderReleaseBody(d.body || '');
     el.innerHTML = `
       <div class="release-header">
-        <div class="release-tag"><i data-lucide="tag" class="inline-icon"></i>${d.tag_name}</div>
+        <div class="release-tag"><i data-lucide="tag" class="inline-icon"></i>${escHtml(d.tag_name)}</div>
         <div class="release-date">${date}</div>
       </div>
-      <div class="release-body">${body ? `<p>${body}</p>` : '<p>See GitHub for release notes.</p>'}
+      <div class="release-body">${body || '<p>See GitHub for release notes.</p>'}
         <p style="margin-top:14px"><a href="${d.html_url}" target="_blank" style="color:rgba(255,255,255,0.7);font-size:13px;">View on GitHub →</a></p>
       </div>`;
     if (window.lucide) lucide.createIcons({ nodes: [el] });
