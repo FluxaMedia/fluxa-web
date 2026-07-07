@@ -82,23 +82,19 @@
 <p>Addons come in a few distinct types, though many addons combine more than one type in a single package.</p>
 
 <h3 id="catalog-addon">Catalog addon</h3>
-<p>A catalog addon provides lists of titles: trending movies, top-rated shows, new anime releases, by genre, and so on. These are the rows that appear on your home screen and the results you see when you search. A catalog addon tells Fluxa <em>what exists</em> — it doesn't provide the actual video.</p>
-<p>You can have as many catalog addons as you want. Each one adds more rows and more content to discover. In Settings → Home Catalogs, you choose which rows appear and in what order.</p>
+<p>Provides lists of titles — trending, top-rated, new releases, by genre — that fill the rows on your home screen and search results. It tells Fluxa <em>what exists</em>, not the video itself. Install as many as you want; pick which ones show in Settings → Home Catalogs.</p>
 
 <h3 id="stream-addon">Stream addon</h3>
-<p>A stream addon provides the actual video links when you press Play. When you tap Play on a title, Fluxa sends a request to all your stream addons at once, asking for available sources. Each addon replies with whatever it has — direct HTTP video links, torrent magnet links, or nothing. Fluxa shows you the combined list (or picks automatically, depending on your settings).</p>
-<p>Without at least one stream addon, you can browse content but can't play anything. Stream addons are the most important type to have installed.</p>
+<p>Provides the actual video link when you press Play. Fluxa asks all your stream addons at once and shows the combined results (or picks automatically). Without at least one, you can browse but can't play anything — this is the type to prioritize.</p>
 
 <h3 id="metadata-addon">Metadata addon</h3>
-<p>A metadata addon provides extra information about titles: cast, synopsis, episode lists, trailers, ratings, posters, and artwork. Fluxa uses this to fill in the detail page when you tap on a title.</p>
-<p>Many addons bundle metadata alongside their catalog and stream data. But some addons specialize in metadata only — for example, an addon that pulls detailed anime data from a specific database. These can be installed on top of other addons to enrich the information you see without duplicating their streams.</p>
+<p>Provides cast, synopsis, episodes, trailers, and artwork for the detail page. Most addons bundle this with catalog/stream data, but some specialize in metadata only to enrich what other addons already give you.</p>
 
 <h3 id="subtitle-addon">Subtitle addon</h3>
-<p>A subtitle addon provides subtitle files for videos you're already playing. When you open the subtitle menu in the player, Fluxa checks your installed subtitle addons for available tracks and adds them to the list alongside any subtitles already embedded in the video file itself.</p>
-<p>Subtitle addons often specialize by language or content type. If you watch content in a language that doesn't have many embedded subtitles, a subtitle addon is worth looking for.</p>
+<p>Provides subtitle files for whatever you're playing, shown in the player's subtitle menu alongside any tracks embedded in the video itself. Worth adding if you watch content that's short on embedded subtitles for your language.</p>
 
 <h3 id="combined-addons">Combined addons</h3>
-<p>Most popular addons do more than one thing. A single addon might provide catalog rows, supply streams when you press Play, and include metadata like cast and synopsis — all in one. This is very common. When you install such an addon, Fluxa uses it for all the things it offers.</p>
+<p>Most popular addons do more than one of these at once — catalog, streams, and metadata in a single install. Fluxa uses it for everything it offers.</p>
 
 <div class="note">
   <strong>Where to find addons.</strong> Fluxa uses the same addon format as Stremio. Search for <a href="https://www.google.com/search?q=stremio+addon+list" target="_blank" rel="noopener noreferrer">"Stremio addon list"</a> to find community-maintained directories. Each addon's page will show its manifest URL.
@@ -108,15 +104,14 @@
 <p>A debrid service (also called a "premium link generator" or just "debrid") is a paid third-party service that dramatically improves streaming performance. It's one of the most impactful things you can add to a setup like Fluxa if you watch frequently.</p>
 
 <h3 id="how-it-works">How it works</h3>
-<p>Many stream addons return torrent links rather than direct video files. Without debrid, playing a torrent requires your device to connect to a swarm of other users sharing that file — which can be slow, unreliable, or blocked by your ISP.</p>
-<p>A debrid service works differently: it downloads the torrent to its own fast servers and gives you a plain HTTP stream URL instead. You then stream directly from the debrid provider's server, not from random peers. The result is:</p>
+<p>Many stream addons return torrent links. Without debrid, playing one means connecting to a swarm of peers — slow, unreliable, sometimes ISP-throttled. A debrid service downloads the torrent to its own servers first and hands you a plain HTTP stream URL instead, so you're pulling from a data center, not random peers:</p>
 <ul>
-  <li><strong>Speed</strong> — You're pulling from a data center, not a peer swarm. Even 4K files start in seconds.</li>
-  <li><strong>Reliability</strong> — Popular content is cached on the debrid server already. You get it instantly.</li>
-  <li><strong>No ISP issues</strong> — Your traffic looks like a normal HTTPS download. Torrent throttling doesn't apply.</li>
-  <li><strong>Better quality</strong> — Full-quality remux and 4K sources that would be impractical to torrent stream fine over HTTP.</li>
+  <li><strong>Speed</strong> — even 4K files start in seconds.</li>
+  <li><strong>Reliability</strong> — popular content is already cached and ready instantly.</li>
+  <li><strong>No ISP issues</strong> — looks like a normal HTTPS download.</li>
+  <li><strong>Better quality</strong> — full remux/4K sources that wouldn't torrent-stream well.</li>
 </ul>
-<p>The tradeoff is cost — debrid services are paid subscriptions, typically €3–5 per month. They're not required to use Fluxa, but users who care about stream quality often find them worth it.</p>
+<p>The tradeoff is cost — typically €3–5/month. Not required to use Fluxa, but worth it if stream quality matters to you.</p>
 
 <h3 id="common-debrid-providers">Common debrid providers</h3>
 <table>
@@ -131,8 +126,7 @@
 </table>
 
 <h3 id="how-to-use-debrid-with-fluxa">How to use Debrid with Fluxa</h3>
-<p>Debrid integration is handled by your stream addons, not by Fluxa itself. Most popular stream addons — like Torrentio — have a configuration page where you paste your debrid API key. After that, when you press Play, the addon automatically checks your debrid account for a cached version of the content and returns a fast HTTP link instead of a raw torrent.</p>
-<p>To get your API key: sign up for a debrid service, then find the API key in your account settings on their website. Paste it into the addon's configuration page (usually found by opening the addon's manifest URL in a browser).</p>
+<p>Debrid integration is handled by your stream addons, not by Fluxa itself. Most (e.g. Torrentio) have a configuration page — usually the manifest URL opened in a browser with <code>/manifest.json</code> removed — where you paste the API key from your debrid account. After that, Play automatically checks for a cached version and returns a fast link instead of a raw torrent.</p>
 
 <div class="note">
   Fluxa itself doesn't know about your debrid account — it just receives whatever link the addon provides. The addon is what talks to debrid on your behalf.
@@ -142,14 +136,13 @@
 <p>Usenet is a decades-old, decentralized network of newsgroups. Outside its original purpose, it's become a fast and reliable way to get media — and like debrid, some stream addons can pull from it directly so you get a streamable link without downloading anything yourself.</p>
 
 <h3 id="how-it-works-2">How it works</h3>
-<p>Files on Usenet are uploaded as binary data spread across many small articles, described by a small text file called an NZB. The NZB doesn't contain the file itself — it's a set of pointers telling a Usenet client which articles to fetch and how to put them back together, similar to how a torrent file points at peers instead of containing the video.</p>
-<p>To use Usenet you need a paid Usenet provider (the server that actually stores the articles) and usually an indexer that searches for NZBs and hands the right one to your downloader.</p>
+<p>Usenet files are uploaded as binary data spread across many small articles, described by a small pointer file called an NZB (like a torrent file, but pointing at a provider's servers instead of peers). You need a paid provider that stores the articles, plus usually an indexer that finds the right NZB.</p>
 <ul>
-  <li><strong>Speed</strong> — providers run high-bandwidth servers with many parallel connections, so downloads often max out a home connection.</li>
-  <li><strong>Privacy</strong> — there's no peer swarm to join. You only ever connect to your provider's servers over an encrypted connection.</li>
-  <li><strong>Long retention</strong> — most providers keep content for over a decade, so older or niche releases stay available long after they'd have died out on torrents.</li>
+  <li><strong>Speed</strong> — high-bandwidth servers often max out a home connection.</li>
+  <li><strong>Privacy</strong> — no peer swarm, just an encrypted connection to your provider.</li>
+  <li><strong>Long retention</strong> — most providers keep content for over a decade.</li>
 </ul>
-<p>The tradeoff, like debrid, is cost — a Usenet provider subscription typically runs €5–10 per month, and a separate indexer subscription is often needed on top of that.</p>
+<p>The tradeoff, like debrid, is cost — typically €5–10/month for the provider, often plus a separate indexer subscription.</p>
 
 <h3 id="common-usenet-providers">Common Usenet providers</h3>
 <table>
@@ -163,33 +156,26 @@
 </table>
 
 <h3 id="how-to-use-usenet-with-fluxa">How to use Usenet with Fluxa</h3>
-<p>As with debrid, Usenet support is handled entirely by your stream addons, not by Fluxa itself. A handful of addons support Usenet directly — Easynews is the most popular since it streams straight from its own servers without any separate download client, much like a debrid service returns a direct link. Other addons expect you to configure an NZB indexer and a download client (like SABnzbd) that they call out to behind the scenes.</p>
-<p>Where an addon supports it, you'll find Usenet or NZB fields on its configuration page alongside any debrid settings — paste in your provider or indexer details the same way you would a debrid API key.</p>
+<p>As with debrid, Usenet is handled entirely by your stream addons. Easynews streams straight from its own servers, no separate client needed; others expect an NZB indexer and downloader (like SABnzbd) behind the scenes. Where supported, you'll find Usenet/NZB fields on the addon's configuration page alongside any debrid settings.</p>
 
 <div class="note">
   Usenet and debrid solve the same problem — a fast, direct stream instead of waiting on a torrent swarm — through different mechanisms. Plenty of people use only one or the other; some addons support both side by side.
 </div>
 
 <h2 id="manifest-url">Manifest URL</h2>
-<p>Every addon has a manifest URL — a web address ending in <code>/manifest.json</code>. This is the addon's "address" that you paste into Fluxa to install it (Settings → Addons). When Fluxa reads this file, it learns everything about the addon: its name, what types of content it provides (catalogs, streams, metadata, subtitles), and how to ask it for data.</p>
-<p>Think of the manifest URL like a phone number — it's what Fluxa dials to reach the addon. The addon itself runs on a remote server; the manifest URL just tells Fluxa where to look.</p>
-<p>If an addon has configuration options (like a debrid API key or content filters), its configuration page is usually found by opening the manifest URL in a browser and removing the <code>/manifest.json</code> part from the end.</p>
+<p>Every addon has a manifest URL — a web address ending in <code>/manifest.json</code> — that you paste into Fluxa to install it (Settings → Addons). Think of it like a phone number: it's what Fluxa dials to reach the addon, which actually runs on a remote server. Reading the manifest tells Fluxa the addon's name and what it provides (catalogs, streams, metadata, subtitles).</p>
+<p>If an addon has configuration options (a debrid key, content filters), its config page is usually the manifest URL opened in a browser with <code>/manifest.json</code> removed.</p>
 
 <h2 id="stremio-compatibility">Stremio compatibility</h2>
-<p>Fluxa uses the same addon protocol as Stremio. This means every Stremio-compatible addon works in Fluxa without any changes — you can install them exactly the same way by pasting the manifest URL. Communities that have built addons for Stremio have effectively built them for Fluxa too.</p>
-<p>This is intentional. Rather than building a proprietary addon ecosystem from scratch, Fluxa taps into the large existing ecosystem of community addons that Stremio users have built and maintained over the years.</p>
+<p>Fluxa uses the same addon protocol as Stremio, so every Stremio-compatible addon works in Fluxa unchanged — install it the same way, by pasting the manifest URL. Rather than building a separate addon ecosystem, Fluxa taps into the one Stremio's community has already built and maintained for years.</p>
 
-<h2 id="direct-streams-vs-torrents">Direct streams vs torrents</h2>
-<p>When you press Play, each stream source has a type:</p>
+<h2 id="source-types">Source types</h2>
+<p>Each stream source you see after pressing Play is one of two types:</p>
 <ul>
-  <li><strong>Direct (HTTP/HTTPS)</strong> — A plain video file served from a web server. Playback starts immediately. These come from hosting sites, debrid services (which convert torrents to direct links), or CDNs that addons have access to.</li>
-  <li><strong>Torrent (magnet link)</strong> — A torrent that Fluxa's built-in download engine connects to. Requires downloading the beginning of the file from a peer swarm before playback can start. Slower to begin, and quality depends on how many people are sharing.</li>
+  <li><strong>Direct (HTTP/HTTPS)</strong> — a plain video file, playback starts immediately. Comes from hosting sites, CDNs, or debrid services converting a torrent to a direct link (look for "via RD" or a debrid name in the label).</li>
+  <li><strong>Torrent (magnet link)</strong> — Fluxa's built-in download engine connects to a peer swarm first, so it's slower to start and quality depends on how many people are sharing.</li>
 </ul>
-<p>In the source list, you can usually tell them apart by looking at the quality label. If a source says something like "via RD" or has a debrid service name in it, that's a direct link that was originally a torrent but has been converted by the addon using your debrid account.</p>
-
-<h2 id="cached-vs-uncached-debrid">Cached vs uncached debrid</h2>
-<p>When a debrid service has already downloaded a specific torrent file, it's "cached" — meaning everyone with a debrid account can stream it immediately as a direct link. When it's "uncached", the debrid service would have to download it first, which can take minutes.</p>
-<p>Most popular content is cached on Real-Debrid and AllDebrid within hours of a new release. Niche content, older films, or very new releases may not be cached yet. Addons that support debrid typically mark sources as cached or uncached so you know what to expect before you pick one.</p>
+<p>For debrid sources specifically, a torrent is "cached" if the debrid service already has it downloaded — instantly playable — or "uncached" if it needs to fetch it first, which can take minutes. Most popular content is cached within hours of release; niche or brand-new content may not be yet. Addons that support debrid usually label sources as cached or uncached.</p>
 
 <h2 id="mpv">mpv</h2>
 <p>mpv is a free, open-source video player that Fluxa uses as its playback engine on desktop. It's what actually decodes and renders the video — Fluxa wraps it to provide the app interface. Because mpv supports virtually every video codec and format (MKV, MP4, AVI, H.264, H.265/HEVC, AV1, Dolby Vision, HDR, etc.), Fluxa inherits that compatibility without needing separate codec packs or plugins.</p>

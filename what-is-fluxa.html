@@ -87,9 +87,8 @@
 </div>
 
 <h2 id="what-is-fluxa">What is Fluxa?</h2>
-<p>Fluxa is a free, open-source media player available on desktop (Windows, macOS, Linux), Android, and the web (including a native app for LG webOS TVs). It doesn't come with content built in — instead, you install addons that bring in movies, shows, and anime from around the web. Think of it like a browser for streaming: Fluxa is the browser, and addons are the websites.</p>
-<p>Once you have an addon set up, you can browse catalogs, search for titles, and hit play. Fluxa handles the rest — fetching the stream, playing the video, tracking where you left off, and syncing your watch history.</p>
-<p>All platform versions share the same addon format, library structure, and tracking integrations. Your content and progress can sync between desktop, Android, and web/webOS through optional third-party services.</p>
+<p>Fluxa is a free, open-source media player for desktop (Windows, macOS, Linux), Android, and the web (including a native app for LG webOS TVs). It doesn't come with content built in — you install addons that bring in movies, shows, and anime from around the web. Think of it like a browser for streaming: Fluxa is the browser, and addons are the websites.</p>
+<p>Once an addon is set up, browse catalogs, search for titles, and hit play — Fluxa fetches the stream, plays it, and tracks where you left off. All platforms share the same addon format and library, and can optionally sync to each other.</p>
 
 <h2 id="what-can-it-do">What can it do?</h2>
 <p><strong>Browse and discover.</strong> Your home screen fills up with rows of content from every addon you've installed — trending, top rated, by genre, and more. You can also search across all your addons at once.</p>
@@ -111,13 +110,7 @@
 </ul>
 
 <h2 id="how-it-s-built">How it's built</h2>
-<p>Fluxa is split across four open-source repositories:</p>
-<ul>
-  <li><strong><a href="https://github.com/FluxaMedia/fluxa-desktop" target="_blank">fluxa-desktop</a></strong> — The desktop app (Tauri + React). Window management, UI, and OS integration for Windows, macOS, and Linux.</li>
-  <li><strong><a href="https://github.com/KhooLy/Fluxa" target="_blank">fluxa-android</a></strong> — The Android app. Same features and addon compatibility, built for phones and tablets.</li>
-  <li><strong><a href="https://github.com/FluxaMedia/fluxa-web" target="_blank">fluxa-web</a></strong> — The browser client (React + WASM), also packaged as a native app for LG webOS TVs.</li>
-  <li><strong><a href="https://github.com/FluxaMedia/fluxa-core" target="_blank">fluxa-core</a></strong> — A shared Rust library used by all three apps. All the business logic lives here: addon resolution, streaming, library state, search, and playback policy.</li>
-</ul>
+<p>Fluxa is free and open-source, split across four repositories on GitHub — one shared Rust core plus a desktop, Android, and web/webOS app built on top of it. See <a href="architecture.html">Architecture</a> for how they fit together.</p>
 
 <h2 id="a-note-on-content">A note on content</h2>
 <p>Fluxa doesn't host or provide any content itself. Everything you watch comes from addons that you choose to install. Whether those addons provide legal content depends on the addon — Fluxa has no control over or affiliation with what addon developers make available. You're responsible for the addons you use.</p>
