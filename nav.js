@@ -9,7 +9,6 @@ const DOC_PAGES = [
   { page: 'privacy-security.html', title: 'Privacy & Security', section: 'How it works', icon: 'shield-check', updated: '2026-07-05', badges: ['Privacy', 'Security'] },
   { page: 'addons-catalogs.html', title: 'Addons & Catalogs', section: 'Core workflows', icon: 'puzzle', updated: '2026-07-05', badges: ['Addons', 'Stremio'] },
   { page: 'sync-accounts.html', title: 'Sync & Accounts', section: 'Core workflows', icon: 'refresh-cw', updated: '2026-07-05', badges: ['Nuvio', 'Trakt', 'MAL', 'Simkl'] },
-  { page: 'nuvio-sync-details.html', title: 'Nuvio Sync Details', section: 'Core workflows', icon: 'cloud', updated: '2026-07-05', badges: ['Nuvio', 'Sync'] },
   { page: 'playback.html', title: 'Playback', section: 'Core workflows', icon: 'play-circle', updated: '2026-07-05', badges: ['Desktop', 'Android', 'mpv'] },
   { page: 'playback-advanced.html', title: 'Playback Advanced', section: 'Core workflows', icon: 'sliders', updated: '2026-07-05', badges: ['mpv', 'HDR', 'Subtitles'] },
   { page: 'library-collections.html', title: 'Library & Collections', section: 'Core workflows', icon: 'bookmark', updated: '2026-07-05', badges: ['Library', 'Nuvio'] },

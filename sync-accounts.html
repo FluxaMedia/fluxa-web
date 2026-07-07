@@ -98,9 +98,10 @@
 <p>When you connect a tracking service, Fluxa opens your browser to that service's login page. After you approve, the browser sends you back to Fluxa automatically. Nothing goes through an outside server — the connection happens directly between your browser, the service, and Fluxa on your machine.</p>
 
 <h2 id="nuvio-cross-device-sync">Nuvio — cross-device sync</h2>
-<p>Nuvio is an optional third-party sync service, separate from Fluxa. It keeps your library, watch progress, collections, addon list, and settings in sync between Fluxa on desktop and Fluxa on Android.</p>
-<p>To sign in, go to <strong>Settings → Account</strong> and connect your Nuvio account. If you don't have one, you can create an account on the Nuvio website.</p>
-<p>Nuvio is entirely optional — if you only use Fluxa on one device, or don't need your data on multiple devices, you don't need it at all. Everything in Fluxa works the same without it, just stored locally on your device.</p>
+<p>Nuvio is an optional third-party sync service, separate from Fluxa. Unlike Trakt/MAL/Simkl, which only track watch history, Nuvio syncs your whole Fluxa state — profiles, installed addons and their order, library entries, continue watching, collections, and relevant settings — between desktop and Android.</p>
+<p>To sign in, go to <strong>Settings → Account</strong> and connect your Nuvio account, or create one from the same screen. It's entirely optional — on a single device, or if you don't need your data to follow you, skip it and everything stays stored locally.</p>
+<p>A few things don't sync: downloaded app binaries or installer state, local OS permissions and file associations, device-only playback capabilities like GPU behavior, and other services' passwords (Trakt/MAL/Simkl each keep their own connection per device).</p>
+<p>If two devices change the same item while offline, the most recently saved version generally wins once sync resumes. Watch progress is timestamped and resolves safely; avoid editing the same collection from two devices at once.</p>
 
 <h2 id="profiles-and-accounts">Profiles and accounts</h2>
 <p>Each profile has its own completely separate set of accounts. If you have two profiles, each one can be connected to a different Trakt account, or none at all. Switching profiles switches everything.</p>

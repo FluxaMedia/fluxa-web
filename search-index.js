@@ -295,38 +295,12 @@ window.SEARCH_INDEX = [
       {
         "title": "Nuvio — cross-device sync",
         "anchor": "nuvio-cross-device-sync",
-        "content": "Nuvio is an optional third-party sync service, separate from Fluxa. It keeps your library, watch progress, collections, addon list, and settings in sync between Fluxa on desktop and Fluxa on Android. To sign in, go to Settings → Account and connect your Nuvio account. If you don't have one, you can create an account on the Nuvio website. Nuvio is entirely optional — if you only use Fluxa on one device, or don't need your data on multiple devices, you don't need it at all. Everything in Fluxa works the same without it, just stored locally on your device."
+        "content": "Nuvio is an optional third-party sync service, separate from Fluxa. Unlike Trakt/MAL/Simkl, which only track watch history, Nuvio syncs your whole Fluxa state — profiles, installed addons and their order, library entries, continue watching, collections, and relevant settings — between desktop and Android. To sign in, go to Settings → Account and connect your Nuvio account, or create one from the same screen. It's entirely optional — on a single device, or if you don't need your data to follow you, skip it and everything stays stored locally. A few things don't sync: downloaded app binaries or installer state, local OS permissions and file associations, device-only playback capabilities like GPU behavior, and other services' passwords. If two devices change the same item while offline, the most recently saved version generally wins once sync resumes. Watch progress is timestamped and resolves safely; avoid editing the same collection from two devices at once."
       },
       {
         "title": "Profiles and accounts",
         "anchor": "profiles-and-accounts",
         "content": "Each profile has its own completely separate set of accounts. If you have two profiles, each one can be connected to a different Trakt account, or none at all. Switching profiles switches everything. A profile can also be set to share the addon list with your main profile instead of having its own. Useful if you want a second profile for a family member but don't want to set up all the addons again."
-      }
-    ]
-  },
-  {
-    "page": "nuvio-sync-details.html",
-    "pageTitle": "Nuvio Sync Details",
-    "sections": [
-      {
-        "title": "What syncs",
-        "anchor": "what-syncs",
-        "content": "Profiles and profile metadata. Installed addons and addon order. Library entries, continue watching, and watch activity. Collections, folders, and collection layout. Relevant app settings that make sense across devices."
-      },
-      {
-        "title": "What does not sync",
-        "anchor": "what-does-not-sync",
-        "content": "Downloaded app binaries or platform-specific installer state. Local OS permissions, protocol handlers, or file associations. Device-only playback capabilities such as GPU behavior. Third-party account passwords."
-      },
-      {
-        "title": "Conflict behavior",
-        "anchor": "conflicts",
-        "content": "If two devices update the same item while offline, the newest saved version generally wins when sync resumes. Watch progress is usually safest because it is updated frequently and tied to timestamps, but collection edits should be done from one device at a time when possible."
-      },
-      {
-        "title": "Privacy notes",
-        "anchor": "privacy",
-        "content": "Nuvio exists to sync Fluxa state. If you do not need cross-device sync, you can use Fluxa without a Nuvio account and keep everything local."
       }
     ]
   },
