@@ -482,7 +482,7 @@ window.SEARCH_INDEX = [
       {
         "title": "Per-platform updates",
         "anchor": "per-platform",
-        "content": "Platform Update method Windows Download and run the latest installer, or use in-app update if available. macOS Replace the app from the latest DMG, then approve Gatekeeper if prompted. Linux Install the new DEB/RPM/AppImage package for your distro. Android Install the latest APK from the official release page."
+        "content": "Platform Update method Windows Download and run the latest installer, or use in-app update if available. macOS Replace the app from the latest DMG, then approve Gatekeeper if prompted. Linux Install the new DEB/RPM/AppImage package for your distro. Android Install the latest APK from the official release page. Web Reload the page. webOS Sideload the latest .ipk via Developer Mode."
       },
       {
         "title": "Verify your version",
@@ -815,7 +815,7 @@ window.SEARCH_INDEX = [
       {
         "title": "Platform differences",
         "anchor": "platform-differences",
-        "content": "Desktop and Android aim for feature parity, but playback behavior can vary because hardware decoding, OS permissions, and video output systems differ by platform."
+        "content": "Desktop, Android, and web/webOS aim for feature parity, but playback behavior can vary because hardware decoding, OS permissions, and video output systems differ by platform. webOS in particular has more limited hardware decoding than desktop."
       }
     ]
   },
