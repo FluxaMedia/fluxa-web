@@ -883,6 +883,7 @@ td:first-child { color: var(--text-heading); font-weight: 500; }
   border-radius: 10px;
   color: var(--text);
   min-width: 0;
+  transition: background 0.15s, border-color 0.15s, transform 0.15s;
 }
 
 .doc-card:hover,
@@ -890,6 +891,7 @@ td:first-child { color: var(--text-heading); font-weight: 500; }
 .quick-card:hover {
   background: rgba(255,255,255,0.06);
   border-color: var(--border-strong);
+  transform: translateY(-2px);
   text-decoration: none;
 }
 
@@ -1008,12 +1010,14 @@ td:first-child { color: var(--text-heading); font-weight: 500; }
   border: 1px solid var(--border);
   border-radius: 10px;
   background: rgba(255,255,255,0.035);
+  transition: background 0.15s, border-color 0.15s, transform 0.15s;
 }
 
 .pager-card:hover {
   text-decoration: none;
   border-color: var(--border-strong);
   background: rgba(255,255,255,0.06);
+  transform: translateY(-2px);
 }
 
 .pager-card span {
