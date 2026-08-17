@@ -243,35 +243,17 @@ const description = 'Free, open-source media player for Windows, macOS, Linux, A
 </section>
 
 <section class="section wrap" id="source">
-  <h2>Source</h2>
-  <p class="lead">Three repositories: one shared Rust core and two app repos built on it.</p>
+  <h2>Open source</h2>
+  <p class="lead">Three repositories, all public. A shared Rust core and the two app repos built on it.</p>
   <div class="section-body rows">
     {repos.map(r => (
-      <a class="row" id={'repo-' + r.id} href={r.href} target="_blank" rel="noopener">
+      <a class="row" href={r.href} target="_blank" rel="noopener">
         <span class="row-main">
           <span class="row-name" style="display:block">{r.id}</span>
-          <span class="row-desc" style="display:block">{r.desc} · {r.lang}</span>
+          <span class="row-desc" style="display:block">{r.desc}</span>
         </span>
-        <span class="row-meta">
-          <span><Icon name="star" size={13} /><span class="repo-stars">–</span></span>
-          <span><Icon name="git-fork" size={13} /><span class="repo-forks">–</span></span>
-        </span>
+        <span class="row-action">{r.lang} <Icon name="arrow-right" size={14} /></span>
       </a>
-    ))}
-  </div>
-</section>
-
-<section class="section wrap">
-  <h2>Latest releases</h2>
-  <div class="section-body" id="release-list">
-    {[0, 1, 2].map(() => (
-      <div class="release">
-        <div class="release-head"><span class="skel skel-tag" aria-hidden="true"></span></div>
-        <div class="release-notes" aria-hidden="true">
-          <span class="skel skel-line"></span>
-          <span class="skel skel-line" style="width:80%"></span>
-        </div>
-      </div>
     ))}
   </div>
 </section>

@@ -47,73 +47,8 @@ async function gh(path) {
   return data;
 }
 
-const fmtNum = n => (n == null ? '–' : n >= 1000 ? (n / 1000).toFixed(1) + 'k' : String(n));
 
-async function loadStats() {
-  for (const repo of REPOS) {
-    try {
-      const data = await gh('repos/' + repo.slug);
-      const row = document.getElementById('repo-' + repo.id);
-      if (!row) continue;
-      row.querySelector('.repo-stars').textContent = fmtNum(data.stargazers_count);
-      row.querySelector('.repo-forks').textContent = fmtNum(data.forks_count);
-    } catch {}
-  }
-}
 
-function notes(raw) {
-  const lines = esc(raw.slice(0, 420)).split('\n');
-  const out = [];
-  let list = false;
-  for (let line of lines) {
-    line = line.trim();
-    if (!line) continue;
-    line = line.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
-    const bullet = line.match(/^[-*]\s+(.*)/);
-    if (bullet) {
-      if (!list) { out.push('<ul>'); list = true; }
-      out.push('<li>' + bullet[1] + '</li>');
-    } else {
-      if (list) { out.push('</ul>'); list = false; }
-      out.push('<p>' + line + '</p>');
-    }
-  }
-  if (list) out.push('</ul>');
-  return out.join('');
-}
-
-async function loadReleases() {
-  const host = document.getElementById('release-list');
-  if (!host) return;
-  const repos = REPOS.filter(r => r.release);
-  const results = await Promise.allSettled(repos.map(r => gh('repos/' + r.slug + '/releases/latest')));
-
-  host.innerHTML = repos.map((repo, i) => {
-    const result = results[i];
-    if (result.status !== 'fulfilled') {
-      return `
-        <div class="release">
-          <div class="release-head"><div class="release-tag">${esc(repo.id)}</div></div>
-          <div class="release-notes">
-            <p><a href="https://github.com/${repo.slug}/releases" target="_blank" rel="noopener">Releases on GitHub</a></p>
-          </div>
-        </div>`;
-    }
-    const d = result.value;
-    const date = new Date(d.published_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
-    return `
-      <div class="release">
-        <div class="release-head">
-          <div class="release-tag">${esc(d.tag_name)}</div>
-          <div class="release-sub">${esc(repo.id)} · ${date}</div>
-        </div>
-        <div class="release-notes">
-          ${notes(d.body || '') || '<p>Release notes are on GitHub.</p>'}
-          <p><a href="${esc(d.html_url)}" target="_blank" rel="noopener">Full notes</a></p>
-        </div>
-      </div>`;
-  }).join('');
-}
 
 async function loadPeople() {
   const host = document.getElementById('people-grid');
@@ -140,8 +75,6 @@ async function loadPeople() {
 }
 
 initNav();
-loadStats();
-loadReleases();
 loadPeople();
 
 function initSwitch() {
