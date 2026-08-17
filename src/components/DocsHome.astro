@@ -12,7 +12,7 @@ const { Content } = await render(entry);
 const { title, description, tagline, buttons, shotTitle } = entry.data;
 ---
 <!DOCTYPE html>
-<html lang={locale} dir={LOCALES[locale].dir} data-base={url('')} data-locale={locale} data-fallback={String(!translated)}>
+<html lang={locale} dir={LOCALES[locale].dir} data-base={url('')} data-locale={locale} data-fallback={String(!translated)} data-skip={t(locale, 'a11y.skip')} data-top={t(locale, 'a11y.backToTop')}>
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />

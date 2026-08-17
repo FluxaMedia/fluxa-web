@@ -242,6 +242,51 @@ function initCopyButtons() {
   });
 }
 
+function initSkipLink() {
+  const main = document.querySelector('.main');
+  if (!main) return;
+  if (!main.id) main.id = 'main-content';
+  const link = document.createElement('a');
+  link.className = 'skip-link';
+  link.href = '#' + main.id;
+  link.textContent = root.dataset.skip || 'Skip to content';
+  document.body.prepend(link);
+}
+
+function initBackToTop() {
+  const btn = document.createElement('button');
+  btn.className = 'back-to-top';
+  btn.type = 'button';
+  btn.setAttribute('aria-label', root.dataset.top || 'Back to top');
+  btn.innerHTML = '<i data-lucide="arrow-up" style="width:16px;height:16px"></i>';
+  btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+  document.body.appendChild(btn);
+  window.addEventListener('scroll', () => {
+    btn.classList.toggle('show', window.scrollY > 900);
+  }, { passive: true });
+}
+
+function initExternalLinks() {
+  document.querySelectorAll('a[target="_blank"]').forEach(a => {
+    const rel = (a.getAttribute('rel') || '').split(/\s+/).filter(Boolean);
+    if (!rel.includes('noopener')) rel.push('noopener');
+    a.setAttribute('rel', rel.join(' '));
+  });
+}
+
+function openHashTarget() {
+  if (!location.hash) return;
+  const target = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+  if (!target) return;
+  if (target.classList.contains('faq-item')) {
+    target.classList.add('open');
+    target.querySelector('.faq-q')?.setAttribute('aria-expanded', 'true');
+  }
+  target.scrollIntoView({ block: 'start' });
+  target.classList.add('jump-highlight');
+  setTimeout(() => target.classList.remove('jump-highlight'), 1600);
+}
+
 function initTocSpy() {
   const rail = document.querySelector('.toc-rail');
   if (!rail) return;
@@ -261,6 +306,7 @@ function initTocSpy() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  initSkipLink();
   initSidebar();
   initTopbarMenu();
   initFaq();
@@ -270,7 +316,10 @@ document.addEventListener('DOMContentLoaded', () => {
   initHeadingAnchors();
   initTables();
   initCopyButtons();
+  initExternalLinks();
+  initBackToTop();
   initTocSpy();
+  openHashTarget();
   if (window.lucide) lucide.createIcons();
 });
 })();
