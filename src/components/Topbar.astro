@@ -19,12 +19,12 @@ const home = url(localePath(locale, '/'));
     </button>
     <div class="docs-top-links" id="docs-top-links">
       <a class="docs-top-link" href={`${home}#features`}><i data-lucide="layout-grid" style="width:13px;height:13px"></i> {t(locale, 'nav.features')}</a>
-      <a class="docs-top-link" href={`${home}#platforms`}><i data-lucide="download" style="width:13px;height:13px"></i> {t(locale, 'nav.download')}</a>
+      <a class="docs-top-link" href={`${home}#download`}><i data-lucide="download" style="width:13px;height:13px"></i> {t(locale, 'nav.download')}</a>
       <a class:list={['docs-top-link', current === 'docs' && 'active']} href={url(localePath(locale, '/docs'))}><i data-lucide="book-open" style="width:13px;height:13px"></i> {t(locale, 'nav.docs')}</a>
       <a class:list={['docs-top-link', current === 'account' && 'active']} href={url('/account')}><i data-lucide="user" style="width:13px;height:13px"></i> {t(locale, 'nav.account')}</a>
       <a class="docs-top-link" href="https://github.com/FluxaMedia/fluxa-desktop" target="_blank" rel="noreferrer">GitHub</a>
       <LanguagePicker locale={locale} path={path} />
-      <a class="docs-top-btn" href={`${home}#platforms`}><i data-lucide="download" style="width:13px;height:13px"></i> {t(locale, 'nav.download')}</a>
+      <a class="docs-top-btn" href={`${home}#download`}><i data-lucide="download" style="width:13px;height:13px"></i> {t(locale, 'nav.download')}</a>
     </div>
   </div>
 </nav>
