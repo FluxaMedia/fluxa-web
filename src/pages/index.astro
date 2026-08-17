@@ -15,13 +15,34 @@ const platforms = [
   { icon: 'tv', name: 'webOS' },
 ];
 
+const shown = [
+  {
+    name: 'You pick the sources',
+    body: 'Fluxa has no catalogue of its own. Paste a Stremio-compatible manifest URL and that addon\u2019s catalogs appear on your home screen straight away. Install as many as you like, turn them on and off per profile, and drag them into the order you want them searched.',
+    points: ['Any Stremio-compatible addon', 'Reorder to set search priority', 'Enable or disable without uninstalling'],
+    shot: 'addons.webp',
+    w: 1200,
+    h: 450,
+    alt: 'Fluxa add-on settings with a manifest URL field and two installed addons',
+  },
+  {
+    name: 'A profile for everyone',
+    body: 'Up to six profiles on one install, each with its own addons, library, collections, and linked accounts. Nobody\u2019s watch history bleeds into anyone else\u2019s, and any profile can be locked behind a PIN.',
+    points: ['Separate library and addons per profile', 'Optional PIN lock', 'Syncs across your devices with a Nuvio account'],
+    shot: 'profiles.webp',
+    w: 1200,
+    h: 420,
+    alt: 'Fluxa profile picker asking who is watching, with four profiles',
+  },
+];
+
 const features = [
-  { name: 'Built-in player', body: 'Direct streams and torrents play through mpv. Hardware decoding, external subtitles, and per-title audio settings that stick.' },
-  { name: 'Addons you choose', body: 'Paste any Stremio-compatible manifest URL and its catalogs show up on the home screen. Fluxa ships with none of its own.' },
-  { name: 'Watch tracking', body: 'Connect Trakt, MyAnimeList, or Simkl. Episodes are logged as you finish them and progress syncs back.' },
-  { name: 'Multiple profiles', body: 'Up to six profiles, each with its own addons, library, collections, and linked accounts. PIN optional.' },
-  { name: 'Your library', body: 'Save titles, group them into custom collections built from addon catalogs, and pin the ones you open most.' },
-  { name: 'Skip intro and recap', body: 'Segments are detected as an episode starts. One press skips them, or ignore it and the prompt goes away.' },
+  { name: 'Built-in player', body: 'Direct streams and torrents play through mpv, so hardware decoding, external subtitle tracks, and per-title audio and delay settings all work without a separate install.' },
+  { name: 'Watch tracking', body: 'Connect Trakt, MyAnimeList, or Simkl. Episodes are logged as you finish them and progress is written back, so continue-watching is correct on the next device.' },
+  { name: 'Your library', body: 'Save titles, group them into custom collections built from addon catalogs, and pin the ones you open most to the top of the home screen.' },
+  { name: 'Skip intro and recap', body: 'Intro and recap segments are detected as an episode starts. One press skips them; ignore the prompt and it disappears on its own.' },
+  { name: 'Same app everywhere', body: 'Windows, macOS, Linux, Android, and LG webOS run the same Rust core, so addon behaviour and playback rules match across every device.' },
+  { name: 'No accounts required', body: 'Everything works offline and on-device by default. Sign in only if you want your library mirrored between machines.' },
 ];
 
 const builds = [
@@ -37,6 +58,12 @@ const repos = [
   { id: 'fluxa-desktop', lang: 'TypeScript, Rust', href: REPO_DESKTOP, desc: 'Desktop app on Tauri and React for Windows, macOS, and Linux.' },
   { id: 'fluxa-android', lang: 'Kotlin', href: REPO_ANDROID, desc: 'Android app for phones and tablets.' },
   { id: 'fluxa-web', lang: 'TypeScript', href: REPO_WEB, desc: 'Browser client, also packaged as a native app for LG webOS.' },
+];
+
+const views = [
+  { id: 'desktop', label: 'Desktop', file: 'home-desktop.webp', w: 1400, h: 889 },
+  { id: 'mobile', label: 'Mobile', file: 'home-mobile.webp', w: 520, h: 1114 },
+  { id: 'tv', label: 'TV', file: 'home-tv.webp', w: 1400, h: 788 },
 ];
 
 const title = 'Fluxa — open-source media player';
@@ -74,7 +101,6 @@ const description = 'Free, open-source media player for Windows, macOS, Linux, A
       <Icon name="menu" size={18} />
     </button>
     <div class="nav-menu" id="nav-menu">
-      <a href="#screenshots">Screenshots</a>
       <a href="#features">Features</a>
       <a href="#download">Download</a>
       <a href={url('/docs')}>Docs</a>
@@ -86,39 +112,61 @@ const description = 'Free, open-source media player for Windows, macOS, Linux, A
 </nav>
 
 <header class="hero wrap">
-  <h1>A media player that plays what you bring it.</h1>
-  <p>
-    Fluxa is free and open source. It ships no content of its own — you connect the addons, and it
-    plays them with mpv, tracks what you watch, and keeps your library in sync across devices.
-  </p>
-  <div class="hero-buttons">
-    <a class="btn btn-primary" href="#download"><Icon name="download" size={15} /> Download</a>
-    <a class="btn btn-ghost" href={url('/docs')}><Icon name="book-open" size={15} /> Read the docs</a>
+  <div class="hero-copy">
+    <h1>A media player that plays what you bring it.</h1>
+    <p>
+      Fluxa is free and open source. It ships no content of its own — you connect the addons, and
+      it plays them with mpv, tracks what you watch, and keeps your library in sync.
+    </p>
+    <div class="hero-buttons">
+      <a class="btn btn-primary" href="#download"><Icon name="download" size={15} /> Download</a>
+      <a class="btn btn-ghost" href={url('/docs')}><Icon name="book-open" size={15} /> Read the docs</a>
+    </div>
+    <div class="hero-runs">
+      {platforms.map(p => <span><Icon name={p.icon} size={15} /> {p.name}</span>)}
+    </div>
   </div>
-  <div class="hero-runs">
-    {platforms.map(p => <span><Icon name={p.icon} size={15} /> {p.name}</span>)}
+
+  <div class="hero-preview">
+    <div class="switch" role="tablist" aria-label="Choose a layout">
+      {views.map((v, i) => (
+        <button role="tab" data-view={v.id} aria-selected={i === 0} class={i === 0 ? 'active' : undefined}>{v.label}</button>
+      ))}
+    </div>
+    <div class="stage">
+      {views.map((v, i) => (
+        <img
+          data-view={v.id}
+          class={i === 0 ? undefined : 'hidden'}
+          src={url('/shots/' + v.file)}
+          width={v.w}
+          height={v.h}
+          alt={`Fluxa home screen on ${v.label.toLowerCase()}`}
+          loading={i === 0 ? 'eager' : 'lazy'}
+        />
+      ))}
+    </div>
   </div>
 </header>
-
-<section class="section wrap" id="screenshots">
-  <h2>How it looks</h2>
-  <p class="lead">The desktop app with a metadata addon installed. Android and webOS use the same layout.</p>
-  <div class="section-body shots">
-    <figure>
-      <img src={url('/shots/home.webp')} width="1400" height="889" alt="Fluxa home screen showing a featured title and a row of movie posters" loading="lazy" />
-      <figcaption>Home — catalogs come from the addons you install.</figcaption>
-    </figure>
-    <figure>
-      <img src={url('/shots/detail.webp')} width="1400" height="889" alt="Fluxa detail page showing a film with summary, cast, and playback actions" loading="lazy" />
-      <figcaption>Detail — summary, cast, awards, and one press to play.</figcaption>
-    </figure>
-  </div>
-</section>
 
 <section class="section wrap" id="features">
   <h2>What it does</h2>
   <p class="lead">Nothing is gated, nothing phones home, and there is no paid version.</p>
-  <div class="section-body features">
+
+  <div class="section-body showcase">
+    {shown.map(f => (
+      <div class="show">
+        <div class="show-copy">
+          <h3>{f.name}</h3>
+          <p>{f.body}</p>
+          <ul>{f.points.map(pt => <li>{pt}</li>)}</ul>
+        </div>
+        <img src={url('/shots/' + f.shot)} width={f.w} height={f.h} alt={f.alt} loading="lazy" />
+      </div>
+    ))}
+  </div>
+
+  <div class="features">
     {features.map(f => (
       <div class="feature">
         <h3>{f.name}</h3>

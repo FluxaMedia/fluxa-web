@@ -144,3 +144,22 @@ initNav();
 loadStats();
 loadReleases();
 loadPeople();
+
+function initSwitch() {
+  const tabs = [...document.querySelectorAll('.switch button')];
+  const shots = [...document.querySelectorAll('.stage img')];
+  if (!tabs.length) return;
+
+  for (const tab of tabs) {
+    tab.addEventListener('click', () => {
+      for (const t of tabs) {
+        const on = t === tab;
+        t.classList.toggle('active', on);
+        t.setAttribute('aria-selected', String(on));
+      }
+      for (const shot of shots) shot.classList.toggle('hidden', shot.dataset.view !== tab.dataset.view);
+    });
+  }
+}
+
+initSwitch();
