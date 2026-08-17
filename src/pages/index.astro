@@ -16,20 +16,16 @@ const platforms = [
 ];
 
 const connect = [
-  { name: 'Trakt', icon: 'trakt.svg' },
-  { name: 'Simkl', icon: 'simkl.svg' },
-  { name: 'MyAnimeList', icon: 'mal.svg' },
-  { name: 'AniList', icon: 'anilist.svg' },
-  { name: 'Stremio', icon: 'stremio.svg' },
-  { name: 'Nuvio', icon: 'nuvio.png' },
-  { name: 'TheIntroDB', icon: 'theintrodb.png' },
-  { name: 'IntroDB', icon: 'introdb.svg' },
-  { name: 'SkipDB', icon: 'skipdb.png' },
-  { name: 'Aniskip' },
-  { name: 'MDBList', icon: 'mdblist.svg' },
-  { name: 'TMDB', icon: 'tmdb.svg' },
-  { name: 'IMDb', icon: 'imdb.svg' },
-  { name: 'OMDb' },
+  { name: 'Trakt', file: 'trakt.png' },
+  { name: 'Simkl', file: 'simkl.png' },
+  { name: 'MyAnimeList', file: 'mal.png' },
+  { name: 'Stremio', file: 'stremio.png' },
+  { name: 'TheIntroDB', file: 'theintrodb.svg' },
+  { name: 'IntroDB', file: 'introdb.png' },
+  { name: 'SkipDB', file: 'skipdb.png' },
+  { name: 'TMDB', file: 'tmdb.png' },
+  { name: 'IMDb', file: 'imdb.svg' },
+  { name: 'Letterboxd', file: 'letterboxd.svg' },
 ];
 
 const shown = [
@@ -220,10 +216,7 @@ const description = 'Free, open-source media player for Windows, macOS, Linux, A
   <div class="marquee">
     <div class="marquee-track">
       {[0, 1].map(() => connect.map(item => (
-        <span class="mark">
-          {item.icon && <img src={url('/logos/' + item.icon)} alt="" width="24" height="24" />}
-          {item.name}
-        </span>
+        <img class="mark" src={url('/logos/' + item.file)} alt={item.name} height="28" />
       )))}
     </div>
   </div>

@@ -293,7 +293,7 @@ a.row:hover .row-action svg { transform: translateX(4px); }
   .stage img { max-height: 400px; }
   .show { grid-template-columns: minmax(0, 1fr); gap: 20px; }
   .marquee-track { gap: 40px; }
-  .marquee-track .mark { font-size: 15px; gap: 8px; }
+  .marquee-track .mark { height: 24px; }
   .show:nth-child(even) .show-copy { order: 0; }
 }
 
@@ -451,27 +451,18 @@ a.row:hover .row-action svg { transform: translateX(4px); }
 }
 
 .marquee-track .mark {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 18px;
-  font-weight: 600;
-  letter-spacing: -0.015em;
-  color: var(--gray);
-  white-space: nowrap;
-  transition: color 0.2s;
-}
-
-.marquee-track .mark img {
-  width: 24px;
-  height: 24px;
+  height: 26px;
+  width: auto;
+  max-width: 132px;
   object-fit: contain;
-  border-radius: 5px;
+  object-position: center;
   flex-shrink: 0;
+  opacity: 0.72;
+  transition: opacity 0.2s;
 }
 
 .marquee:hover .marquee-track { animation-play-state: paused; }
-.marquee-track .mark:hover { color: var(--white); }
+.marquee-track .mark:hover { opacity: 1; }
 
 @keyframes slide { to { transform: translateX(-50%); } }
 
