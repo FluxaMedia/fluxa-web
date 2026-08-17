@@ -7,15 +7,6 @@ const REPO_ANDROID = 'https://github.com/KhooLy/Fluxa';
 const REPO_WEB = 'https://github.com/FluxaMedia/fluxa-web';
 const REPO_CORE = 'https://github.com/FluxaMedia/fluxa-core';
 
-const chapters = [
-  { id: 'start', label: 'Start' },
-  { id: 'capabilities', label: 'Capabilities' },
-  { id: 'platforms', label: 'Download' },
-  { id: 'source', label: 'Source' },
-  { id: 'releases', label: 'Releases' },
-  { id: 'people', label: 'People' },
-];
-
 const platforms = [
   { icon: 'windows', name: 'Windows' },
   { icon: 'apple', name: 'macOS' },
@@ -24,36 +15,32 @@ const platforms = [
   { icon: 'tv', name: 'webOS' },
 ];
 
-const specs = [
-  { tag: 'Playback', name: 'mpv, built in', body: 'Direct streams and torrents play through mpv without a separate install. Hardware decoding, external subtitle tracks, and per-title audio and delay settings that stick.' },
-  { tag: 'Sources', name: 'Addons you choose', body: 'Paste any Stremio-compatible manifest URL and its catalogs appear on the home screen. Fluxa ships with none of its own — the app is a client, not a library.' },
-  { tag: 'Tracking', name: 'Scrobbling that keeps up', body: 'Connect Trakt, MyAnimeList, or Simkl and every episode is logged as you finish it. Progress is written back, so continue-watching is right on the next device.' },
-  { tag: 'Profiles', name: 'Separate people, one install', body: 'Up to six profiles, each with its own addons, library, collections, and linked accounts. Optional PIN on any profile.' },
-  { tag: 'Library', name: 'Collections you arrange', body: 'Save titles, then group them into custom folders built from addon catalogs and pin the ones you open most to the home screen.' },
-  { tag: 'Skipping', name: 'Intro and recap detection', body: 'Segments are detected as an episode starts. One press skips; ignore it and the prompt disappears on its own.' },
-  { tag: 'Reach', name: 'Five targets, one core', body: 'Windows, macOS, Linux, Android, and LG webOS run the same Rust core, so addon behaviour and playback policy match everywhere.' },
-  { tag: 'Licence', name: 'Open source, no tiers', body: 'Every repository is public and free to use, read, fork, and ship. There is no paid version and nothing is held back.' },
+const features = [
+  { name: 'Built-in player', body: 'Direct streams and torrents play through mpv. Hardware decoding, external subtitles, and per-title audio settings that stick.' },
+  { name: 'Addons you choose', body: 'Paste any Stremio-compatible manifest URL and its catalogs show up on the home screen. Fluxa ships with none of its own.' },
+  { name: 'Watch tracking', body: 'Connect Trakt, MyAnimeList, or Simkl. Episodes are logged as you finish them and progress syncs back.' },
+  { name: 'Multiple profiles', body: 'Up to six profiles, each with its own addons, library, collections, and linked accounts. PIN optional.' },
+  { name: 'Your library', body: 'Save titles, group them into custom collections built from addon catalogs, and pin the ones you open most.' },
+  { name: 'Skip intro and recap', body: 'Segments are detected as an episode starts. One press skips them, or ignore it and the prompt goes away.' },
 ];
 
 const builds = [
-  { icon: 'windows', name: 'Windows', req: 'Windows 10 or later. EXE installer, no admin rights required.', file: 'Download .exe', href: REPO_DESKTOP + '/releases/latest' },
-  { icon: 'apple', name: 'macOS', req: 'macOS 11 or later. Universal binary for Intel and Apple Silicon.', file: 'Download .dmg', href: REPO_DESKTOP + '/releases/latest' },
-  { icon: 'linux', name: 'Linux', req: '.deb, .rpm, and .AppImage. mpv is bundled, so nothing else to install.', file: 'Download for Linux', href: REPO_DESKTOP + '/releases/latest' },
-  { icon: 'android', name: 'Android', req: 'Phones and tablets. Same addons and same library as the desktop build.', file: 'Download .apk', href: REPO_ANDROID + '/releases/latest' },
-  { icon: 'tv', name: 'webOS', req: 'LG Smart TVs via Developer Mode. The same build runs in any browser.', file: 'Download for webOS', href: REPO_WEB + '/releases/latest' },
+  { icon: 'windows', name: 'Windows', req: 'Windows 10 or later. EXE installer, no admin rights needed.', action: 'Download .exe', href: REPO_DESKTOP + '/releases/latest' },
+  { icon: 'apple', name: 'macOS', req: 'macOS 11 or later. Universal binary for Intel and Apple Silicon.', action: 'Download .dmg', href: REPO_DESKTOP + '/releases/latest' },
+  { icon: 'linux', name: 'Linux', req: '.deb, .rpm, and .AppImage. mpv is bundled.', action: 'Download', href: REPO_DESKTOP + '/releases/latest' },
+  { icon: 'android', name: 'Android', req: 'Phones and tablets. Same addons as the desktop build.', action: 'Download .apk', href: REPO_ANDROID + '/releases/latest' },
+  { icon: 'tv', name: 'webOS', req: 'LG Smart TVs via Developer Mode. Also runs in any browser.', action: 'Download', href: REPO_WEB + '/releases/latest' },
 ];
 
 const repos = [
-  { id: 'fluxa-core', lang: 'Rust', href: REPO_CORE, desc: 'The shared library. Addon resolution, streaming, library state, search, and playback policy — all platform-agnostic.' },
-  { id: 'fluxa-desktop', lang: 'TypeScript / Rust', href: REPO_DESKTOP, desc: 'The desktop shell on Tauri and React. Window management, UI, and OS integration for Windows, macOS, and Linux.' },
-  { id: 'fluxa-android', lang: 'Kotlin', href: REPO_ANDROID, desc: 'The Android app. Same features and addon compatibility as desktop, laid out for phones and tablets.' },
-  { id: 'fluxa-web', lang: 'TypeScript', href: REPO_WEB, desc: 'The browser client on React and WASM. Also packages as a native app for LG webOS.' },
+  { id: 'fluxa-core', lang: 'Rust', href: REPO_CORE, desc: 'Shared library — addon resolution, streaming, library state, search, and playback policy.' },
+  { id: 'fluxa-desktop', lang: 'TypeScript, Rust', href: REPO_DESKTOP, desc: 'Desktop app on Tauri and React for Windows, macOS, and Linux.' },
+  { id: 'fluxa-android', lang: 'Kotlin', href: REPO_ANDROID, desc: 'Android app for phones and tablets.' },
+  { id: 'fluxa-web', lang: 'TypeScript', href: REPO_WEB, desc: 'Browser client, also packaged as a native app for LG webOS.' },
 ];
 
-const formats = ['MKV', 'MP4', 'AVI', 'MOV', 'WEBM', 'TS', 'M2TS', 'H.264', 'HEVC', 'AV1', 'VP9', 'MPEG-2', 'PRORES', 'AAC', 'AC-3', 'E-AC-3', 'DTS', 'DTS-HD', 'TRUEHD', 'FLAC', 'OPUS', 'SRT', 'ASS', 'SSA', 'PGS', 'VOBSUB', 'WEBVTT', 'HLS', 'DASH', 'TORRENT'];
-
-const title = 'Fluxa — a player, not a platform';
-const description = 'Free, open-source media player for Windows, macOS, Linux, Android, and LG webOS. Connect the addons you choose, play them with mpv, and keep your library in sync.';
+const title = 'Fluxa — open-source media player';
+const description = 'Free, open-source media player for Windows, macOS, Linux, Android, and LG webOS. Connect the addons you want and play them with mpv.';
 ---
 <!DOCTYPE html>
 <html lang="en" data-base={url('')}>
@@ -73,175 +60,121 @@ const description = 'Free, open-source media player for Windows, macOS, Linux, A
 <link rel="icon" type="image/png" sizes="48x48" href={url('/favicon.png')} />
 <link rel="apple-touch-icon" href={url('/logo.png')} />
 <link rel="preload" as="font" type="font/woff2" href={url('/fonts/archivo-latin.woff2')} crossorigin />
-<link rel="preload" as="font" type="font/woff2" href={url('/fonts/martianmono-latin.woff2')} crossorigin />
 <link rel="stylesheet" href={url('/landing.css')} />
 </head>
 <body>
 
-<nav class="top-nav" id="top-nav">
-  <span class="nav-progress" id="nav-progress"></span>
+<nav class="nav">
   <div class="nav-inner">
-    <a class="nav-logo" href={url('/')}>
+    <a class="nav-brand" href={url('/')}>
       <img src={url('/logo.png')} alt="" />
-      <span>Fluxa</span>
+      Fluxa
     </a>
-    <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
+    <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-menu">
       <Icon name="menu" size={18} />
     </button>
-    <div class="nav-links" id="nav-links">
-      <a class="nav-link" href="#capabilities">Capabilities</a>
-      <a class="nav-link" href="#source">Source</a>
-      <a class="nav-link" href={url('/docs')}>Docs</a>
-      <a class="nav-link" href={url('/account')}>Account</a>
-      <a class="nav-link" href={REPO_DESKTOP} target="_blank" rel="noopener">GitHub</a>
-      <a class="nav-cta" href="#platforms">Download</a>
+    <div class="nav-menu" id="nav-menu">
+      <a href="#features">Features</a>
+      <a href="#download">Download</a>
+      <a href={url('/docs')}>Docs</a>
+      <a href={url('/account')}>Account</a>
+      <a href={REPO_DESKTOP} target="_blank" rel="noopener">GitHub</a>
+      <a class="btn btn-primary" href="#download">Download</a>
     </div>
   </div>
 </nav>
 
-<header class="hero" id="start" data-label="Start">
-  <div class="hero-grid" aria-hidden="true"></div>
-  <div class="hero-glow" aria-hidden="true"></div>
-  <img class="hero-mark" src={url('/logo.png')} alt="" aria-hidden="true" />
-
-  <div class="shell">
-    <p class="mono hero-eyebrow">Open source · Rust core · mpv playback</p>
-    <h1 class="hero-title">
-      <span class="line"><span>A player,</span></span>
-      <span class="line"><span class="thin">not a platform.</span></span>
-    </h1>
-
-    <div class="hero-lower">
-      <p class="hero-sub">
-        Fluxa ships <b>no content of its own</b>. You connect the addons; it resolves them, plays
-        them with mpv, and keeps your library, profiles, and progress in step across every device.
-      </p>
-      <div class="hero-actions">
-        <a class="btn-solid" href="#platforms"><Icon name="download" size={14} /> Download</a>
-        <a class="btn-quiet" href={url('/docs')}><Icon name="book-open" size={13} /> Docs</a>
-        <a class="btn-quiet" href={REPO_DESKTOP} target="_blank" rel="noopener"><Icon name="github" size={13} /> Source</a>
-      </div>
-    </div>
-
-    <div class="hero-strip">
-      <span class="mono">Runs on</span>
-      <div class="strip-targets">
-        {platforms.map(p => (
-          <a class="strip-item" href="#platforms"><Icon name={p.icon} size={15} /> {p.name}</a>
-        ))}
-      </div>
-    </div>
+<header class="hero wrap">
+  <h1>A media player that plays what you bring it.</h1>
+  <p>
+    Fluxa is free and open source. It ships no content of its own — you connect the addons, and it
+    plays them with mpv, tracks what you watch, and keeps your library in sync across devices.
+  </p>
+  <div class="hero-buttons">
+    <a class="btn btn-primary" href="#download"><Icon name="download" size={15} /> Download</a>
+    <a class="btn btn-ghost" href={url('/docs')}><Icon name="book-open" size={15} /> Read the docs</a>
+  </div>
+  <div class="hero-runs">
+    {platforms.map(p => <span><Icon name={p.icon} size={15} /> {p.name}</span>)}
   </div>
 </header>
 
-<section class="chapter shell" id="capabilities" data-label="Capabilities">
-  <div class="chapter-head">
-    <div>
-      <div class="chapter-index"><span class="num">01</span><span class="mono">Capabilities</span></div>
-      <h2 class="chapter-title">What the app actually does.</h2>
-    </div>
-    <p class="chapter-note">
-      No feature is gated and nothing phones home. This is the whole surface, written the way you
-      would meet it after installing.
-    </p>
+<section class="section wrap" id="features">
+  <h2>What it does</h2>
+  <p class="lead">Nothing is gated, nothing phones home, and there is no paid version.</p>
+  <div class="section-body features">
+    {features.map(f => (
+      <div class="feature">
+        <h3>{f.name}</h3>
+        <p>{f.body}</p>
+      </div>
+    ))}
   </div>
-  {specs.map(s => (
-    <div class="spec reveal">
-      <p class="mono">{s.tag}</p>
-      <h3 class="spec-name">{s.name}</h3>
-      <p class="spec-body">{s.body}</p>
-    </div>
-  ))}
 </section>
 
-<section class="chapter shell" id="platforms" data-label="Download">
-  <div class="chapter-head">
-    <div>
-      <div class="chapter-index"><span class="num">02</span><span class="mono">Download</span></div>
-      <h2 class="chapter-title">Get the build for your machine.</h2>
-    </div>
-    <p class="chapter-note">Every release is published on GitHub. No installer bundles, no telemetry, no account.</p>
+<section class="section wrap" id="download">
+  <h2>Download</h2>
+  <p class="lead">Every release is published on GitHub. No account needed.</p>
+  <div class="section-body rows">
+    {builds.map(b => (
+      <a class="row" href={b.href} target="_blank" rel="noopener">
+        <span class="row-icon"><Icon name={b.icon} size={18} /></span>
+        <span class="row-main">
+          <span class="row-name" style="display:block">{b.name}</span>
+          <span class="row-desc" style="display:block">{b.req}</span>
+        </span>
+        <span class="row-action">{b.action} <Icon name="arrow-right" size={14} /></span>
+      </a>
+    ))}
   </div>
-  {builds.map(b => (
-    <a class="grab reveal" href={b.href} target="_blank" rel="noopener">
-      <span class="grab-os"><Icon name={b.icon} size={15} /> {b.name}</span>
-      <span class="grab-req">{b.req}</span>
-      <span class="grab-get">{b.file} <Icon name="arrow-right" size={13} /></span>
-    </a>
-  ))}
 </section>
 
-<div class="plays" aria-hidden="true">
-  <div class="plays-track">
-    {[0, 1].map(() => formats.map(f => <span>{f}</span>))}
+<section class="section wrap" id="source">
+  <h2>Source</h2>
+  <p class="lead">Four repositories: one shared Rust core and three platform apps built on it.</p>
+  <div class="section-body rows">
+    {repos.map(r => (
+      <a class="row" id={'repo-' + r.id} href={r.href} target="_blank" rel="noopener">
+        <span class="row-main">
+          <span class="row-name" style="display:block">{r.id}</span>
+          <span class="row-desc" style="display:block">{r.desc} · {r.lang}</span>
+        </span>
+        <span class="row-meta">
+          <span><Icon name="star" size={13} /><span class="repo-stars">–</span></span>
+          <span><Icon name="git-fork" size={13} /><span class="repo-forks">–</span></span>
+        </span>
+      </a>
+    ))}
   </div>
-</div>
-
-<section class="chapter shell" id="source" data-label="Source">
-  <div class="chapter-head">
-    <div>
-      <div class="chapter-index"><span class="num">03</span><span class="mono">Source</span></div>
-      <h2 class="chapter-title">Four repositories, one core.</h2>
-    </div>
-    <p class="chapter-note">
-      The Rust core holds every decision that must not drift between platforms. The three shells
-      above it own only their own window, input, and rendering.
-    </p>
-  </div>
-  {repos.map(r => (
-    <a class="repo reveal" id={'repo-' + r.id} href={r.href} target="_blank" rel="noopener">
-      <span class="repo-lang">{r.lang}</span>
-      <span>
-        <span class="repo-name">{r.id}</span>
-        <span class="repo-desc" style="display:block">{r.desc}</span>
-      </span>
-      <span class="repo-stats">
-        <span><Icon name="star" size={12} /><span class="repo-stars">–</span></span>
-        <span><Icon name="git-fork" size={12} /><span class="repo-forks">–</span></span>
-      </span>
-    </a>
-  ))}
 </section>
 
-<section class="chapter shell" id="releases" data-label="Releases">
-  <div class="chapter-head">
-    <div>
-      <div class="chapter-index"><span class="num">04</span><span class="mono">Releases</span></div>
-      <h2 class="chapter-title">What shipped most recently.</h2>
-    </div>
-    <p class="chapter-note">Pulled live from the GitHub releases feed for each app.</p>
-  </div>
-  <div id="release-list">
+<section class="section wrap">
+  <h2>Latest releases</h2>
+  <div class="section-body" id="release-list">
     {[0, 1, 2].map(() => (
       <div class="release">
-        <span class="skel skel-tag" aria-hidden="true"></span>
-        <div aria-hidden="true">
+        <div class="release-head"><span class="skel skel-tag" aria-hidden="true"></span></div>
+        <div class="release-notes" aria-hidden="true">
           <span class="skel skel-line"></span>
-          <span class="skel skel-line" style="width:88%"></span>
-          <span class="skel skel-line" style="width:64%"></span>
+          <span class="skel skel-line" style="width:80%"></span>
         </div>
       </div>
     ))}
   </div>
 </section>
 
-<section class="chapter shell" id="people" data-label="People">
-  <div class="chapter-head">
-    <div>
-      <div class="chapter-index"><span class="num">05</span><span class="mono">People</span></div>
-      <h2 class="chapter-title">Everyone who has committed.</h2>
-    </div>
-    <p class="chapter-note">Across all four repositories, ordered by contributions.</p>
-  </div>
-  <div class="people" id="people-grid">
+<section class="section wrap">
+  <h2>Contributors</h2>
+  <p class="lead">Everyone who has committed across the four repositories.</p>
+  <div class="section-body people" id="people-grid">
     {[0, 1, 2, 3, 4, 5, 6, 7].map(() => <span class="skel skel-person" aria-hidden="true"></span>)}
   </div>
 </section>
 
-<footer class="site-foot shell">
-  <div class="foot-top">
-    <a class="foot-mark" href={url('/')}><img src={url('/logo.png')} alt="" /> Fluxa</a>
-    <div class="foot-links">
+<footer class="footer wrap">
+  <div class="footer-inner">
+    <a class="nav-brand" href={url('/')}><img src={url('/logo.png')} alt="" /> Fluxa</a>
+    <div class="footer-links">
       <a href={url('/docs')}>Docs</a>
       <a href={url('/docs/getting-started')}>Getting started</a>
       <a href={url('/docs/faq')}>FAQ</a>
@@ -253,9 +186,9 @@ const description = 'Free, open-source media player for Windows, macOS, Linux, A
       <a href={REPO_DESKTOP + '/issues'} target="_blank" rel="noopener">Issues</a>
     </div>
   </div>
-  <p class="foot-note">
-    Fluxa is free and open-source software. It provides no catalogues, no streams, and no content,
-    and is not affiliated with any provider.
+  <p class="footer-note">
+    Fluxa is free and open-source software. It provides no catalogues, streams, or content, and is
+    not affiliated with any provider.
   </p>
 </footer>
 

@@ -6,67 +6,25 @@ const REPOS = [
 ];
 
 const GH_TTL = 60 * 60 * 1000;
-const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-document.documentElement.classList.add('js');
 
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c =>
   ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
 function initNav() {
-  const nav = document.getElementById('top-nav');
   const toggle = document.getElementById('nav-toggle');
-  const links = document.getElementById('nav-links');
-
-  addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', scrollY > 24);
-  }, { passive: true });
+  const menu = document.getElementById('nav-menu');
 
   toggle.addEventListener('click', () => {
-    const open = links.classList.toggle('open');
+    const open = menu.classList.toggle('open');
     toggle.setAttribute('aria-expanded', String(open));
     toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
   });
 
-  links.addEventListener('click', e => {
+  menu.addEventListener('click', e => {
     if (!e.target.closest('a')) return;
-    links.classList.remove('open');
+    menu.classList.remove('open');
     toggle.setAttribute('aria-expanded', 'false');
     toggle.setAttribute('aria-label', 'Open menu');
-  });
-}
-
-function initProgress() {
-  const nav = document.getElementById('top-nav');
-  const bar = document.getElementById('nav-progress');
-
-  const paint = () => {
-    const span = Math.max(1, document.documentElement.scrollHeight - innerHeight);
-    bar.style.width = Math.min(100, (scrollY / span) * 100).toFixed(2) + '%';
-  };
-
-  paint();
-  addEventListener('scroll', paint, { passive: true });
-  addEventListener('resize', paint);
-}
-
-function initReveal() {
-  const targets = document.querySelectorAll('.reveal');
-  if (reduced) {
-    targets.forEach(el => el.classList.add('in-view'));
-    return;
-  }
-  const io = new IntersectionObserver(entries => {
-    for (const entry of entries) {
-      if (!entry.isIntersecting) continue;
-      entry.target.classList.add('in-view');
-      io.unobserve(entry.target);
-    }
-  }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
-
-  targets.forEach((el, i) => {
-    el.style.transitionDelay = (Math.min(i, 6) * 45) + 'ms';
-    io.observe(el);
   });
 }
 
@@ -96,16 +54,16 @@ async function loadStats() {
   for (const repo of REPOS) {
     try {
       const data = await gh('repos/' + repo.slug);
-      const card = document.getElementById('repo-' + repo.id);
-      if (!card) continue;
-      card.querySelector('.repo-stars').textContent = fmtNum(data.stargazers_count);
-      card.querySelector('.repo-forks').textContent = fmtNum(data.forks_count);
+      const row = document.getElementById('repo-' + repo.id);
+      if (!row) continue;
+      row.querySelector('.repo-stars').textContent = fmtNum(data.stargazers_count);
+      row.querySelector('.repo-forks').textContent = fmtNum(data.forks_count);
     } catch {}
   }
 }
 
 function notes(raw) {
-  const lines = esc(raw.slice(0, 520)).split('\n');
+  const lines = esc(raw.slice(0, 420)).split('\n');
   const out = [];
   let list = false;
   for (let line of lines) {
@@ -136,10 +94,9 @@ async function loadReleases() {
     if (result.status !== 'fulfilled') {
       return `
         <div class="release">
-          <div><div class="release-tag">${esc(repo.id)}</div></div>
+          <div class="release-head"><div class="release-tag">${esc(repo.id)}</div></div>
           <div class="release-notes">
-            <p>No release feed right now.
-            <a href="https://github.com/${repo.slug}/releases" target="_blank" rel="noopener">Check GitHub</a></p>
+            <p><a href="https://github.com/${repo.slug}/releases" target="_blank" rel="noopener">Releases on GitHub</a></p>
           </div>
         </div>`;
     }
@@ -147,9 +104,9 @@ async function loadReleases() {
     const date = new Date(d.published_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
     return `
       <div class="release">
-        <div>
+        <div class="release-head">
           <div class="release-tag">${esc(d.tag_name)}</div>
-          <div class="mono release-meta">${esc(repo.id)} · ${date}</div>
+          <div class="release-sub">${esc(repo.id)} · ${date}</div>
         </div>
         <div class="release-notes">
           ${notes(d.body || '') || '<p>Release notes are on GitHub.</p>'}
@@ -176,16 +133,14 @@ async function loadPeople() {
     if (!sorted.length) throw new Error('empty');
     host.innerHTML = sorted.map(c =>
       `<a class="person" href="${esc(c.html_url)}" target="_blank" rel="noopener" title="${esc(c.login)}">
-        <img src="${esc(c.avatar_url)}&s=84" alt="${esc(c.login)}" loading="lazy" />
+        <img src="${esc(c.avatar_url)}&s=80" alt="${esc(c.login)}" loading="lazy" />
       </a>`).join('');
   } catch {
-    host.innerHTML = '<p class="mono">Contributor list unavailable.</p>';
+    host.innerHTML = '<p>Contributor list unavailable.</p>';
   }
 }
 
 initNav();
-initProgress();
-initReveal();
 loadStats();
 loadReleases();
 loadPeople();
