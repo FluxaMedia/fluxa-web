@@ -58,11 +58,11 @@ const features = [
 ];
 
 const builds = [
-  { icon: 'windows', name: 'Windows', req: 'Windows 10 or later. EXE installer, no admin rights needed.', action: 'Download .exe', href: REPO_DESKTOP + '/releases/latest' },
-  { icon: 'apple', name: 'macOS', req: 'macOS 11 or later. Universal binary for Intel and Apple Silicon.', action: 'Download .dmg', href: REPO_DESKTOP + '/releases/latest' },
-  { icon: 'linux', name: 'Linux', req: '.deb, .rpm, and .AppImage. mpv is bundled.', action: 'Download', href: REPO_DESKTOP + '/releases/latest' },
-  { icon: 'android', name: 'Android', req: 'Phones and tablets. Same addons as the desktop build.', action: 'Download .apk', href: REPO_ANDROID + '/releases/latest' },
-  { icon: 'tv', name: 'webOS', req: 'LG Smart TVs via Developer Mode. Also runs in any browser.', action: 'Download', href: REPO_WEB + '/releases/latest' },
+  { icon: 'windows', name: 'Windows', req: 'Windows 10 or later', file: '.exe', href: REPO_DESKTOP + '/releases/latest' },
+  { icon: 'apple', name: 'macOS', req: 'macOS 11 or later, universal', file: '.dmg', href: REPO_DESKTOP + '/releases/latest' },
+  { icon: 'linux', name: 'Linux', req: 'mpv bundled', file: '.deb / .rpm / AppImage', href: REPO_DESKTOP + '/releases/latest' },
+  { icon: 'android', name: 'Android', req: 'Phones and tablets', file: '.apk', href: REPO_ANDROID + '/releases/latest' },
+  { icon: 'tv', name: 'webOS', req: 'LG TVs via Developer Mode', file: 'Get it', href: REPO_WEB + '/releases/latest' },
 ];
 
 const repos = [
@@ -225,15 +225,15 @@ const description = 'Free, open-source media player for Windows, macOS, Linux, A
 <section class="section wrap" id="download">
   <h2>Download</h2>
   <p class="lead">Every release is published on GitHub. No account needed.</p>
-  <div class="section-body rows">
+  <div class="section-body grabs">
     {builds.map(b => (
-      <a class="row" href={b.href} target="_blank" rel="noopener">
-        <span class="row-icon"><Icon name={b.icon} size={18} /></span>
-        <span class="row-main">
-          <span class="row-name" style="display:block">{b.name}</span>
-          <span class="row-desc" style="display:block">{b.req}</span>
+      <a class="grab" href={b.href} target="_blank" rel="noopener">
+        <span class="grab-icon"><Icon name={b.icon} size={22} /></span>
+        <span class="grab-main">
+          <span class="grab-os" style="display:block">{b.name}</span>
+          <span class="grab-req" style="display:block">{b.req}</span>
         </span>
-        <span class="row-action">{b.action} <Icon name="arrow-right" size={14} /></span>
+        <span class="grab-go"><Icon name="download" size={13} /> {b.file}</span>
       </a>
     ))}
   </div>

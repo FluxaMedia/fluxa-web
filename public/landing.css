@@ -222,6 +222,54 @@ img { display: block; max-width: 100%; }
 .row-action svg { width: 14px; height: 14px; transition: transform 0.15s; }
 a.row:hover .row-action svg { transform: translateX(4px); }
 
+.grabs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 12px;
+}
+
+.grab {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 18px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface);
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.grab:hover { border-color: var(--line-strong); background: #171717; }
+
+.grab-icon {
+  display: flex;
+  color: var(--white);
+  flex-shrink: 0;
+}
+
+.grab-icon svg { width: 22px; height: 22px; }
+.grab-main { flex: 1; min-width: 0; }
+.grab-os { font-size: 15.5px; font-weight: 600; color: var(--white); }
+.grab-req { font-size: 13.5px; color: var(--gray-dim); margin-top: 1px; }
+
+.grab-go {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--white);
+  border: 1px solid var(--line-strong);
+  border-radius: 7px;
+  padding: 7px 12px;
+  white-space: nowrap;
+  transition: background 0.15s;
+}
+
+.grab:hover .grab-go { background: rgba(255, 255, 255, 0.08); }
+.grab-go svg { width: 13px; height: 13px; }
+
 .row-meta {
   flex-shrink: 0;
   display: flex;
