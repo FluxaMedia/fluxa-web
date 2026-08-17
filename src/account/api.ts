@@ -7,7 +7,8 @@ export const NUVIO_MAX_PROFILES = 6;
 export const NUVIO_STORAGE = 'https://api.nuvio.tv/storage/v1/object/public/avatars/';
 
 export type Session = {
-  provider: 'nuvio' | 'stremio';
+  provider: 'fluxa' | 'nuvio' | 'stremio';
+  instanceUrl?: string;
   email: string;
   userId?: string | null;
   accessToken?: string;
@@ -174,4 +175,98 @@ export function friendlyError(err: unknown) {
   if (/already registered|already exists|user_already_exists/i.test(m)) return 'An account with that email already exists.';
   if (/failed to fetch|networkerror|load failed/i.test(m)) return 'Network error. Check your connection and try again.';
   return m;
+}
+
+export type FluxaProfile = {
+  id: string;
+  name: string;
+  avatar: string | null;
+  settings: Record<string, unknown>;
+  updated_at: string;
+};
+
+export function resolveInstanceBase(input: string): string {
+  const trimmed = input.trim().replace(/\/+$/, '');
+  if (!trimmed) throw new Error('Enter your Fluxa Sync address');
+  const absolute = /^https?:\/\//.test(trimmed) ? trimmed : `https://${trimmed}`;
+  let parsed: URL;
+  try {
+    parsed = new URL(absolute);
+  } catch {
+    throw new Error('That address is not a valid URL');
+  }
+  if (parsed.pathname.endsWith('/api/v1') || parsed.pathname.includes('/functions/v1/')) return absolute;
+  if (parsed.hostname.endsWith('.supabase.co')) return `${absolute}/functions/v1/fluxa-sync`;
+  return `${absolute}/api/v1`;
+}
+
+async function fluxaRequest<T>(base: string, method: string, path: string, body?: unknown, token?: string): Promise<T> {
+  const headers: Record<string, string> = {};
+  if (body !== undefined) headers['content-type'] = 'application/json';
+  if (token) headers.authorization = 'Bearer ' + token;
+  const res = await fetch(base + path, { method, headers, body: body === undefined ? undefined : JSON.stringify(body) });
+  const text = await res.text();
+  if (!res.ok) {
+    let msg = text;
+    try {
+      const j = JSON.parse(text);
+      msg = j.error_description || j.message || j.error || text;
+    } catch {}
+    const err: Error & { status?: number } = new Error(msg || 'Fluxa Sync ' + res.status);
+    err.status = res.status;
+    throw err;
+  }
+  return text ? (JSON.parse(text) as T) : (null as T);
+}
+
+type FluxaSessionResponse = {
+  access_token: string | null;
+  refresh_token: string | null;
+  expires_in: number | null;
+  user: { id: string; email: string } | null;
+};
+
+function toFluxaSession(base: string, payload: FluxaSessionResponse): Session {
+  if (!payload?.access_token || !payload.refresh_token) {
+    throw new Error('Confirm your email address before signing in');
+  }
+  if (!payload.user) throw new Error('That instance returned no account');
+  const lifetime = typeof payload.expires_in === 'number' && payload.expires_in > 0 ? payload.expires_in : 3600;
+  return {
+    provider: 'fluxa',
+    email: payload.user.email,
+    userId: payload.user.id,
+    instanceUrl: base,
+    accessToken: payload.access_token,
+    refreshToken: payload.refresh_token,
+    expiresAt: Math.floor(Date.now() / 1000) + lifetime,
+  };
+}
+
+export const FluxaClient = {
+  signIn: async (instanceUrl: string, email: string, password: string) => {
+    const base = resolveInstanceBase(instanceUrl);
+    return toFluxaSession(base, await fluxaRequest<FluxaSessionResponse>(base, 'POST', '/auth/login', { email, password }));
+  },
+  signUp: async (instanceUrl: string, email: string, password: string) => {
+    const base = resolveInstanceBase(instanceUrl);
+    return toFluxaSession(base, await fluxaRequest<FluxaSessionResponse>(base, 'POST', '/auth/register', { email, password }));
+  },
+  refresh: async (base: string, refreshToken: string) =>
+    toFluxaSession(base, await fluxaRequest<FluxaSessionResponse>(base, 'POST', '/auth/refresh', { refresh_token: refreshToken })),
+  signOut: (base: string, token: string, refreshToken: string) =>
+    fluxaRequest(base, 'POST', '/auth/logout', { refresh_token: refreshToken }, token).catch(() => null),
+  profiles: async (base: string, token: string) =>
+    (await fluxaRequest<FluxaProfile[]>(base, 'GET', '/profiles', undefined, token)) ?? [],
+};
+
+export async function fluxaToken(session: Session, onRefresh: (s: Session) => void) {
+  const now = Math.floor(Date.now() / 1000);
+  if (session.refreshToken && session.expiresAt && session.expiresAt - now < 60) {
+    const next = await FluxaClient.refresh(session.instanceUrl!, session.refreshToken);
+    saveSession(next);
+    onRefresh(next);
+    return next.accessToken!;
+  }
+  return session.accessToken!;
 }

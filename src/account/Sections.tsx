@@ -32,6 +32,22 @@ export function Overview() {
   const { session, token, profiles } = useAccount();
   const nuvio = session.provider === 'nuvio';
 
+  if (session.provider === 'fluxa') {
+    return (
+      <>
+        <SecHead title="Overview">Signed in to your own Fluxa Sync instance.</SecHead>
+        <div className="stat-row">
+          <Stat value={profiles.length} label="Profiles" />
+        </div>
+        <div className="list">
+          <div className="row"><div className="row-main"><div className="row-title">Instance</div><div className="row-sub">{session.instanceUrl}</div></div></div>
+          <div className="row"><div className="row-main"><div className="row-title">Email</div><div className="row-sub">{session.email}</div></div></div>
+          <div className="row"><div className="row-main"><div className="row-title">User ID</div><div className="row-sub">{session.userId || 'Unknown'}</div></div></div>
+        </div>
+      </>
+    );
+  }
+
   const { data, error } = useLoad(async () => {
     if (nuvio) return { overview: await NuvioClient.getSyncOverview(await token()), addons: [], library: [] };
     const [addons, library] = await Promise.all([
@@ -86,7 +102,7 @@ function toPushShape(p: Profile) {
 }
 
 export function Profiles() {
-  const { token, profiles, avatars, reloadProfiles } = useAccount();
+  const { session, token, profiles, avatars, reloadProfiles } = useAccount();
   const toast = useToast();
   const confirm = useConfirm();
   const [name, setName] = useState('');
@@ -127,6 +143,27 @@ export function Profiles() {
     await push(profiles.filter(x => x.profile_index !== p.profile_index));
     toast('Profile deleted');
   };
+
+  if (session.provider === 'fluxa') {
+    return (
+      <>
+        <SecHead title="Profiles">Profiles stored on your Fluxa Sync instance.</SecHead>
+        <div className="note-box">
+          Profiles are created and edited in the Fluxa app. This is a read-only view of what your instance holds.
+        </div>
+        <div className="list">
+          {profiles.length ? profiles.map(p => (
+            <div className="row" key={p.profile_index}>
+              <ProfileAvatar profile={p} avatars={avatars} size={42} />
+              <div className="row-main">
+                <div className="row-title">{p.name || 'Profile ' + p.profile_index}</div>
+              </div>
+            </div>
+          )) : <div className="empty">No profiles on this instance yet.</div>}
+        </div>
+      </>
+    );
+  }
 
   return (
     <>

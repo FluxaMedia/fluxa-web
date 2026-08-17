@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { NuvioClient, StremioClient, loadSession, nuvioToken, saveSession } from './api';
+import { FluxaClient, NuvioClient, StremioClient, fluxaToken, loadSession, nuvioToken, saveSession } from './api';
 import type { Session } from './api';
 import Auth from './Auth';
 import Panel from './Panel';
@@ -27,10 +27,17 @@ export default function App({ base = '' }: { base?: string }) {
 
   const token = useCallback(async () => {
     if (!session) throw new Error('Signed out');
-    return nuvioToken(session, setSession);
+    return session.provider === 'fluxa' ? fluxaToken(session, setSession) : nuvioToken(session, setSession);
   }, [session]);
 
   const reloadProfiles = useCallback(async () => {
+    if (session?.provider === 'fluxa') {
+      const raw = await FluxaClient.profiles(session.instanceUrl!, await token());
+      const mapped = raw.map((p, i) => ({ profile_index: i + 1, name: p.name, avatar_url: p.avatar }));
+      setProfiles(mapped);
+      setActiveIndex(current => (current != null && mapped.some(p => p.profile_index === current) ? current : mapped[0]?.profile_index ?? null));
+      return mapped;
+    }
     const list = ((await NuvioClient.pullProfiles(await token())) || []) as Profile[];
     const sorted = list.sort((a, b) => a.profile_index - b.profile_index);
     setProfiles(sorted);
@@ -39,9 +46,9 @@ export default function App({ base = '' }: { base?: string }) {
   }, [token]);
 
   useEffect(() => {
-    if (session?.provider !== 'nuvio') return;
+    if (session?.provider === 'stremio' || !session) return;
     reloadProfiles().catch(() => {});
-    NuvioClient.listAvatars().then(list => setAvatars(list || []), () => {});
+    if (session.provider === 'nuvio') NuvioClient.listAvatars().then(list => setAvatars(list || []), () => {});
   }, [session?.provider, session?.userId]);
 
   useEffect(() => {
@@ -50,6 +57,9 @@ export default function App({ base = '' }: { base?: string }) {
   }, [session, section]);
 
   const signOut = () => {
+    if (session?.provider === 'fluxa' && session.accessToken && session.refreshToken) {
+      FluxaClient.signOut(session.instanceUrl!, session.accessToken, session.refreshToken);
+    }
     if (session?.provider === 'nuvio' && session.accessToken) NuvioClient.signOut(session.accessToken).catch(() => {});
     if (session?.provider === 'stremio' && session.authKey) StremioClient.logout(session.authKey);
     saveSession(null);

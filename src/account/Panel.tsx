@@ -16,6 +16,10 @@ import { Loading, ProfileAvatar } from './ui';
 type SectionId = 'overview' | 'profiles' | 'addons' | 'plugins' | 'library' | 'watch' | 'settings' | 'collections';
 
 const SECTIONS: Record<string, [SectionId, string, LucideIcon][]> = {
+  fluxa: [
+    ['overview', 'Overview', LayoutDashboard],
+    ['profiles', 'Profiles', Users],
+  ],
   nuvio: [
     ['overview', 'Overview', LayoutDashboard],
     ['profiles', 'Profiles', Users],
@@ -135,7 +139,7 @@ export default function Panel({
       <div className={'panel-overlay' + (open ? ' open' : '')} onClick={() => setOpen(false)} />
       <aside className={'panel-side' + (open ? ' open' : '')}>
         <div className="acct-card">
-          <img className="acct-logo" src={asset(session.provider + '-logo.png')} alt="" onError={e => (e.currentTarget.style.display = 'none')} />
+          <img className="acct-logo" src={asset(session.provider === 'fluxa' ? 'logo.png' : session.provider + '-logo.png')} alt="" onError={e => (e.currentTarget.style.display = 'none')} />
           <div className="acct-info">
             <div className="acct-email">{session.email || 'Signed in'}</div>
             <div className="acct-provider">{session.provider} account</div>
