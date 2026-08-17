@@ -78,18 +78,8 @@ const description = 'Free, open-source media player for Windows, macOS, Linux, A
 </head>
 <body>
 
-<nav class="chapter-rail" aria-label="Page progress">
-  <span class="rail-count" id="rail-count">01/0{chapters.length}</span>
-  <div class="rail-track">
-    <div class="rail-fill" id="rail-fill"></div>
-    {chapters.map(c => <span class="rail-tick" data-tick={c.id}></span>)}
-  </div>
-  <span class="rail-chapter" id="rail-chapter">{chapters[0].label}</span>
-</nav>
-
-<div class="page">
-
 <nav class="top-nav" id="top-nav">
+  <span class="nav-progress" id="nav-progress"></span>
   <div class="nav-inner">
     <a class="nav-logo" href={url('/')}>
       <img src={url('/logo.png')} alt="" />
@@ -109,69 +99,68 @@ const description = 'Free, open-source media player for Windows, macOS, Linux, A
   </div>
 </nav>
 
-<header class="hero shell" id="start" data-label="Start">
-  <p class="mono hero-eyebrow">Open source · Rust core · mpv playback</p>
-  <h1 class="hero-title">
-    <span class="line"><span>A player,</span></span>
-    <span class="line"><span>not a platform.</span></span>
-  </h1>
-  <p class="hero-sub">
-    Fluxa ships <b>no content of its own</b>. You connect the addons; it resolves them, plays them
-    with mpv, and keeps your library, profiles, and progress in step across every device you
-    install it on.
-  </p>
-  <div class="hero-actions">
-    <a class="btn-solid" href="#platforms"><Icon name="download" size={14} /> Download</a>
-    <a class="btn-quiet" href={url('/docs')}><Icon name="book-open" size={13} /> Read the docs</a>
-    <a class="btn-quiet" href={REPO_DESKTOP} target="_blank" rel="noopener"><Icon name="github" size={13} /> Source</a>
-  </div>
+<header class="hero" id="start" data-label="Start">
+  <div class="hero-grid" aria-hidden="true"></div>
+  <div class="hero-glow" aria-hidden="true"></div>
+  <img class="hero-mark" src={url('/logo.png')} alt="" aria-hidden="true" />
 
-  <div class="scrub">
-    <div class="scrub-head">
-      <span class="mono">Runs on</span>
-      <span class="mono">5 targets · 1 core</span>
+  <div class="shell">
+    <p class="mono hero-eyebrow">Open source · Rust core · mpv playback</p>
+    <h1 class="hero-title">
+      <span class="line"><span>A player,</span></span>
+      <span class="line"><span class="thin">not a platform.</span></span>
+    </h1>
+
+    <div class="hero-lower">
+      <p class="hero-sub">
+        Fluxa ships <b>no content of its own</b>. You connect the addons; it resolves them, plays
+        them with mpv, and keeps your library, profiles, and progress in step across every device.
+      </p>
+      <div class="hero-actions">
+        <a class="btn-solid" href="#platforms"><Icon name="download" size={14} /> Download</a>
+        <a class="btn-quiet" href={url('/docs')}><Icon name="book-open" size={13} /> Docs</a>
+        <a class="btn-quiet" href={REPO_DESKTOP} target="_blank" rel="noopener"><Icon name="github" size={13} /> Source</a>
+      </div>
     </div>
-    <div class="scrub-track"><div class="scrub-fill"></div></div>
-    <div class="scrub-marks">
-      {platforms.map(p => (
-        <div class="scrub-mark">
-          <Icon name={p.icon} size={15} />
-          <span class="mono">{p.name}</span>
-        </div>
-      ))}
+
+    <div class="hero-strip">
+      <span class="mono">Runs on</span>
+      <div class="strip-targets">
+        {platforms.map(p => (
+          <a class="strip-item" href="#platforms"><Icon name={p.icon} size={15} /> {p.name}</a>
+        ))}
+      </div>
     </div>
   </div>
 </header>
 
 <section class="chapter shell" id="capabilities" data-label="Capabilities">
   <div class="chapter-head">
-    <p class="mono">Capabilities</p>
     <div>
+      <div class="chapter-index"><span class="num">01</span><span class="mono">Capabilities</span></div>
       <h2 class="chapter-title">What the app actually does.</h2>
-      <p class="chapter-note">
-        No feature is gated and nothing phones home. This is the whole surface, written the way
-        you would meet it after installing.
-      </p>
     </div>
+    <p class="chapter-note">
+      No feature is gated and nothing phones home. This is the whole surface, written the way you
+      would meet it after installing.
+    </p>
   </div>
   {specs.map(s => (
     <div class="spec reveal">
       <p class="mono">{s.tag}</p>
-      <div class="spec-body">
-        <h3 class="spec-name">{s.name}</h3>
-        <p>{s.body}</p>
-      </div>
+      <h3 class="spec-name">{s.name}</h3>
+      <p class="spec-body">{s.body}</p>
     </div>
   ))}
 </section>
 
 <section class="chapter shell" id="platforms" data-label="Download">
   <div class="chapter-head">
-    <p class="mono">Download</p>
     <div>
+      <div class="chapter-index"><span class="num">02</span><span class="mono">Download</span></div>
       <h2 class="chapter-title">Get the build for your machine.</h2>
-      <p class="chapter-note">Every release is published on GitHub. No installer bundles, no telemetry, no account.</p>
     </div>
+    <p class="chapter-note">Every release is published on GitHub. No installer bundles, no telemetry, no account.</p>
   </div>
   {builds.map(b => (
     <a class="grab reveal" href={b.href} target="_blank" rel="noopener">
@@ -190,14 +179,14 @@ const description = 'Free, open-source media player for Windows, macOS, Linux, A
 
 <section class="chapter shell" id="source" data-label="Source">
   <div class="chapter-head">
-    <p class="mono">Source</p>
     <div>
+      <div class="chapter-index"><span class="num">03</span><span class="mono">Source</span></div>
       <h2 class="chapter-title">Four repositories, one core.</h2>
-      <p class="chapter-note">
-        The Rust core holds every decision that must not drift between platforms. The three shells
-        above it own only their own window, input, and rendering.
-      </p>
     </div>
+    <p class="chapter-note">
+      The Rust core holds every decision that must not drift between platforms. The three shells
+      above it own only their own window, input, and rendering.
+    </p>
   </div>
   {repos.map(r => (
     <a class="repo reveal" id={'repo-' + r.id} href={r.href} target="_blank" rel="noopener">
@@ -216,11 +205,11 @@ const description = 'Free, open-source media player for Windows, macOS, Linux, A
 
 <section class="chapter shell" id="releases" data-label="Releases">
   <div class="chapter-head">
-    <p class="mono">Releases</p>
     <div>
+      <div class="chapter-index"><span class="num">04</span><span class="mono">Releases</span></div>
       <h2 class="chapter-title">What shipped most recently.</h2>
-      <p class="chapter-note">Pulled live from the GitHub releases feed for each app.</p>
     </div>
+    <p class="chapter-note">Pulled live from the GitHub releases feed for each app.</p>
   </div>
   <div id="release-list">
     {[0, 1, 2].map(() => (
@@ -238,20 +227,20 @@ const description = 'Free, open-source media player for Windows, macOS, Linux, A
 
 <section class="chapter shell" id="people" data-label="People">
   <div class="chapter-head">
-    <p class="mono">People</p>
     <div>
+      <div class="chapter-index"><span class="num">05</span><span class="mono">People</span></div>
       <h2 class="chapter-title">Everyone who has committed.</h2>
-      <p class="chapter-note">Across all four repositories, ordered by contributions.</p>
     </div>
+    <p class="chapter-note">Across all four repositories, ordered by contributions.</p>
   </div>
-  <div class="people" id="people">
+  <div class="people" id="people-grid">
     {[0, 1, 2, 3, 4, 5, 6, 7].map(() => <span class="skel skel-person" aria-hidden="true"></span>)}
   </div>
 </section>
 
 <footer class="site-foot shell">
-  <div class="foot-grid">
-    <p class="mono">Fluxa</p>
+  <div class="foot-top">
+    <a class="foot-mark" href={url('/')}><img src={url('/logo.png')} alt="" /> Fluxa</a>
     <div class="foot-links">
       <a href={url('/docs')}>Docs</a>
       <a href={url('/docs/getting-started')}>Getting started</a>
@@ -269,8 +258,6 @@ const description = 'Free, open-source media player for Windows, macOS, Linux, A
     and is not affiliated with any provider.
   </p>
 </footer>
-
-</div>
 
 <script is:inline src={url('/landing.js')}></script>
 </body>

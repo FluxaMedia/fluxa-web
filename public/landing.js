@@ -5,9 +5,10 @@ const REPOS = [
   { id: 'fluxa-web', slug: 'FluxaMedia/fluxa-web', release: true },
 ];
 
-const CHAPTERS = ['start', 'capabilities', 'platforms', 'source', 'releases', 'people'];
 const GH_TTL = 60 * 60 * 1000;
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+document.documentElement.classList.add('js');
 
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c =>
   ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -35,51 +36,18 @@ function initNav() {
   });
 }
 
-function initRail() {
-  const rail = document.querySelector('.chapter-rail');
-  const fill = document.getElementById('rail-fill');
-  const count = document.getElementById('rail-count');
-  const label = document.getElementById('rail-chapter');
-  const ticks = [...document.querySelectorAll('[data-tick]')];
-  const marks = CHAPTERS.map(id => document.getElementById(id)).filter(Boolean);
-  if (!marks.length) return;
-
-  const pad = n => String(n).padStart(2, '0');
-  let stops = [];
-
-  const measure = () => {
-    const span = Math.max(1, document.documentElement.scrollHeight - innerHeight);
-    stops = marks.map(el => Math.min(1, Math.max(0, (el.offsetTop - innerHeight * 0.3) / span)));
-    ticks.forEach((tick, i) => {
-      tick.style.top = (stops[i] * 100).toFixed(2) + '%';
-    });
-  };
+function initProgress() {
+  const nav = document.getElementById('top-nav');
+  const bar = document.getElementById('nav-progress');
 
   const paint = () => {
     const span = Math.max(1, document.documentElement.scrollHeight - innerHeight);
-    const progress = Math.min(1, Math.max(0, scrollY / span));
-
-    fill.style.height = (progress * 100).toFixed(2) + '%';
-    rail.style.setProperty('--progress', (progress * 100).toFixed(2) + '%');
-
-    let current = 0;
-    stops.forEach((stop, i) => {
-      if (progress >= stop - 0.001) current = i;
-    });
-
-    ticks.forEach((tick, i) => {
-      tick.classList.toggle('past', i < current);
-      tick.classList.toggle('active', i === current);
-    });
-
-    count.textContent = pad(current + 1) + '/' + pad(marks.length);
-    label.textContent = marks[current].dataset.label || marks[current].id;
+    bar.style.width = Math.min(100, (scrollY / span) * 100).toFixed(2) + '%';
   };
 
-  measure();
   paint();
   addEventListener('scroll', paint, { passive: true });
-  addEventListener('resize', () => { measure(); paint(); });
+  addEventListener('resize', paint);
 }
 
 function initReveal() {
@@ -192,7 +160,7 @@ async function loadReleases() {
 }
 
 async function loadPeople() {
-  const host = document.getElementById('people');
+  const host = document.getElementById('people-grid');
   if (!host) return;
   try {
     const seen = new Map();
@@ -216,7 +184,7 @@ async function loadPeople() {
 }
 
 initNav();
-initRail();
+initProgress();
 initReveal();
 loadStats();
 loadReleases();
