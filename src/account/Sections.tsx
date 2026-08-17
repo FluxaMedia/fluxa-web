@@ -23,7 +23,7 @@ function IdentityRows({ email, userId }: { email: string; userId?: string | null
   return (
     <div className="list">
       <div className="row"><div className="row-main"><div className="row-title">Email</div><div className="row-sub">{email}</div></div></div>
-      <div className="row"><div className="row-main"><div className="row-title">User ID</div><div className="row-sub">{userId || '—'}</div></div></div>
+      <div className="row"><div className="row-main"><div className="row-title">User ID</div><div className="row-sub">{userId || 'Unknown'}</div></div></div>
     </div>
   );
 }
@@ -53,8 +53,8 @@ export function Overview() {
         <div className="stat-row">
           <Stat value={profiles.length} label="Profiles" />
           <Stat value={NUVIO_MAX_PROFILES} label="Profile limit" />
-          <Stat value={addonTotal ?? '—'} label="Addons synced" />
-          <Stat value={libTotal ?? '—'} label="Library items" />
+          <Stat value={addonTotal ?? 0} label="Addons synced" />
+          <Stat value={libTotal ?? 0} label="Library items" />
         </div>
         <IdentityRows email={session.email} userId={session.userId} />
       </>

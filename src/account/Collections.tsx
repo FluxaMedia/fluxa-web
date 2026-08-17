@@ -119,7 +119,7 @@ export default function Collections() {
       setCollections(parsed);
       setDraft(JSON.stringify(parsed, null, 2));
       setMode('json');
-      toast('Imported — review, then Save to sync');
+      toast('Imported. Review, then Save to sync');
     };
     reader.readAsText(file);
   };

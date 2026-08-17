@@ -5,7 +5,7 @@ import { useAccount, useLoad } from './context';
 import { Loading, SecHead, SectionError, useToast } from './ui';
 
 function settingValue(v: unknown) {
-  if (v == null) return '—';
+  if (v == null) return 'Not set';
   if (typeof v === 'boolean') return v ? 'On' : 'Off';
   if (typeof v === 'object') {
     if (Array.isArray(v)) return `${v.length} item${v.length === 1 ? '' : 's'}`;

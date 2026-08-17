@@ -12,7 +12,7 @@ badges: ["Desktop", "Android"]
 | Setting | What it does |
 | --- | --- |
 | Language | Changes the language of the app's interface and catalog labels. |
-| Start Page | Which screen opens first after you choose a profile — Home, Search, Library, or Discover. |
+| Start Page | Which screen opens first after you choose a profile. Home, Search, Library, or Discover. |
 | Show Hero Section | Turns the large featured banner at the top of the Home screen on or off. |
 | Notifications | Allows Fluxa to send notifications on your device. |
 | New episode alerts | Sends a notification when a new episode drops for a show in your watchlist. |

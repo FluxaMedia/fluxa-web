@@ -8,15 +8,15 @@ badges: ["Answers"]
 ---
 
 :::faq[Is Fluxa free?]
-Yes. Fluxa is completely free to download and use. The optional third-party services you can connect — Trakt, MyAnimeList, Simkl, Nuvio — are separate products with their own accounts and pricing. Fluxa itself has no subscription or paid features.
+Yes. Fluxa is completely free to download and use. The optional third-party services you can connect (Trakt, MyAnimeList, Simkl, Nuvio) are separate products with their own accounts and pricing. Fluxa itself has no subscription or paid features.
 :::
 
 :::faq[Is it legal?]
-Fluxa itself is a legal, open-source app. It doesn't host or provide any content. What you can actually watch depends entirely on the addons you install — Fluxa has no control over what addon developers make available. You're responsible for the addons you use and the content you access through them.
+Fluxa itself is a legal, open-source app. It doesn't host or provide any content. What you can actually watch depends entirely on the addons you install. Fluxa has no control over what addon developers make available. You're responsible for the addons you use and the content you access through them.
 :::
 
 :::faq[Do I need to create an account?]
-No. Fluxa works completely without any account. Trakt, MAL, Simkl, and Nuvio are all optional third-party services — you can connect any or none of them. You can stream, save to your library, make collections, and use profiles without ever signing in to anything.
+No. Fluxa works completely without any account. Trakt, MAL, Simkl, and Nuvio are all optional third-party services. You can connect any or none of them. You can stream, save to your library, make collections, and use profiles without ever signing in to anything.
 :::
 
 :::faq[Why is the home screen empty after I install the app?]
@@ -24,7 +24,7 @@ Fluxa doesn't come with any built-in content. You need to install an addon first
 :::
 
 :::faq[Where do I find addon links?]
-Fluxa uses the same addon format as Stremio, so searching for "Stremio addon list" will turn up plenty of community-maintained lists. Each addon has its own link — a web address ending in `/manifest.json` — that you paste into Fluxa to install it.
+Fluxa uses the same addon format as Stremio, so searching for "Stremio addon list" will turn up plenty of community-maintained lists. Each addon has its own link, a web address ending in `/manifest.json`, that you paste into Fluxa to install it.
 :::
 
 :::faq[What's the difference between catalog addons and stream addons?]
@@ -36,7 +36,7 @@ Fluxa is asking your addons for stream sources. How long this takes depends on h
 :::
 
 :::faq[Why is the video quality low?]
-In **Manual** source selection mode you can pick any source from the list, including higher-quality ones. In **Auto** mode, switch to **Regex** and enter a pattern like `1080p` — Fluxa will automatically prefer sources whose names match it. Both settings are in **Settings → Playback → Stream Source Selection**.
+In **Manual** source selection mode you can pick any source from the list, including higher-quality ones. In **Auto** mode, switch to **Regex** and enter a pattern like `1080p`. Fluxa will automatically prefer sources whose names match it. Both settings are in **Settings → Playback → Stream Source Selection**.
 :::
 
 :::faq[Can I use an external video player instead?]
@@ -48,7 +48,7 @@ Install an anime catalog addon to browse and discover titles, and at least one s
 :::
 
 :::faq[Why don't I see cast photos or trailers?]
-Cast photos and trailers can come from your installed metadata addons — many addons include this information alongside streams. If yours don't provide them, you can add a free TMDB API key in **Settings → Metadata** to pull in additional data from The Movie Database. Get a free key at [themoviedb.org](https://www.themoviedb.org/settings/api).
+Cast photos and trailers can come from your installed metadata addons. Many addons include this information alongside streams. If yours don't provide them, you can add a free TMDB API key in **Settings → Metadata** to pull in additional data from The Movie Database. Get a free key at [themoviedb.org](https://www.themoviedb.org/settings/api).
 :::
 
 :::faq[Can I import my Trakt or MAL watch history into Fluxa?]
@@ -60,7 +60,7 @@ Go to **Settings → General → Check for updates**. The app shows your current
 :::
 
 :::faq[Can I download content to watch offline?]
-No. Fluxa doesn't support offline downloads — everything plays live from online sources. The app caches some data while playing, but you can't save content for later.
+No. Fluxa doesn't support offline downloads. Everything plays live from online sources. The app caches some data while playing, but you can't save content for later.
 :::
 
 :::faq[What video formats does Fluxa support?]
@@ -68,7 +68,7 @@ Fluxa uses mpv to play video, which supports virtually every format: MKV, MP4, A
 :::
 
 :::faq[Can I use a VPN with Fluxa?]
-Yes, VPNs work normally with Fluxa. A VPN may affect how individual addons and stream sources behave — some sources may be slower or unavailable depending on your exit location — but the app itself works fine with one running.
+Yes, VPNs work normally with Fluxa. A VPN may affect how individual addons and stream sources behave, some sources may be slower or unavailable depending on your exit location, but the app itself works fine with one running.
 :::
 
 :::faq[How do keyboard shortcuts work?]
@@ -80,11 +80,11 @@ Yes. Both the subtitle menu and audio track menu are always available in the pla
 :::
 
 :::faq[Why are episode numbers wrong for some shows?]
-Different addons sometimes use different episode numbering, especially common with anime that aired as split-cour seasons. If the numbers don't match, try a different stream addon — the catalog and stream addon may be counting episodes by different conventions.
+Different addons sometimes use different episode numbering, especially common with anime that aired as split-cour seasons. If the numbers don't match, try a different stream addon. The catalog and stream addon may be counting episodes by different conventions.
 :::
 
 :::faq[What is Nuvio and do I need it?]
-Nuvio is an optional third-party sync service, not part of Fluxa itself. It lets you keep your library, watch progress, and settings in sync between Fluxa on desktop and Fluxa on Android. If you only use one device, or don't mind setting up each device separately, you don't need Nuvio — Fluxa works exactly the same without it.
+Nuvio is an optional third-party sync service, not part of Fluxa itself. It lets you keep your library, watch progress, and settings in sync between Fluxa on desktop and Fluxa on Android. If you only use one device, or don't mind setting up each device separately, you don't need Nuvio. Fluxa works exactly the same without it.
 :::
 
 :::faq[Can multiple people use Fluxa on the same computer?]
@@ -92,7 +92,7 @@ Yes. Fluxa supports up to five profiles per installation, each with its own comp
 :::
 
 :::faq[Can each profile have different settings and addons?]
-Yes, every profile is fully independent — separate addons, appearance settings, accounts, and library. A profile can also be optionally configured to share the addon list with your main profile. Useful for a second profile for a family member.
+Yes, every profile is fully independent. Separate addons, appearance settings, accounts, and library. A profile can also be optionally configured to share the addon list with your main profile. Useful for a second profile for a family member.
 :::
 
 :::faq[How do I move my data to a new device?]
@@ -110,11 +110,11 @@ Linux: `~/.local/share/fluxa-desktop`
 :::
 
 :::faq[Can I use Fluxa without an internet connection?]
-The app opens offline and your saved library and collections are readable without internet. But actually watching something requires a connection — streams come from online sources and catalogs are fetched live from your addons.
+The app opens offline and your saved library and collections are readable without internet. But actually watching something requires a connection. Streams come from online sources and catalogs are fetched live from your addons.
 :::
 
 :::faq[What's the difference between Fluxa Desktop and Fluxa for Android?]
-They're the same app on different platforms. The features, addon support, and sync are identical — the interface is adapted for desktop vs. mobile. Watch progress and library sync between them if you have Nuvio or the same tracking accounts connected.
+They're the same app on different platforms. The features, addon support, and sync are identical. The interface is adapted for desktop vs. mobile. Watch progress and library sync between them if you have Nuvio or the same tracking accounts connected.
 :::
 
 :::faq[How do I report a problem or suggest something?]

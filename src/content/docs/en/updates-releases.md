@@ -19,7 +19,7 @@ Use the official GitHub releases linked from the Fluxa site. Avoid re-uploaded i
 | macOS | Replace the app from the latest DMG, then approve Gatekeeper if prompted. |
 | Linux | Install the new DEB/RPM/AppImage package for your distro. |
 | Android | Install the latest APK from the official release page. |
-| Web | Reload the page — it always serves the latest build. |
+| Web | Reload the page. It always serves the latest build. |
 | webOS | Sideload the latest .ipk from the official release page via Developer Mode. |
 
 ## Verify your version

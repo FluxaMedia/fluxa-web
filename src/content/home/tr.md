@@ -12,19 +12,19 @@ buttons:
 ## Buradan başla
 
 :::doccards
-- [Fluxa nedir](/docs/what-is-fluxa) — Kısa açıklama, platform desteği ve içerik modeli.
-- [Kurulum ve ilk akış](/docs/getting-started) — İndir, profil oluştur, addon kur ve bir şey oynat.
-- [Terimler ve kavramlar](/docs/concepts) — Addon'lar, kataloglar, manifestler, debrid, Usenet, mpv ve kaynak kalitesi.
-- [Hızlı yanıtlar](/docs/faq) — Hesap, addon, oynatma ve kütüphane hakkında sık sorulanlar.
+- [Fluxa nedir](/docs/what-is-fluxa). Kısa açıklama, platform desteği ve içerik modeli.
+- [Kurulum ve ilk akış](/docs/getting-started). İndir, profil oluştur, addon kur ve bir şey oynat.
+- [Terimler ve kavramlar](/docs/concepts). Addon'lar, kataloglar, manifestler, debrid, Usenet, mpv ve kaynak kalitesi.
+- [Hızlı yanıtlar](/docs/faq). Hesap, addon, oynatma ve kütüphane hakkında sık sorulanlar.
 :::
 
 ## Sık yapılan işler
 
 :::taskcards
-- [İlk addon'unu kur](/docs/addons-catalogs#installing-an-addon) — Bir manifest URL'i yapıştır ve içerik satırlarını görünür kıl.
-- [Nuvio eşitlemeyi kur](/docs/sync-accounts#nuvio-cross-device-sync) — Kütüphane, profil, koleksiyon ve ilerlemeyi cihazlar arasında hizala.
-- [Koleksiyon oluştur](/docs/library-collections#creating-a-collection) — Özel kütüphane bölümleri kur, istersen ana ekrana sabitle.
-- [Oynatma sorunlarını çöz](/docs/troubleshooting#nothing-plays-when-i-press-play) — Boş kaynak listesi, takılma, ses ve altyazı için belirtiye göre çözümler.
+- [İlk addon'unu kur](/docs/addons-catalogs#installing-an-addon). Bir manifest URL'i yapıştır ve içerik satırlarını görünür kıl.
+- [Nuvio eşitlemeyi kur](/docs/sync-accounts#nuvio-cross-device-sync). Kütüphane, profil, koleksiyon ve ilerlemeyi cihazlar arasında hizala.
+- [Koleksiyon oluştur](/docs/library-collections#creating-a-collection). Özel kütüphane bölümleri kur, istersen ana ekrana sabitle.
+- [Oynatma sorunlarını çöz](/docs/troubleshooting#nothing-plays-when-i-press-play). Boş kaynak listesi, takılma, ses ve altyazı için belirtiye göre çözümler.
 :::
 
 :::info

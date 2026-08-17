@@ -25,17 +25,17 @@ Grab the file for your platform from the release page and install it.
 | Android | `fluxa-x.x.x.apk` |
 | LG webOS TV | `fluxa-x.x.x.ipk` |
 
-**Windows, macOS, Linux:** from the [fluxa-desktop releases page](https://github.com/FluxaMedia/fluxa-desktop/releases/latest). Run the Windows installer and follow the prompts (no admin rights needed); open the macOS .dmg and drag Fluxa into Applications (approve it under System Settings → Privacy & Security → *Open Anyway* if blocked); install the Linux .deb/.rpm with your package manager, or run the .AppImage directly — mpv is bundled, nothing else to install.
+**Windows, macOS, Linux:** from the [fluxa-desktop releases page](https://github.com/FluxaMedia/fluxa-desktop/releases/latest). Run the Windows installer and follow the prompts (no admin rights needed); open the macOS .dmg and drag Fluxa into Applications (approve it under System Settings → Privacy & Security → *Open Anyway* if blocked); install the Linux .deb/.rpm with your package manager, or run the .AppImage directly. Mpv is bundled, nothing else to install.
 
 **Android:** download the APK from the [fluxa-android releases page](https://github.com/KhooLy/Fluxa/releases/latest) and install it. You may need to allow "install unknown apps" for your browser or file manager first.
 
-**Web / webOS:** the web app needs no install — open it in any browser. For LG TVs, get the native app from the [fluxa-web releases page](https://github.com/FluxaMedia/fluxa-web/releases/latest) and sideload it via the TV's Developer Mode app. See [webOS install notes](/docs/platform-install#webos) for the full walkthrough.
+**Web / webOS:** the web app needs no install. Open it in any browser. For LG TVs, get the native app from the [fluxa-web releases page](https://github.com/FluxaMedia/fluxa-web/releases/latest) and sideload it via the TV's Developer Mode app. See [webOS install notes](/docs/platform-install#webos) for the full walkthrough.
 
 ## First launch
 
-When you open Fluxa for the first time, you'll be asked to create a profile. Give it a name and pick an avatar — that's all you need to get in. You can create more profiles later, and each one has its own completely separate library and settings.
+When you open Fluxa for the first time, you'll be asked to create a profile. Give it a name and pick an avatar. That's all you need to get in. You can create more profiles later, and each one has its own completely separate library and settings.
 
-After your profile is set up you'll see the home screen. It will look mostly empty at first, and that's normal — you need to add an addon before anything shows up.
+After your profile is set up you'll see the home screen. It will look mostly empty at first, and that's normal. You need to add an addon before anything shows up.
 
 <div class="ui-shot" aria-hidden="true">
   <div class="ui-shot-bar">
@@ -59,7 +59,7 @@ After your profile is set up you'll see the home screen. It will look mostly emp
 
 ## Adding your first addon
 
-Addons are what bring content into Fluxa. Each addon has a link — a web address ending in `/manifest.json` — that you paste into Fluxa to install it.
+Addons are what bring content into Fluxa. Each addon has a link, a web address ending in `/manifest.json`, that you paste into Fluxa to install it.
 
 ```
 https://example-addon.example/manifest.json
@@ -70,7 +70,7 @@ To add one, go to **Settings → Addons**, paste the addon link into the field, 
 You can install as many addons as you like. Each one can add more content, more stream sources, or subtitles on top of what you already have.
 
 :::info
-**Where do I find addon links?** Search for "Stremio addon list" — Fluxa uses the same addon format. Community-maintained lists are easy to find online.
+**Where do I find addon links?** Search for "Stremio addon list". Fluxa uses the same addon format. Community-maintained lists are easy to find online.
 :::
 
 ## Finding something to watch
@@ -81,7 +81,7 @@ Browse the home screen rows, use the **Search** screen to look for a specific ti
 
 When you tap Play, Fluxa asks your addons for available sources and either shows you a list to choose from or starts automatically, depending on your settings. Once a source is picked, the video starts playing in the built-in player.
 
-If one source doesn't work, you can switch to another without going back to the detail page — there's a source button in the player itself.
+If one source doesn't work, you can switch to another without going back to the detail page. There's a source button in the player itself.
 
 ## Screens at a glance
 
@@ -92,4 +92,4 @@ If one source doesn't work, you can switch to another without going back to the 
 | Discover | Browse one catalog at a time with genre and type filters. |
 | Library | Your saved titles, continue watching, and collections. |
 | Calendar | Upcoming episode dates for shows in your watchlist. |
-| Settings | Everything configurable — playback, appearance, accounts, addons. |
+| Settings | Everything configurable. Playback, appearance, accounts, addons. |

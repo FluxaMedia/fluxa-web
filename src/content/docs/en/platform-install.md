@@ -29,4 +29,4 @@ Download the APK from official releases. Android may ask for permission to insta
 
 Fluxa also runs as a native app on LG webOS TVs, built from the same web codebase. Enable Developer Mode on your TV through the LG Developer Mode app, note the IP address and passphrase it shows, then use it to sideload the `.ipk` package from the latest release.
 
-Developer Mode installs expire after a set number of days unless the TV stays signed in with a paired LG developer account — reinstall if the app disappears.
+Developer Mode installs expire after a set number of days unless the TV stays signed in with a paired LG developer account. Reinstall if the app disappears.
