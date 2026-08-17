@@ -16,12 +16,9 @@ const platforms = [
 ];
 
 const connect = [
-  { file: 'trakt.svg', name: 'Trakt' },
-  { file: 'simkl.svg', name: 'Simkl' },
-  { file: 'mal.svg', name: 'MyAnimeList' },
-  { file: 'anilist.svg', name: 'AniList' },
-  { file: 'stremio.svg', name: 'Stremio' },
-  { file: 'nuvio.png', name: 'Nuvio' },
+  'Trakt', 'Simkl', 'MyAnimeList', 'AniList', 'Stremio', 'Nuvio',
+  'TheIntroDB', 'IntroDB', 'SkipDB', 'Aniskip',
+  'MDBList', 'TMDB', 'IMDb', 'OMDb',
 ];
 
 const shown = [
@@ -207,13 +204,11 @@ const description = 'Free, open-source media player for Windows, macOS, Linux, A
   </div>
 </section>
 
-<section class="connect" aria-label="Services Fluxa connects to">
-  <p class="connect-label">Connect anything</p>
+<section class="connect" aria-label="Services Fluxa works with">
+  <p class="connect-label">Works with</p>
   <div class="marquee">
     <div class="marquee-track">
-      {[0, 1, 2, 3, 4, 5].map(() => connect.map(logo => (
-        <img src={url('/logos/' + logo.file)} alt={logo.name} width="32" height="32" />
-      )))}
+      {[0, 1].map(() => connect.map(name => <span>{name}</span>))}
     </div>
   </div>
 </section>
