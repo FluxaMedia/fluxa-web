@@ -1,8 +1,7 @@
 const REPOS = [
   { id: 'fluxa-core', slug: 'FluxaMedia/fluxa-core', release: false },
   { id: 'fluxa-desktop', slug: 'FluxaMedia/fluxa-desktop', release: true },
-  { id: 'fluxa-android', slug: 'KhooLy/Fluxa', release: true },
-  { id: 'fluxa-web', slug: 'FluxaMedia/fluxa-web', release: true },
+  { id: 'fluxa', slug: 'FluxaMedia/fluxa', release: true },
 ];
 
 const GH_TTL = 60 * 60 * 1000;

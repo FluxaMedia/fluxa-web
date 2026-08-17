@@ -3,8 +3,7 @@ import { url } from '../lib/nav';
 import Icon from '../components/Icon.astro';
 
 const REPO_DESKTOP = 'https://github.com/FluxaMedia/fluxa-desktop';
-const REPO_ANDROID = 'https://github.com/KhooLy/Fluxa';
-const REPO_WEB = 'https://github.com/FluxaMedia/fluxa-web';
+const REPO_MOBILE = 'https://github.com/FluxaMedia/fluxa';
 const REPO_CORE = 'https://github.com/FluxaMedia/fluxa-core';
 
 const platforms = [
@@ -12,7 +11,8 @@ const platforms = [
   { icon: 'apple', name: 'macOS' },
   { icon: 'linux', name: 'Linux' },
   { icon: 'android', name: 'Android' },
-  { icon: 'tv', name: 'webOS' },
+  { icon: 'apple', name: 'iOS' },
+  { icon: 'tv', name: 'TV' },
 ];
 
 const connect = [
@@ -59,17 +59,19 @@ const features = [
 
 const builds = [
   { icon: 'windows', name: 'Windows', req: 'Windows 10 or later', file: '.exe', href: REPO_DESKTOP + '/releases/latest' },
-  { icon: 'apple', name: 'macOS', req: 'macOS 11 or later, universal', file: '.dmg', href: REPO_DESKTOP + '/releases/latest' },
+  { icon: 'apple', name: 'macOS', req: 'macOS 11 or later', file: '.dmg', href: REPO_DESKTOP + '/releases/latest' },
   { icon: 'linux', name: 'Linux', req: 'mpv bundled', file: '.deb / .rpm / AppImage', href: REPO_DESKTOP + '/releases/latest' },
-  { icon: 'android', name: 'Android', req: 'Phones and tablets', file: '.apk', href: REPO_ANDROID + '/releases/latest' },
-  { icon: 'tv', name: 'webOS', req: 'LG TVs via Developer Mode', file: 'Get it', href: REPO_WEB + '/releases/latest' },
+  { icon: 'android', name: 'Android', req: 'Phones and tablets', file: '.apk', href: REPO_MOBILE + '/releases/latest' },
+  { icon: 'apple', name: 'iOS', req: 'iPhone and iPad', file: 'Get it', href: REPO_MOBILE + '/releases/latest' },
+  { icon: 'android', name: 'Android TV', req: 'Set-top boxes and TVs', file: '.apk', href: REPO_MOBILE + '/releases/latest' },
+  { icon: 'apple', name: 'tvOS', req: 'Apple TV', file: 'Get it', href: REPO_MOBILE + '/releases/latest' },
+  { icon: 'tv', name: 'webOS', req: 'LG TVs via Developer Mode', file: 'Get it', href: REPO_DESKTOP + '/releases/latest' },
 ];
 
 const repos = [
   { id: 'fluxa-core', lang: 'Rust', href: REPO_CORE, desc: 'Shared library. Addon resolution, streaming, library state, search, and playback policy.' },
-  { id: 'fluxa-desktop', lang: 'TypeScript, Rust', href: REPO_DESKTOP, desc: 'Desktop app on Tauri and React for Windows, macOS, and Linux.' },
-  { id: 'fluxa-android', lang: 'Kotlin', href: REPO_ANDROID, desc: 'Android app for phones and tablets.' },
-  { id: 'fluxa-web', lang: 'TypeScript', href: REPO_WEB, desc: 'Browser client, also packaged as a native app for LG webOS.' },
+  { id: 'fluxa-desktop', lang: 'TypeScript, Rust', href: REPO_DESKTOP, desc: 'Windows, macOS, and Linux, plus the browser build and the LG webOS app.' },
+  { id: 'fluxa', lang: 'Kotlin, Swift', href: REPO_MOBILE, desc: 'iOS, Android, Android TV, and tvOS.' },
 ];
 
 const views = [
@@ -241,7 +243,7 @@ const description = 'Free, open-source media player for Windows, macOS, Linux, A
 
 <section class="section wrap" id="source">
   <h2>Source</h2>
-  <p class="lead">Four repositories: one shared Rust core and three platform apps built on it.</p>
+  <p class="lead">Three repositories: one shared Rust core and two app repos built on it.</p>
   <div class="section-body rows">
     {repos.map(r => (
       <a class="row" id={'repo-' + r.id} href={r.href} target="_blank" rel="noopener">
@@ -291,8 +293,7 @@ const description = 'Free, open-source media player for Windows, macOS, Linux, A
       <a href={url('/account')}>Account</a>
       <a href={REPO_CORE} target="_blank" rel="noopener">Core</a>
       <a href={REPO_DESKTOP} target="_blank" rel="noopener">Desktop</a>
-      <a href={REPO_ANDROID} target="_blank" rel="noopener">Android</a>
-      <a href={REPO_WEB} target="_blank" rel="noopener">Web</a>
+      <a href={REPO_MOBILE} target="_blank" rel="noopener">Mobile & TV</a>
       <a href={REPO_DESKTOP + '/issues'} target="_blank" rel="noopener">Issues</a>
     </div>
   </div>
