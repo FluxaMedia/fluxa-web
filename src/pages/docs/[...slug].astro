@@ -1,33 +1,23 @@
 ---
-import { getCollection, render } from 'astro:content';
+import { render } from 'astro:content';
 import DocsLayout from '../../layouts/DocsLayout.astro';
-import { docsNav } from '../../lib/nav';
-import { lastUpdated } from '../../lib/gitdate';
+import { docPaths } from '../../lib/docpage';
+import { DEFAULT_LOCALE } from '../../i18n/ui';
 
 export async function getStaticPaths() {
-  const groups = await docsNav();
-  const flat = groups.flatMap(g => g.items);
-  return flat.map((entry, i) => ({
-    params: { slug: entry.id },
-    props: { entry, prev: flat[i - 1], next: flat[i + 1] },
-  }));
+  return docPaths(DEFAULT_LOCALE);
 }
 
-const { entry, prev, next } = Astro.props;
+const { entry, ...props } = Astro.props;
 const { Content, headings } = await render(entry);
-const file = `src/content/docs/${entry.id}.md`;
 ---
 <DocsLayout
   title={entry.data.title}
   description={entry.data.description}
   section={entry.data.section}
   badges={entry.data.badges}
-  slug={entry.id}
   headings={headings}
-  updated={lastUpdated(file)}
-  editPath={file}
-  prev={prev}
-  next={next}
+  {...props}
 >
   <Content />
 </DocsLayout>

@@ -1,0 +1,93 @@
+---
+import { getEntry, render } from 'astro:content';
+import Topbar from './Topbar.astro';
+import Sidebar from './Sidebar.astro';
+import { url, localePath } from '../lib/nav';
+import { t, LOCALES, localeList, DEFAULT_LOCALE } from '../i18n/ui';
+
+const { locale = DEFAULT_LOCALE } = Astro.props;
+const entry = (await getEntry('home', locale)) ?? (await getEntry('home', DEFAULT_LOCALE))!;
+const translated = entry.id === locale;
+const { Content } = await render(entry);
+const { title, description, tagline, buttons, shotTitle } = entry.data;
+---
+<!DOCTYPE html>
+<html lang={locale} dir={LOCALES[locale].dir} data-base={url('')} data-locale={locale} data-fallback={String(!translated)}>
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>{title}</title>
+<meta name="description" content={description} />
+<meta property="og:type" content="website" />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={url('/logo.png')} />
+<meta name="twitter:card" content="summary" />
+<link rel="icon" type="image/png" sizes="48x48" href={url('/favicon.png')} />
+<link rel="apple-touch-icon" href={url('/logo.png')} />
+<link rel="stylesheet" href={url('/style.css')} />
+{localeList.map(code => (
+  <link rel="alternate" hreflang={code} href={new URL(url(localePath(code, '/docs')), Astro.site)} />
+))}
+<link rel="alternate" hreflang="x-default" href={new URL(url('/docs'), Astro.site)} />
+</head>
+<body>
+<Topbar current="docs" locale={locale} path="/docs" />
+<div class="layout">
+<div class="overlay" id="overlay"></div>
+<Sidebar locale={locale} />
+<main class="main">
+<div class="content docs-home">
+
+<div class="docs-hero-grid">
+  <div class="home-hero">
+    <div class="logo-row">
+      <img src={url('/logo.png')} alt="Fluxa" />
+      <h1>{title}</h1>
+    </div>
+    <p class="sub">{tagline}</p>
+    <div class="btn-row">
+      {buttons.map(b => (
+        <a class:list={['btn', b.primary ? 'btn-primary' : 'btn-ghost']} href={url(localePath(locale, b.href))}>{b.label}</a>
+      ))}
+    </div>
+  </div>
+  <div class="ui-shot" aria-hidden="true">
+    <div class="ui-shot-bar">
+      <span class="ui-shot-dot"></span>
+      <span class="ui-shot-dot"></span>
+      <span class="ui-shot-dot"></span>
+      <span class="ui-shot-title">{shotTitle}</span>
+    </div>
+    <div class="ui-shot-body">
+      <div class="ui-shot-hero"></div>
+      <div class="ui-shot-row-title"></div>
+      <div class="ui-shot-posters">
+        <span class="ui-shot-poster"></span>
+        <span class="ui-shot-poster"></span>
+        <span class="ui-shot-poster"></span>
+        <span class="ui-shot-poster"></span>
+        <span class="ui-shot-poster"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+{!translated && (
+  <div class="callout callout-info">
+    <i data-lucide="languages"></i>
+    <div>
+      <strong>{t(locale, 'docs.untranslatedTitle')}</strong> {t(locale, 'docs.untranslatedBody')}
+    </div>
+  </div>
+)}
+
+<Content />
+
+</div>
+</main>
+</div>
+<script is:inline src={url('/lucide.min.js')}></script>
+<script is:inline src={url('/docs-client.js')}></script>
+</body>
+</html>

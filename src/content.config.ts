@@ -1,7 +1,7 @@
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
 
-export const SECTIONS = ['Start', 'How it works', 'Core workflows', 'Operations', 'Reference'] as const;
+export const SECTIONS = ['start', 'how-it-works', 'core-workflows', 'operations', 'reference'] as const;
 
 const docs = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/docs' }),
@@ -16,4 +16,15 @@ const docs = defineCollection({
   }),
 });
 
-export const collections = { docs };
+const home = defineCollection({
+  loader: glob({ pattern: '*.md', base: './src/content/home' }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    tagline: z.string(),
+    buttons: z.array(z.object({ label: z.string(), href: z.string(), primary: z.boolean().default(false) })).default([]),
+    shotTitle: z.string().default('Fluxa Home'),
+  }),
+});
+
+export const collections = { docs, home };

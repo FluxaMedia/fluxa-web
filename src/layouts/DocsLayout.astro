@@ -2,18 +2,27 @@
 import Topbar from '../components/Topbar.astro';
 import Sidebar from '../components/Sidebar.astro';
 import Toc from '../components/Toc.astro';
-import { url } from '../lib/nav';
+import { url, localePath } from '../lib/nav';
+import { t, LOCALES, localeList, DEFAULT_LOCALE } from '../i18n/ui';
 
-const { title, description, section, slug, headings = [], badges = [], updated, editPath, prev, next } = Astro.props;
-const pageTitle = `${title} - Fluxa Docs`;
-const issueUrl = `https://github.com/FluxaMedia/fluxa-docs-web/issues/new?title=${encodeURIComponent('Docs feedback: ' + title)}`;
-const editUrl = `https://github.com/FluxaMedia/fluxa-docs-web/edit/master/${editPath}`;
+const {
+  title, description, section, slug, locale = DEFAULT_LOCALE,
+  headings = [], badges = [], updated, editPath, prev, next,
+  translated = true, outdated = false,
+} = Astro.props;
+
+const pageTitle = `${title} - ${t(locale, 'docs.title')}`;
+const path = `/docs/${slug}`;
+const repo = 'https://github.com/FluxaMedia/fluxa-docs-web';
+const issueUrl = `${repo}/issues/new?title=${encodeURIComponent('Docs feedback: ' + title)}`;
+const editUrl = `${repo}/edit/master/${editPath}`;
+const translateUrl = `${repo}/new/master/src/content/docs/${locale}?filename=${slug}.md`;
 const formatted = updated
-  ? new Date(updated).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+  ? new Date(updated).toLocaleDateString(locale === 'en' ? 'en-US' : locale, { month: 'short', day: 'numeric', year: 'numeric' })
   : '';
 ---
 <!DOCTYPE html>
-<html lang="en" data-base={url('')}>
+<html lang={locale} dir={LOCALES[locale].dir} data-base={url('')} data-locale={locale} data-fallback={String(!translated)}>
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -27,12 +36,16 @@ const formatted = updated
 <link rel="icon" type="image/png" sizes="48x48" href={url('/favicon.png')} />
 <link rel="apple-touch-icon" href={url('/logo.png')} />
 <link rel="stylesheet" href={url('/style.css')} />
+{localeList.map(code => (
+  <link rel="alternate" hreflang={code} href={new URL(url(localePath(code, path)), Astro.site)} />
+))}
+<link rel="alternate" hreflang="x-default" href={new URL(url(path), Astro.site)} />
 </head>
 <body>
-<Topbar current="docs" />
+<Topbar current="docs" locale={locale} path={path} />
 <div class="layout">
 <div class="overlay" id="overlay"></div>
-<Sidebar slug={slug} />
+<Sidebar slug={slug} locale={locale} />
 <main class="main">
 <div class="content">
 
@@ -40,30 +53,50 @@ const formatted = updated
     <h1>{title}</h1>
     <p>{description}</p>
     <div class="doc-meta">
-      <span>{section}</span>
-      {formatted && <span>Updated {formatted}</span>}
+      <span>{t(locale, `section.${section}` as const)}</span>
+      {formatted && <span>{t(locale, 'docs.updated')} {formatted}</span>}
       {badges.map(b => <span class="platform-badge">{b}</span>)}
     </div>
   </div>
 
+  {!translated && (
+    <div class="callout callout-info" lang={DEFAULT_LOCALE === locale ? undefined : locale}>
+      <i data-lucide="languages"></i>
+      <div>
+        <strong>{t(locale, 'docs.untranslatedTitle')}</strong> {t(locale, 'docs.untranslatedBody')}
+        <a href={translateUrl} target="_blank" rel="noopener noreferrer">{t(locale, 'docs.helpTranslate')}</a>
+      </div>
+    </div>
+  )}
+
+  {translated && outdated && (
+    <div class="callout callout-warning">
+      <i data-lucide="alert-triangle"></i>
+      <div>
+        <strong>{t(locale, 'docs.outdatedTitle')}</strong> {t(locale, 'docs.outdatedBody')}
+        <a href={editUrl} target="_blank" rel="noopener noreferrer">{t(locale, 'docs.edit')}</a>
+      </div>
+    </div>
+  )}
+
   <slot />
 
   <nav class="doc-pager" aria-label="Documentation pagination">
-    {prev ? <a class="pager-card prev" href={url(`/docs/${prev.id}`)}><span>Previous</span><strong>{prev.data.title}</strong></a> : <span></span>}
-    {next ? <a class="pager-card next" href={url(`/docs/${next.id}`)}><span>Next</span><strong>{next.data.title}</strong></a> : <span></span>}
+    {prev ? <a class="pager-card prev" href={url(localePath(locale, `/docs/${prev.slug}`))}><span>{t(locale, 'docs.previous')}</span><strong>{prev.entry.data.title}</strong></a> : <span></span>}
+    {next ? <a class="pager-card next" href={url(localePath(locale, `/docs/${next.slug}`))}><span>{t(locale, 'docs.next')}</span><strong>{next.entry.data.title}</strong></a> : <span></span>}
   </nav>
 
   <div class="doc-feedback">
     <div>
-      <strong>Was this page useful?</strong>
-      <p>Report outdated steps, missing screenshots, or unclear wording.</p>
+      <strong>{t(locale, 'docs.useful')}</strong>
+      <p>{t(locale, 'docs.usefulSub')}</p>
     </div>
-    <a class="btn btn-ghost" href={editUrl} target="_blank" rel="noopener noreferrer">Edit this page</a>
-    <a class="btn btn-ghost" href={issueUrl} target="_blank" rel="noopener noreferrer">Report an issue</a>
+    <a class="btn btn-ghost" href={editUrl} target="_blank" rel="noopener noreferrer">{t(locale, 'docs.edit')}</a>
+    <a class="btn btn-ghost" href={issueUrl} target="_blank" rel="noopener noreferrer">{t(locale, 'docs.report')}</a>
   </div>
 
 </div>
-<Toc headings={headings} />
+<Toc headings={headings} locale={locale} />
 </main>
 </div>
 <script is:inline src={url('/lucide.min.js')}></script>

@@ -1,29 +1,36 @@
 ---
-import { docsNav, url } from '../lib/nav';
-const groups = await docsNav();
-const { slug } = Astro.props;
+import { docsNav, url, docUrl } from '../lib/nav';
+import { t, DEFAULT_LOCALE } from '../i18n/ui';
+
+const { slug, locale = DEFAULT_LOCALE } = Astro.props;
+const groups = await docsNav(locale);
 ---
 <aside class="sidebar" id="sidebar">
-  <a class="sidebar-logo" href={url('/docs')}><img src={url('/logo.png')} alt="Fluxa" /><span>Fluxa Docs<small>Guides and reference</small></span></a>
+  <a class="sidebar-logo" href={url(locale === DEFAULT_LOCALE ? '/docs' : `/${locale}/docs`)}><img src={url('/logo.png')} alt="Fluxa" /><span>{t(locale, 'docs.title')}<small>{t(locale, 'docs.tagline')}</small></span></a>
   <div class="search-wrap">
     <i data-lucide="search" class="search-icon"></i>
-    <input type="search" id="search-input" placeholder="Search docs..." aria-label="Search documentation" autocomplete="off" />
+    <input type="search" id="search-input" placeholder={t(locale, 'docs.search')} aria-label={t(locale, 'docs.searchLabel')} autocomplete="off" />
     <span class="search-kbd">/</span>
   </div>
-  <div id="search-results" class="search-results"></div>
+  <div id="search-results" class="search-results" data-empty={t(locale, 'docs.noMatches')} data-empty-hint={t(locale, 'docs.noMatchesHint')}></div>
   <nav>
     {groups.map(group => {
-      const open = group.items.some(item => item.id === slug);
+      const open = group.items.some(item => item.slug === slug);
       return (
         <>
           <button type="button" class="nav-group nav-group-toggle" aria-expanded={String(open)}>
-            {group.section}
+            {t(locale, `section.${group.section}` as const)}
             <i data-lucide="chevron-down" class="nav-group-chevron"></i>
           </button>
           <div class:list={['nav-group-links', open && 'open']}>
             {group.items.map(item => (
-              <a href={url(`/docs/${item.id}`)} class={item.id === slug ? 'active' : ''} aria-current={item.id === slug ? 'page' : undefined}>
-                <i data-lucide={item.data.icon} class="nav-icon"></i>{item.data.title}
+              <a
+                href={docUrl(locale, item.slug)}
+                class={item.slug === slug ? 'active' : ''}
+                aria-current={item.slug === slug ? 'page' : undefined}
+              >
+                <i data-lucide={item.entry.data.icon} class="nav-icon"></i>{item.entry.data.title}
+                {!item.translated && <span class="nav-untranslated" title="Not translated yet">EN</span>}
               </a>
             ))}
           </div>

@@ -1,0 +1,13 @@
+---
+import DocsHome from '../../../components/DocsHome.astro';
+import { localeList, DEFAULT_LOCALE } from '../../../i18n/ui';
+
+export function getStaticPaths() {
+  return localeList
+    .filter(code => code !== DEFAULT_LOCALE)
+    .map(lang => ({ params: { lang }, props: { locale: lang } }));
+}
+
+const { locale } = Astro.props;
+---
+<DocsHome locale={locale} />

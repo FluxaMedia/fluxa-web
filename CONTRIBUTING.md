@@ -117,3 +117,62 @@ Then open the printed URL. Pages reload as you save.
 
 Before opening a pull request, `npm run build` should finish without errors — it fails on a missing
 frontmatter field or an unknown `section`, which catches most mistakes.
+
+# Translating
+
+Documentation lives under `src/content/docs/<locale>/`. English is the source language and is always
+complete; every other locale is a partial copy that falls back to English where a page is missing.
+
+## Translating a page
+
+Copy the English file to your locale, keeping the same file name, and translate it:
+
+```bash
+cp src/content/docs/en/playback.md src/content/docs/tr/playback.md
+```
+
+The file name is the URL, so it must not change: `tr/playback.md` serves `/tr/docs/playback`.
+
+In the frontmatter, translate `title`, `description`, and `badges`. Leave `section`, `icon`, and `order`
+exactly as they are — `section` is a key that maps to a translated label, not display text.
+
+```yaml
+---
+title: "Oynatma"
+description: "Fluxa bir akışı nasıl oynatır ve oynatmadığında ne değiştirmelisin."
+section: core-workflows   # do not translate
+icon: "play-circle"       # do not translate
+order: 3                  # do not translate
+badges: ["Masaüstü", "Android", "mpv"]
+---
+```
+
+In the body, translate the prose and the headings. Leave link paths alone — write `/docs/playback` and
+the locale prefix is added automatically, so a Turkish page links to `/tr/docs/playback` on its own.
+Directive names stay in English (`:::warning`, `:::faq[...]`); only the text inside them is translated.
+
+Heading anchors come from the translated heading text, so a cross-page link to a specific section
+(`/docs/platform-install#webos`) resolves against the English heading until that page is translated too.
+Translate whole pages rather than half of one, and this stays consistent.
+
+## Checking what needs work
+
+```bash
+npm run translations
+```
+
+This lists, per locale, how many pages are done, which are missing, and which are **older than their
+English source** — those have drifted and need a pass. Pages that have not been translated yet are marked
+`EN` in the sidebar and show a notice at the top explaining that the reader is seeing English.
+
+## Adding a new language
+
+1. Add the locale to `LOCALES` and the `strings` table in `src/i18n/ui.ts`. Every key in the English
+   block needs a translation; missing keys fall back to English rather than breaking the build.
+2. Add the locale code to `locales` in `astro.config.mjs`.
+3. Create `src/content/docs/<locale>/` and translate at least one page.
+4. Optionally translate the docs landing page by copying `src/content/home/en.md` to
+   `src/content/home/<locale>.md`.
+
+The language picker in the top bar, the per-language search index, and the `hreflang` tags are all
+generated from that list — there is nothing else to register.

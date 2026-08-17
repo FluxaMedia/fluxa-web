@@ -6,6 +6,11 @@ export default defineConfig({
   site: 'https://fluxamedia.github.io',
   base: '/fluxa-docs-web',
   trailingSlash: 'ignore',
+  i18n: {
+    defaultLocale: 'en',
+    locales: ['en', 'tr'],
+    routing: { prefixDefaultLocale: false },
+  },
   markdown: {
     remarkPlugins: [remarkDirective, remarkFluxaDirectives, remarkBaseLinks],
     shikiConfig: { theme: 'github-dark-default', wrap: true },

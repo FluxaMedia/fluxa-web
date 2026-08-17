@@ -1,0 +1,23 @@
+---
+import { LOCALES, localeList, t, DEFAULT_LOCALE } from '../i18n/ui';
+import { url, localePath } from '../lib/nav';
+
+const { locale = DEFAULT_LOCALE, path = '/docs' } = Astro.props;
+---
+<div class="lang-picker">
+  <button type="button" class="lang-btn" id="lang-btn" aria-haspopup="true" aria-expanded="false" aria-label={t(locale, 'nav.language')}>
+    <i data-lucide="languages" style="width:14px;height:14px"></i>
+    <span>{LOCALES[locale].label}</span>
+  </button>
+  <div class="lang-menu" id="lang-menu">
+    {localeList.map(code => (
+      <a
+        href={url(localePath(code, path))}
+        hreflang={code}
+        lang={code}
+        class={code === locale ? 'active' : ''}
+        aria-current={code === locale ? 'true' : undefined}
+      >{LOCALES[code].label}</a>
+    ))}
+  </div>
+</div>

@@ -1,10 +1,11 @@
 ---
-const { headings = [] } = Astro.props;
+import { t, DEFAULT_LOCALE } from '../i18n/ui';
+const { headings = [], locale = DEFAULT_LOCALE } = Astro.props;
 const items = headings.filter(h => h.depth === 2);
 ---
 {items.length > 1 && (
-  <nav class="toc-rail" aria-label="On this page">
-    <div class="toc-rail-title">On this page</div>
+  <nav class="toc-rail" aria-label={t(locale, 'docs.onThisPage')}>
+    <div class="toc-rail-title">{t(locale, 'docs.onThisPage')}</div>
     {items.map(h => <a href={`#${h.slug}`}>{h.text}</a>)}
   </nav>
 )}

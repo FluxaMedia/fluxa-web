@@ -6,7 +6,9 @@ built with [Astro](https://astro.build) and deployed to GitHub Pages.
 ## Layout
 
 ```
-src/content/docs/     documentation pages (Markdown)
+src/content/docs/     documentation pages (Markdown), one directory per language
+src/content/home/     docs landing page copy, one file per language
+src/i18n/             interface strings and the locale list
 src/pages/            landing page, docs home, account panel, search index endpoint
 src/components/       topbar, sidebar, on-this-page rail
 src/layouts/          docs page shell
@@ -24,12 +26,17 @@ npm install
 npm run dev      # local server with live reload
 npm run build    # static output in dist/
 npm run preview  # serve the built output
+npm run translations  # per-language coverage and stale-translation report
 ```
 
 ## Editing documentation
 
-See [CONTRIBUTING.md](CONTRIBUTING.md). In short: every page is a Markdown file in `src/content/docs/`,
-and adding one is enough for it to appear in the sidebar and in search.
+See [CONTRIBUTING.md](CONTRIBUTING.md). In short: every page is a Markdown file in
+`src/content/docs/en/`, and adding one is enough for it to appear in the sidebar and in search.
+
+Translations go in `src/content/docs/<locale>/` under the same file name. English is the source language;
+any page without a translation falls back to English and is marked in the sidebar, so a language can be
+started without translating everything at once.
 
 ## Deployment
 

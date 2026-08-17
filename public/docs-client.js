@@ -1,5 +1,8 @@
 (function () {
-const BASE = document.documentElement.dataset.base || '';
+const root = document.documentElement;
+const BASE = root.dataset.base || '';
+const LOCALE = root.dataset.locale || 'en';
+const PREFIX = LOCALE === 'en' ? '' : '/' + LOCALE;
 
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c =>
   ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
@@ -90,7 +93,7 @@ function initSearch() {
   let selected = -1;
 
   const load = async () => {
-    if (!index) index = await (await fetch(BASE + '/search.json')).json();
+    if (!index) index = await (await fetch(BASE + PREFIX + '/search.json')).json();
     return index;
   };
 
@@ -99,12 +102,12 @@ function initSearch() {
     if (!matches.length) {
       results.innerHTML =
         '<div class="search-empty">' +
-        '<div class="search-empty-title">No matches</div>' +
-        '<div class="search-empty-sub">Try a shorter or different term.</div>' +
+        `<div class="search-empty-title">${esc(results.dataset.empty || 'No matches')}</div>` +
+        `<div class="search-empty-sub">${esc(results.dataset.emptyHint || 'Try a shorter or different term.')}</div>` +
         '</div>';
     } else {
       results.innerHTML = matches.slice(0, 8).map(r =>
-        `<a class="search-result" href="${BASE}/docs/${esc(r.slug)}${r.anchor ? '#' + esc(r.anchor) : ''}">` +
+        `<a class="search-result" href="${BASE}${PREFIX}/docs/${esc(r.slug)}${r.anchor ? '#' + esc(r.anchor) : ''}">` +
           `<div class="search-result-title">${highlight(r.title, terms)}</div>` +
           `<div class="search-result-page">${esc(r.pageTitle)}</div>` +
           `<div class="search-result-snippet">${highlight(r.excerpt, terms)}</div>` +
@@ -177,6 +180,30 @@ function initSearch() {
   });
 }
 
+function initFallbackLinks() {
+  if (root.dataset.fallback !== 'true' || !PREFIX) return;
+  document.querySelectorAll('.content a[href]').forEach(a => {
+    const href = a.getAttribute('href');
+    if (!href.startsWith(BASE + '/docs/')) return;
+    a.setAttribute('href', BASE + PREFIX + href.slice(BASE.length));
+  });
+}
+
+function initLanguagePicker() {
+  const btn = document.getElementById('lang-btn');
+  const menu = document.getElementById('lang-menu');
+  if (!btn || !menu) return;
+  btn.addEventListener('click', e => {
+    e.stopPropagation();
+    const open = menu.classList.toggle('open');
+    btn.setAttribute('aria-expanded', String(open));
+  });
+  document.addEventListener('click', () => {
+    menu.classList.remove('open');
+    btn.setAttribute('aria-expanded', 'false');
+  });
+}
+
 function initHeadingAnchors() {
   document.querySelectorAll('.content h2[id], .content h3[id]').forEach(h => {
     const a = document.createElement('a');
@@ -238,6 +265,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initTopbarMenu();
   initFaq();
   initSearch();
+  initLanguagePicker();
+  initFallbackLinks();
   initHeadingAnchors();
   initTables();
   initCopyButtons();
