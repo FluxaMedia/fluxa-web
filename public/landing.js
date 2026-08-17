@@ -163,3 +163,39 @@ function initSwitch() {
 }
 
 initSwitch();
+
+function initDemo() {
+  const video = document.getElementById('demo-video');
+  const skip = document.getElementById('demo-skip');
+  const fill = document.getElementById('demo-fill');
+  if (!video || !skip) return;
+
+  const INTRO_END = 5.2;
+
+  skip.hidden = false;
+
+  const paint = () => {
+    const shown = video.currentTime < INTRO_END;
+    skip.classList.toggle('on', shown);
+    skip.tabIndex = shown ? 0 : -1;
+    if (video.duration) fill.style.width = (video.currentTime / video.duration) * 100 + '%';
+  };
+
+  video.addEventListener('timeupdate', paint);
+  video.addEventListener('loadedmetadata', paint);
+  paint();
+  skip.addEventListener('click', () => {
+    video.currentTime = INTRO_END;
+    paint();
+  });
+
+  const observer = new IntersectionObserver(entries => {
+    for (const entry of entries) {
+      if (entry.isIntersecting) video.play().catch(() => {});
+      else video.pause();
+    }
+  }, { threshold: 0.35 });
+  observer.observe(video);
+}
+
+initDemo();

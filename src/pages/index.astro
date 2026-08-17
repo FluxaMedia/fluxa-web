@@ -15,20 +15,31 @@ const platforms = [
   { icon: 'tv', name: 'webOS' },
 ];
 
+const connect = [
+  { file: 'trakt.svg', name: 'Trakt' },
+  { file: 'simkl.svg', name: 'Simkl' },
+  { file: 'mal.svg', name: 'MyAnimeList' },
+  { file: 'anilist.svg', name: 'AniList' },
+  { file: 'stremio.svg', name: 'Stremio' },
+  { file: 'nuvio.png', name: 'Nuvio' },
+];
+
 const shown = [
   {
+    id: 'sources',
     name: 'You pick the sources',
     body: 'Fluxa has no catalogue of its own. Paste a Stremio-compatible manifest URL and that addon\u2019s catalogs appear on your home screen straight away. Install as many as you like, turn them on and off per profile, and drag them into the order you want them searched.',
     points: ['Any Stremio-compatible addon', 'Reorder to set search priority', 'Enable or disable without uninstalling'],
     shot: 'addons.webp',
-    w: 1200,
-    h: 450,
+    w: 1168,
+    h: 480,
     alt: 'Fluxa add-on settings with a manifest URL field and two installed addons',
   },
   {
+    id: 'profiles',
     name: 'A profile for everyone',
     body: 'Up to six profiles on one install, each with its own addons, library, collections, and linked accounts. Nobody\u2019s watch history bleeds into anyone else\u2019s, and any profile can be locked behind a PIN.',
-    points: ['Separate library and addons per profile', 'Optional PIN lock', 'Syncs across your devices with a Nuvio account'],
+    points: ['Separate library and addons per profile', 'Optional PIN lock', 'Syncs across your devices'],
     shot: 'profiles.webp',
     w: 1200,
     h: 420,
@@ -37,12 +48,9 @@ const shown = [
 ];
 
 const features = [
-  { name: 'Built-in player', body: 'Direct streams and torrents play through mpv, so hardware decoding, external subtitle tracks, and per-title audio and delay settings all work without a separate install.' },
-  { name: 'Watch tracking', body: 'Connect Trakt, MyAnimeList, or Simkl. Episodes are logged as you finish them and progress is written back, so continue-watching is correct on the next device.' },
-  { name: 'Your library', body: 'Save titles, group them into custom collections built from addon catalogs, and pin the ones you open most to the top of the home screen.' },
-  { name: 'Skip intro and recap', body: 'Intro and recap segments are detected as an episode starts. One press skips them; ignore the prompt and it disappears on its own.' },
-  { name: 'Same app everywhere', body: 'Windows, macOS, Linux, Android, and LG webOS run the same Rust core, so addon behaviour and playback rules match across every device.' },
-  { name: 'No accounts required', body: 'Everything works offline and on-device by default. Sign in only if you want your library mirrored between machines.' },
+  { name: 'Collections you arrange', body: 'Save titles, group them into custom folders built from addon catalogs, and pin the ones you open most to the top of the home screen.' },
+  { name: 'The same app everywhere', body: 'Windows, macOS, Linux, Android, and LG webOS run the same Rust core, so addon behaviour and playback rules match on every device.' },
+  { name: 'Torrents without a client', body: 'Magnet links and torrent results stream straight from the results list. No separate download manager, no waiting for a full file.' },
 ];
 
 const builds = [
@@ -164,6 +172,29 @@ const description = 'Free, open-source media player for Windows, macOS, Linux, A
         <img src={url('/shots/' + f.shot)} width={f.w} height={f.h} alt={f.alt} loading="lazy" />
       </div>
     ))}
+
+    <div class="show">
+      <div class="show-copy">
+        <h3>Skip the intro</h3>
+        <p>
+          Intro and recap segments are detected as an episode starts, so the prompt is already
+          there when the theme music kicks in. Press it once and playback jumps to the first scene.
+          Ignore it and it fades out on its own.
+        </p>
+        <ul>
+          <li>Detected before the segment begins</li>
+          <li>One press, or one key on the remote</li>
+          <li>Never blocks the picture</li>
+        </ul>
+      </div>
+      <div class="demo">
+        <video id="demo-video" muted loop playsinline preload="metadata"
+          src="https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/720/Big_Buck_Bunny_720_10s_1MB.mp4"></video>
+        <button class="demo-skip" id="demo-skip" type="button" hidden>Skip Intro</button>
+        <div class="demo-bar"><span id="demo-fill"></span></div>
+        <p class="demo-credit">Demo clip: <em>Big Buck Bunny</em>, Blender Foundation, CC BY 3.0</p>
+      </div>
+    </div>
   </div>
 
   <div class="features">
@@ -173,6 +204,17 @@ const description = 'Free, open-source media player for Windows, macOS, Linux, A
         <p>{f.body}</p>
       </div>
     ))}
+  </div>
+</section>
+
+<section class="connect" aria-label="Services Fluxa connects to">
+  <p class="connect-label">Connect anything</p>
+  <div class="marquee">
+    <div class="marquee-track">
+      {[0, 1, 2, 3, 4, 5].map(() => connect.map(logo => (
+        <img src={url('/logos/' + logo.file)} alt={logo.name} width="32" height="32" />
+      )))}
+    </div>
   </div>
 </section>
 
