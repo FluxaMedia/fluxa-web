@@ -1,0 +1,25 @@
+---
+import { url } from '../lib/nav';
+const { current = 'docs' } = Astro.props;
+---
+<nav class="docs-topbar">
+  <div class="docs-topbar-inner">
+    <button class="menu-btn" id="menu-btn" aria-label="Toggle documentation menu" aria-expanded="false" aria-controls="sidebar"><i data-lucide="panel-left" style="width:18px;height:18px"></i></button>
+    <a class="docs-brand" href={url('/')} aria-label="Fluxa home">
+      <img src={url('/logo.png')} alt="" />
+      <span>Fluxa</span>
+      <span class="docs-pill">Docs</span>
+    </a>
+    <button class="docs-nav-toggle" id="docs-nav-toggle" aria-label="Open site menu" aria-expanded="false" aria-controls="docs-top-links">
+      <i data-lucide="menu" style="width:20px;height:20px"></i>
+    </button>
+    <div class="docs-top-links" id="docs-top-links">
+      <a class="docs-top-link" href={url('/#features')}><i data-lucide="layout-grid" style="width:13px;height:13px"></i> Features</a>
+      <a class="docs-top-link" href={url('/#platforms')}><i data-lucide="download" style="width:13px;height:13px"></i> Download</a>
+      <a class:list={['docs-top-link', current === 'docs' && 'active']} href={url('/docs')}><i data-lucide="book-open" style="width:13px;height:13px"></i> Docs</a>
+      <a class:list={['docs-top-link', current === 'account' && 'active']} href={url('/account')}><i data-lucide="user" style="width:13px;height:13px"></i> Account</a>
+      <a class="docs-top-link" href="https://github.com/FluxaMedia/fluxa-desktop" target="_blank" rel="noreferrer">GitHub</a>
+      <a class="docs-top-btn" href={url('/#platforms')}><i data-lucide="download" style="width:13px;height:13px"></i> Download</a>
+    </div>
+  </div>
+</nav>

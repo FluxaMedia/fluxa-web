@@ -1,0 +1,72 @@
+---
+import Topbar from '../components/Topbar.astro';
+import Sidebar from '../components/Sidebar.astro';
+import Toc from '../components/Toc.astro';
+import { url } from '../lib/nav';
+
+const { title, description, section, slug, headings = [], badges = [], updated, editPath, prev, next } = Astro.props;
+const pageTitle = `${title} - Fluxa Docs`;
+const issueUrl = `https://github.com/FluxaMedia/fluxa-docs-web/issues/new?title=${encodeURIComponent('Docs feedback: ' + title)}`;
+const editUrl = `https://github.com/FluxaMedia/fluxa-docs-web/edit/master/${editPath}`;
+const formatted = updated
+  ? new Date(updated).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+  : '';
+---
+<!DOCTYPE html>
+<html lang="en" data-base={url('')}>
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>{pageTitle}</title>
+<meta name="description" content={description} />
+<meta property="og:type" content="article" />
+<meta property="og:title" content={pageTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={url('/logo.png')} />
+<meta name="twitter:card" content="summary" />
+<link rel="icon" type="image/png" sizes="48x48" href={url('/favicon.png')} />
+<link rel="apple-touch-icon" href={url('/logo.png')} />
+<link rel="stylesheet" href={url('/style.css')} />
+</head>
+<body>
+<Topbar current="docs" />
+<div class="layout">
+<div class="overlay" id="overlay"></div>
+<Sidebar slug={slug} />
+<main class="main">
+<div class="content">
+
+  <div class="intro">
+    <h1>{title}</h1>
+    <p>{description}</p>
+    <div class="doc-meta">
+      <span>{section}</span>
+      {formatted && <span>Updated {formatted}</span>}
+      {badges.map(b => <span class="platform-badge">{b}</span>)}
+    </div>
+  </div>
+
+  <slot />
+
+  <nav class="doc-pager" aria-label="Documentation pagination">
+    {prev ? <a class="pager-card prev" href={url(`/docs/${prev.id}`)}><span>Previous</span><strong>{prev.data.title}</strong></a> : <span></span>}
+    {next ? <a class="pager-card next" href={url(`/docs/${next.id}`)}><span>Next</span><strong>{next.data.title}</strong></a> : <span></span>}
+  </nav>
+
+  <div class="doc-feedback">
+    <div>
+      <strong>Was this page useful?</strong>
+      <p>Report outdated steps, missing screenshots, or unclear wording.</p>
+    </div>
+    <a class="btn btn-ghost" href={editUrl} target="_blank" rel="noopener noreferrer">Edit this page</a>
+    <a class="btn btn-ghost" href={issueUrl} target="_blank" rel="noopener noreferrer">Report an issue</a>
+  </div>
+
+</div>
+<Toc headings={headings} />
+</main>
+</div>
+<script is:inline src={url('/lucide.min.js')}></script>
+<script is:inline src={url('/docs-client.js')}></script>
+</body>
+</html>

@@ -1,0 +1,95 @@
+---
+import Topbar from "../../components/Topbar.astro";
+import Sidebar from "../../components/Sidebar.astro";
+import { url } from "../../lib/nav";
+---
+<!DOCTYPE html>
+<html lang="en" data-base={url("")}>
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Docs — Fluxa Docs</title>
+<meta name="description" content="Fluxa documentation: start here, common tasks, troubleshooting, settings, addons, playback, sync, and account guides." />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Docs — Fluxa Docs" />
+<meta property="og:description" content="Fluxa documentation: start here, common tasks, troubleshooting, settings, addons, playback, sync, and account guides." />
+<meta property="og:image" content={url("/logo.png")} />
+<meta name="twitter:card" content="summary" />
+<link rel="icon" type="image/png" sizes="48x48" href={url("/favicon.png")} />
+<link rel="apple-touch-icon" href={url("/logo.png")} />
+<link rel="stylesheet" href={url("/style.css")} />
+</head>
+<body>
+<Topbar current="docs" />
+<div class="layout">
+<div class="overlay" id="overlay"></div>
+<Sidebar />
+<main class="main">
+<div class="content docs-home">
+
+<div class="docs-hero-grid">
+  <div class="home-hero">
+    <div class="logo-row">
+      <img src={url('/logo.png')} alt="Fluxa" />
+      <h1>Fluxa Docs</h1>
+    </div>
+    <p class="sub">Start here for setup, addons, playback, sync, library workflows, settings, and troubleshooting.</p>
+    <div class="btn-row">
+      <a class="btn btn-primary" href={url('/docs/getting-started')}>Start setup</a>
+      <a class="btn btn-ghost" href={url('/docs/troubleshooting')}>Fix a problem</a>
+      <a class="btn btn-ghost" href={url('/docs/concepts')}>Learn terms</a>
+    </div>
+  </div>
+  <div class="ui-shot" aria-hidden="true">
+    <div class="ui-shot-bar">
+      <span class="ui-shot-dot"></span>
+      <span class="ui-shot-dot"></span>
+      <span class="ui-shot-dot"></span>
+      <span class="ui-shot-title">Fluxa Home</span>
+    </div>
+    <div class="ui-shot-body">
+      <div class="ui-shot-hero"></div>
+      <div class="ui-shot-row-title"></div>
+      <div class="ui-shot-posters">
+        <span class="ui-shot-poster"></span>
+        <span class="ui-shot-poster"></span>
+        <span class="ui-shot-poster"></span>
+        <span class="ui-shot-poster"></span>
+        <span class="ui-shot-poster"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h2 id="start-here">Start here</h2>
+<div class="doc-card-grid">
+  <a class="doc-card" href={url('/docs/what-is-fluxa')}><strong>What Fluxa is</strong><span>The short explanation, platform support, and content model.</span></a>
+  <a class="doc-card" href={url('/docs/getting-started')}><strong>Install and first stream</strong><span>Download, create a profile, install an addon, and play something.</span></a>
+  <a class="doc-card" href={url('/docs/concepts')}><strong>Terms and concepts</strong><span>Addons, catalogs, manifests, debrid, Usenet, mpv, and source quality.</span></a>
+  <a class="doc-card" href={url('/docs/faq')}><strong>Quick answers</strong><span>Short answers for common account, addon, playback, and library questions.</span></a>
+</div>
+
+<h2 id="common-tasks">Common tasks</h2>
+<div class="task-grid">
+  <a class="task-card" href={url('/docs/addons-catalogs#installing-an-addon')}><strong>Install your first addon</strong><span>Paste a manifest URL and make content rows appear.</span></a>
+  <a class="task-card" href={url('/docs/sync-accounts#nuvio-cross-device-sync')}><strong>Set up Nuvio sync</strong><span>Keep library, profiles, collections, and progress aligned across devices.</span></a>
+  <a class="task-card" href={url('/docs/library-collections#creating-a-collection')}><strong>Create a collection</strong><span>Build custom library sections and optionally pin them to Home.</span></a>
+  <a class="task-card" href={url('/docs/troubleshooting#nothing-plays-when-i-press-play')}><strong>Fix playback issues</strong><span>Use symptom-based fixes for empty source lists, buffering, audio, and subtitles.</span></a>
+</div>
+
+<div class="callout callout-info">
+  <i data-lucide="info"></i>
+  <div><strong>Fluxa does not provide content.</strong> The app connects to addons you install. If the Home screen is empty or nothing plays, start with the addon guide and troubleshooting page.</div>
+</div>
+
+<div class="note">
+  <strong>Looking for something else?</strong> Everything else — architecture, advanced playback, debrid/Usenet setup, settings reference, platform notes, and more — is one click away in the sidebar, grouped by topic. Press <code>/</code> to search by name.
+</div>
+
+</div>
+</main>
+</div>
+<script is:inline src={url("/lucide.min.js")}></script>
+<script is:inline src={url("/docs-client.js")}></script>
+</body>
+</html>
