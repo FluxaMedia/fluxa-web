@@ -373,9 +373,10 @@ a.row:hover .row-action svg { transform: translateX(4px); }
 }
 
 .stage img {
-  max-height: 520px;
   width: auto;
+  height: auto;
   max-width: 100%;
+  max-height: 520px;
   border: 1px solid var(--line);
   border-radius: 10px;
 }
@@ -453,9 +454,7 @@ a.row:hover .row-action svg { transform: translateX(4px); }
 .marquee-track .mark {
   height: 26px;
   width: auto;
-  max-width: 132px;
-  object-fit: contain;
-  object-position: center;
+  max-width: none;
   flex-shrink: 0;
   opacity: 0.72;
   transition: opacity 0.2s;
