@@ -1,5 +1,6 @@
 ---
 import { url } from '../lib/nav';
+import App from '../account/App';
 ---
 <!DOCTYPE html>
 <html lang="en" data-base={url('')}>
@@ -17,9 +18,7 @@ import { url } from '../lib/nav';
 
 <nav class="top-nav account-top-nav">
   <div class="nav-container">
-    <button class="panel-menu-btn" id="panel-menu-btn" aria-label="Open account menu">
-      <i data-lucide="panel-left" style="width:18px;height:18px"></i>
-    </button>
+    <span id="panel-menu-slot"></span>
     <a class="nav-logo" href={url('/')} aria-label="Fluxa home">
       <img src={url('/logo.png')} alt="" />
       <span>Fluxa</span>
@@ -42,24 +41,9 @@ import { url } from '../lib/nav';
   </div>
 </nav>
 
-<div id="app"></div>
-
-<div class="toast" id="toast"></div>
-
-<div class="modal-overlay" id="modal">
-  <div class="modal">
-    <h3 id="modal-title"></h3>
-    <p id="modal-body"></p>
-    <div class="modal-actions">
-      <button class="btn btn-ghost" id="modal-cancel">Cancel</button>
-      <button class="btn btn-danger" id="modal-confirm">Confirm</button>
-    </div>
-  </div>
-</div>
+<App client:only="react" base={url('')} />
 
 <script is:inline src={url('/lucide.min.js')}></script>
 <script is:inline src={url('/docs-client.js')}></script>
-<script is:inline src={url('/account-api.js')}></script>
-<script is:inline src={url('/account.js')}></script>
 </body>
 </html>
