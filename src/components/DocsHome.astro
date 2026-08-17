@@ -25,6 +25,7 @@ const { title, description, tagline, buttons, shotTitle } = entry.data;
 <meta name="twitter:card" content="summary" />
 <link rel="icon" type="image/png" sizes="48x48" href={url('/favicon.png')} />
 <link rel="apple-touch-icon" href={url('/logo.png')} />
+<link rel="stylesheet" href={url('/type.css')} />
 <link rel="stylesheet" href={url('/style.css')} />
 {localeList.map(code => (
   <link rel="alternate" hreflang={code} href={new URL(url(localePath(code, '/docs')), Astro.site)} />

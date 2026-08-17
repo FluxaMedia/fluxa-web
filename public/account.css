@@ -1,14 +1,14 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --bg: #0a0a0b;
-  --surface: #111114;
-  --surface-2: #16161a;
-  --border: rgba(255,255,255,0.08);
-  --border-strong: rgba(255,255,255,0.14);
-  --text: #c9cdd6;
-  --text-heading: #f0f1f3;
-  --text-muted: rgba(255,255,255,0.5);
+  --bg: #0a0a0a;
+  --surface: #131313;
+  --surface-2: #171717;
+  --border: rgba(255,255,255,0.09);
+  --border-strong: rgba(255,255,255,0.18);
+  --text: #a0a0a8;
+  --text-heading: #fafafa;
+  --text-muted: #6c6c76;
   --danger: #d66;
   --nav-h: 64px;
 }
@@ -18,7 +18,7 @@ html { scroll-behavior: smooth; }
 body {
   background: var(--bg);
   color: var(--text);
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  font-family: 'Archivo', system-ui, sans-serif;
   font-size: 15px;
   line-height: 1.6;
   min-height: 100vh;
