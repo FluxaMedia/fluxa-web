@@ -293,7 +293,7 @@ a.row:hover .row-action svg { transform: translateX(4px); }
   .stage img { max-height: 400px; }
   .show { grid-template-columns: minmax(0, 1fr); gap: 20px; }
   .marquee-track { gap: 40px; }
-  .marquee-track span { font-size: 16px; }
+  .marquee-track .mark { font-size: 15px; gap: 8px; }
   .show:nth-child(even) .show-copy { order: 0; }
 }
 
@@ -450,8 +450,11 @@ a.row:hover .row-action svg { transform: translateX(4px); }
   animation: slide 38s linear infinite;
 }
 
-.marquee-track span {
-  font-size: 19px;
+.marquee-track .mark {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 18px;
   font-weight: 600;
   letter-spacing: -0.015em;
   color: var(--gray);
@@ -459,8 +462,16 @@ a.row:hover .row-action svg { transform: translateX(4px); }
   transition: color 0.2s;
 }
 
+.marquee-track .mark img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  border-radius: 5px;
+  flex-shrink: 0;
+}
+
 .marquee:hover .marquee-track { animation-play-state: paused; }
-.marquee-track span:hover { color: var(--white); }
+.marquee-track .mark:hover { color: var(--white); }
 
 @keyframes slide { to { transform: translateX(-50%); } }
 
