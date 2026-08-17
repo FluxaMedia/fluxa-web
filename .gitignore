@@ -3,7 +3,3 @@
 node_modules/
 dist/
 .astro/
-
-# local screenshot helpers
-shot.mjs
-demoshot.mjs
