@@ -58,14 +58,14 @@ const features = [
 ];
 
 const builds = [
-  { icon: 'windows', name: 'Windows', req: 'Windows 10 or later', file: '.exe', href: REPO_DESKTOP + '/releases/latest' },
-  { icon: 'apple', name: 'macOS', req: 'macOS 11 or later', file: '.dmg', href: REPO_DESKTOP + '/releases/latest' },
-  { icon: 'linux', name: 'Linux', req: 'mpv bundled', file: '.deb / .rpm / AppImage', href: REPO_DESKTOP + '/releases/latest' },
-  { icon: 'android', name: 'Android', req: 'Phones and tablets', file: '.apk', href: REPO_MOBILE + '/releases/latest' },
-  { icon: 'apple', name: 'iOS', req: 'iPhone and iPad', file: 'Get it', href: REPO_MOBILE + '/releases/latest' },
-  { icon: 'android', name: 'Android TV', req: 'Set-top boxes and TVs', file: '.apk', href: REPO_MOBILE + '/releases/latest' },
-  { icon: 'apple', name: 'tvOS', req: 'Apple TV', file: 'Get it', href: REPO_MOBILE + '/releases/latest' },
-  { icon: 'tv', name: 'webOS', req: 'LG TVs via Developer Mode', file: 'Get it', href: REPO_DESKTOP + '/releases/latest' },
+  { icon: 'windows', name: 'Windows', req: 'Windows 10 or later', file: 'Download .exe', href: REPO_DESKTOP + '/releases/latest' },
+  { icon: 'apple', name: 'macOS', req: 'macOS 11 or later, universal', file: 'Download .dmg', href: REPO_DESKTOP + '/releases/latest' },
+  { icon: 'linux', name: 'Linux', req: '.deb, .rpm, AppImage', file: 'Download', href: REPO_DESKTOP + '/releases/latest' },
+  { icon: 'tv', name: 'webOS', req: 'LG TVs, Developer Mode', file: 'Download', href: REPO_DESKTOP + '/releases/latest' },
+  { icon: 'android', name: 'Android', req: 'Phones and tablets', file: 'Download .apk', href: REPO_MOBILE + '/releases/latest' },
+  { icon: 'android', name: 'Android TV', req: 'Set-top boxes and TVs', file: 'Download .apk', href: REPO_MOBILE + '/releases/latest' },
+  { icon: 'apple', name: 'iOS', req: 'iPhone and iPad', file: 'Download', href: REPO_MOBILE + '/releases/latest' },
+  { icon: 'apple', name: 'tvOS', req: 'Apple TV', file: 'Download', href: REPO_MOBILE + '/releases/latest' },
 ];
 
 const repos = [
@@ -230,15 +230,16 @@ const description = 'Free, open-source media player for Windows, macOS, Linux, A
   <div class="section-body grabs">
     {builds.map(b => (
       <a class="grab" href={b.href} target="_blank" rel="noopener">
-        <span class="grab-icon"><Icon name={b.icon} size={22} /></span>
-        <span class="grab-main">
-          <span class="grab-os" style="display:block">{b.name}</span>
-          <span class="grab-req" style="display:block">{b.req}</span>
+        <span class="grab-head">
+          <Icon name={b.icon} size={20} />
+          {b.name}
         </span>
-        <span class="grab-go"><Icon name="download" size={13} /> {b.file}</span>
+        <span class="grab-req">{b.req}</span>
+        <span class="grab-go">{b.file} <Icon name="arrow-right" size={13} /></span>
       </a>
     ))}
   </div>
+
 </section>
 
 <section class="section wrap" id="source">
