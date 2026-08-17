@@ -74,6 +74,7 @@ const description = 'Free, open-source media player for Windows, macOS, Linux, A
       <Icon name="menu" size={18} />
     </button>
     <div class="nav-menu" id="nav-menu">
+      <a href="#screenshots">Screenshots</a>
       <a href="#features">Features</a>
       <a href="#download">Download</a>
       <a href={url('/docs')}>Docs</a>
@@ -98,6 +99,21 @@ const description = 'Free, open-source media player for Windows, macOS, Linux, A
     {platforms.map(p => <span><Icon name={p.icon} size={15} /> {p.name}</span>)}
   </div>
 </header>
+
+<section class="section wrap" id="screenshots">
+  <h2>How it looks</h2>
+  <p class="lead">The desktop app with a metadata addon installed. Android and webOS use the same layout.</p>
+  <div class="section-body shots">
+    <figure>
+      <img src={url('/shots/home.webp')} width="1400" height="889" alt="Fluxa home screen showing a featured title and a row of movie posters" loading="lazy" />
+      <figcaption>Home — catalogs come from the addons you install.</figcaption>
+    </figure>
+    <figure>
+      <img src={url('/shots/detail.webp')} width="1400" height="889" alt="Fluxa detail page showing a film with summary, cast, and playback actions" loading="lazy" />
+      <figcaption>Detail — summary, cast, awards, and one press to play.</figcaption>
+    </figure>
+  </div>
+</section>
 
 <section class="section wrap" id="features">
   <h2>What it does</h2>

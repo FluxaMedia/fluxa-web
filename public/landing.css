@@ -306,3 +306,16 @@ a.row:hover .row-action svg { transform: translateX(4px); }
   .row-action, .row-meta { order: 3; margin-left: auto; }
   .release-head { width: 100%; }
 }
+
+.shots { display: grid; gap: 40px; }
+
+.shots figure { margin: 0; }
+
+.shots img {
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+
+.shots figcaption { margin-top: 12px; font-size: 14px; color: var(--gray-dim); }
