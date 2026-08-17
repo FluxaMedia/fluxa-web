@@ -168,7 +168,7 @@ img { display: block; max-width: 100%; }
 }
 
 .hero-runs span { display: inline-flex; align-items: center; gap: 8px; }
-.hero-runs svg { width: 15px; height: 15px; }
+.hero-runs img { height: 16px; width: auto; max-width: 48px; object-fit: contain; }
 
 .section { padding: clamp(56px, 8vh, 84px) 0; border-top: 1px solid var(--line); }
 
@@ -239,7 +239,8 @@ a.row:hover .row-action svg { transform: translateX(4px); }
   color: var(--white);
 }
 
-.grab-head svg { width: 20px; height: 20px; flex-shrink: 0; }
+.grab-head img { height: 22px; width: auto; max-width: 64px; object-fit: contain; flex-shrink: 0; }
+.grab-head img.wordmark { height: 19px; max-width: 110px; }
 
 .grab-req {
   display: block;

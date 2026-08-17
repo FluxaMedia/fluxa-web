@@ -7,12 +7,11 @@ const REPO_MOBILE = 'https://github.com/FluxaMedia/fluxa';
 const REPO_CORE = 'https://github.com/FluxaMedia/fluxa-core';
 
 const platforms = [
-  { icon: 'windows', name: 'Windows' },
-  { icon: 'apple', name: 'macOS' },
-  { icon: 'linux', name: 'Linux' },
-  { icon: 'android', name: 'Android' },
-  { icon: 'apple', name: 'iOS' },
-  { icon: 'tv', name: 'TV' },
+  { logo: 'windows.svg', name: 'Windows' },
+  { logo: 'apple.svg', name: 'macOS' },
+  { logo: 'linux.svg', name: 'Linux' },
+  { logo: 'android.svg', name: 'Android' },
+  { logo: 'webos.svg', name: 'webOS' },
 ];
 
 const connect = [
@@ -58,14 +57,14 @@ const features = [
 ];
 
 const builds = [
-  { icon: 'windows', name: 'Windows', req: 'Windows 10 or later', file: 'Download .exe', href: REPO_DESKTOP + '/releases/latest' },
-  { icon: 'apple', name: 'macOS', req: 'macOS 11 or later, universal', file: 'Download .dmg', href: REPO_DESKTOP + '/releases/latest' },
-  { icon: 'linux', name: 'Linux', req: '.deb, .rpm, AppImage', file: 'Download', href: REPO_DESKTOP + '/releases/latest' },
-  { icon: 'tv', name: 'webOS', req: 'LG TVs, Developer Mode', file: 'Download', href: REPO_DESKTOP + '/releases/latest' },
-  { icon: 'android', name: 'Android', req: 'Phones and tablets', file: 'Download .apk', href: REPO_MOBILE + '/releases/latest' },
-  { icon: 'android', name: 'Android TV', req: 'Set-top boxes and TVs', file: 'Download .apk', href: REPO_MOBILE + '/releases/latest' },
-  { icon: 'apple', name: 'iOS', req: 'iPhone and iPad', file: 'Download', href: REPO_MOBILE + '/releases/latest' },
-  { icon: 'apple', name: 'tvOS', req: 'Apple TV', file: 'Download', href: REPO_MOBILE + '/releases/latest' },
+  { logo: 'windows.svg', name: 'Windows', req: 'Windows 10 or later', file: 'Download .exe', href: REPO_DESKTOP + '/releases/latest' },
+  { logo: 'apple.svg', name: 'macOS', req: 'macOS 11 or later, universal', file: 'Download .dmg', href: REPO_DESKTOP + '/releases/latest' },
+  { logo: 'linux.svg', name: 'Linux', req: '.deb, .rpm, AppImage', file: 'Download', href: REPO_DESKTOP + '/releases/latest' },
+  { logo: 'webos.svg', name: 'webOS', wordmark: true, req: 'LG TVs, Developer Mode', file: 'Download', href: REPO_DESKTOP + '/releases/latest' },
+  { logo: 'android.svg', name: 'Android', req: 'Phones and tablets', file: 'Download .apk', href: REPO_MOBILE + '/releases/latest' },
+  { logo: 'android.svg', name: 'Android TV', req: 'Set-top boxes and TVs', file: 'Download .apk', href: REPO_MOBILE + '/releases/latest' },
+  { logo: 'apple.svg', name: 'iOS', req: 'iPhone and iPad', file: 'Download', href: REPO_MOBILE + '/releases/latest' },
+  { logo: 'apple.svg', name: 'tvOS', req: 'Apple TV', file: 'Download', href: REPO_MOBILE + '/releases/latest' },
 ];
 
 const repos = [
@@ -137,7 +136,7 @@ const description = 'Free, open-source media player for Windows, macOS, Linux, A
       <a class="btn btn-ghost" href={url('/docs')}><Icon name="book-open" size={15} /> Read the docs</a>
     </div>
     <div class="hero-runs">
-      {platforms.map(p => <span><Icon name={p.icon} size={15} /> {p.name}</span>)}
+      {platforms.map(p => <span><img src={url('/logos/' + p.logo)} alt="" width="16" height="16" /> {p.name}</span>)}
     </div>
   </div>
 
@@ -231,8 +230,8 @@ const description = 'Free, open-source media player for Windows, macOS, Linux, A
     {builds.map(b => (
       <a class="grab" href={b.href} target="_blank" rel="noopener">
         <span class="grab-head">
-          <Icon name={b.icon} size={20} />
-          {b.name}
+          <img src={url('/logos/' + b.logo)} alt={b.wordmark ? b.name : ''} height="22" class={b.wordmark ? 'wordmark' : undefined} />
+          {!b.wordmark && b.name}
         </span>
         <span class="grab-req">{b.req}</span>
         <span class="grab-go">{b.file} <Icon name="arrow-right" size={13} /></span>
