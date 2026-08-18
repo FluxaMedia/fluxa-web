@@ -5,7 +5,7 @@ import { remarkFluxaDirectives, remarkBaseLinks } from './src/plugins/remark-flu
 
 export default defineConfig({
   site: 'https://fluxamedia.github.io',
-  base: '/fluxa-docs-web',
+  base: '/fluxa-web',
   trailingSlash: 'ignore',
   integrations: [react()],
   i18n: {
