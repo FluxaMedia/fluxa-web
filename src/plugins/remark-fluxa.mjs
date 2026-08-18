@@ -46,13 +46,15 @@ export function remarkFluxaDirectives() {
           const para = item.children[0];
           const link = para.children.find(c => c.type === 'link');
           if (!link) return '';
+          const normalized = link.url.replace(/^\/fluxa-web\/(?:fluxa-web\/)+/, '/fluxa-web/');
+          const href = normalized.startsWith('/fluxa-web/') ? normalized : `/fluxa-web${normalized}`;
           const title = link.children.map(c => c.value ?? '').join('');
           const rest = para.children
             .slice(para.children.indexOf(link) + 1)
             .map(c => c.value ?? '')
             .join('')
             .replace(/^\s*[—-]\s*/, '');
-          return `<a class="${cardClass}" href="${link.url}"><strong>${title}</strong><span>${rest}</span></a>`;
+          return `<a class="${cardClass}" href="${href}"><strong>${title}</strong><span>${rest}</span></a>`;
         });
         html(node, `<div class="${gridClass}">${cards.join('')}</div>`);
         return;
@@ -78,7 +80,8 @@ export function remarkFluxaDirectives() {
 const DEFAULT_LOCALE = 'en';
 
 export function remarkBaseLinks() {
-  const base = (process.env.BASE_URL ?? '/fluxa-web').replace(/\/$/, '');
+  const configuredBase = process.env.BASE_URL;
+  const base = (configuredBase && configuredBase !== '/' ? configuredBase : '/fluxa-web').replace(/\/$/, '');
   return (tree, file) => {
     const match = (file.path ?? '').replace(/\\/g, '/').match(/\/content\/(?:docs|home)\/([^/]+)/);
     const locale = match ? match[1].replace(/\.md$/, '') : DEFAULT_LOCALE;
