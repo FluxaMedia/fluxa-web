@@ -78,7 +78,7 @@ export function remarkFluxaDirectives() {
 const DEFAULT_LOCALE = 'en';
 
 export function remarkBaseLinks() {
-  const base = (process.env.BASE_URL ?? '/fluxa-docs-web').replace(/\/$/, '');
+  const base = (process.env.BASE_URL ?? '/fluxa-web').replace(/\/$/, '');
   return (tree, file) => {
     const match = (file.path ?? '').replace(/\\/g, '/').match(/\/content\/(?:docs|home)\/([^/]+)/);
     const locale = match ? match[1].replace(/\.md$/, '') : DEFAULT_LOCALE;
