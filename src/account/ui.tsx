@@ -12,6 +12,8 @@ export type Profile = {
   uses_primary_addons?: boolean;
   uses_primary_plugins?: boolean;
   pin_enabled?: boolean;
+  pin_locked_until?: string | null;
+  updated_at?: string;
 };
 
 export function initials(name?: string | null) {

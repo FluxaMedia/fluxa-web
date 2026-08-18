@@ -70,6 +70,14 @@ export const NuvioClient = {
   getUser: (token: string) => get('/auth/v1/user', token),
 
   pullProfiles: (token: string) => post('/rest/v1/rpc/sync_pull_profiles', {}, token),
+  verifyProfilePin: (token: string, profileId: number, pin: string) =>
+    post('/rest/v1/rpc/verify_profile_pin', { p_profile_id: profileId, p_pin: pin }, token),
+  setProfilePin: (token: string, profileId: number, pin: string, currentPin?: string) =>
+    post('/rest/v1/rpc/set_profile_pin', { p_profile_id: profileId, p_pin: pin, ...(currentPin ? { p_current_pin: currentPin } : {}) }, token),
+  clearProfilePin: (token: string, profileId: number, currentPin?: string) =>
+    post('/rest/v1/rpc/clear_profile_pin', { p_profile_id: profileId, ...(currentPin ? { p_current_pin: currentPin } : {}) }, token),
+  clearProfilePinWithPassword: (token: string, profileId: number, accountPassword: string) =>
+    post('/rest/v1/rpc/clear_profile_pin_with_account_password', { p_profile_id: profileId, p_account_password: accountPassword }, token),
   pushProfiles: (token: string, profiles: unknown[]) =>
     post('/rest/v1/rpc/sync_push_profiles', { p_client_max_profiles: NUVIO_MAX_PROFILES, p_profiles: profiles }, token),
 

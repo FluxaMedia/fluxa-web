@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Pencil, Plus, Trash2, X } from 'lucide-react';
+import { KeyRound, Pencil, Plus, Save, Trash2, X } from 'lucide-react';
 import { NUVIO_MAX_PROFILES, NuvioClient, StremioClient } from './api';
 import { useAccount, useLoad } from './context';
 import type { Profile } from './ui';
@@ -107,6 +107,12 @@ export function Profiles() {
   const confirm = useConfirm();
   const [name, setName] = useState('');
   const [busy, setBusy] = useState(false);
+  const [editing, setEditing] = useState<number | null>(null);
+  const [editName, setEditName] = useState('');
+  const [editAvatar, setEditAvatar] = useState('');
+  const [currentPin, setCurrentPin] = useState('');
+  const [newPin, setNewPin] = useState('');
+  const [accountPassword, setAccountPassword] = useState('');
 
   const push = async (list: Profile[]) => {
     setBusy(true);
@@ -134,6 +140,57 @@ export function Profiles() {
     if (!trimmed) return toast('Name cannot be empty', true);
     await push(profiles.map(x => (x.profile_index === p.profile_index ? { ...x, name: trimmed } : x)));
     toast('Profile renamed');
+  };
+
+  const startEdit = (p: Profile) => {
+    setEditing(p.profile_index);
+    setEditName(p.name || '');
+    setEditAvatar(p.avatar_id || '');
+    setCurrentPin('');
+    setNewPin('');
+    setAccountPassword('');
+  };
+
+  const saveProfile = async (p: Profile) => {
+    const trimmed = editName.trim();
+    if (!trimmed) return toast('Name cannot be empty', true);
+    if (newPin && !/^\d{4}$/.test(newPin)) return toast('PIN must be exactly 4 digits', true);
+    setBusy(true);
+    try {
+      await NuvioClient.pushProfiles(
+        await token(),
+        profiles.map(x => x.profile_index === p.profile_index
+          ? { ...toPushShape(x), name: trimmed, avatar_id: editAvatar || null }
+          : toPushShape(x))
+      );
+      if (newPin) {
+        await NuvioClient.setProfilePin(await token(), p.profile_index, newPin, currentPin || undefined);
+      }
+      await reloadProfiles();
+      setEditing(null);
+      toast('Profile saved');
+    } catch (err) {
+      toast((err as Error).message || 'Could not save profile', true);
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const clearPin = async (p: Profile) => {
+    if (!currentPin && !accountPassword) return toast('Enter the current PIN or account password', true);
+    setBusy(true);
+    try {
+      if (currentPin) await NuvioClient.clearProfilePin(await token(), p.profile_index, currentPin);
+      else await NuvioClient.clearProfilePinWithPassword(await token(), p.profile_index, accountPassword);
+      await reloadProfiles();
+      setCurrentPin('');
+      setAccountPassword('');
+      toast('PIN removed');
+    } catch (err) {
+      toast((err as Error).message || 'Could not remove PIN', true);
+    } finally {
+      setBusy(false);
+    }
   };
 
   const remove = async (p: Profile) => {
@@ -182,7 +239,8 @@ export function Profiles() {
       </div>
       <div className="list">
         {profiles.map(p => (
-          <div className="row" key={p.profile_index}>
+          <div key={p.profile_index}>
+          <div className="row">
             <ProfileAvatar profile={p} avatars={avatars} size={42} />
             <div className="row-main">
               <div className="row-title">
@@ -191,11 +249,33 @@ export function Profiles() {
               <div className="row-sub">Index {p.profile_index}{p.pin_enabled ? ' · PIN locked' : ''}</div>
             </div>
             <div className="row-actions">
-              <button className="btn btn-ghost btn-sm" onClick={() => rename(p)} disabled={busy}><Pencil size={13} /></button>
+              <button className="btn btn-ghost btn-sm" onClick={() => editing === p.profile_index ? setEditing(null) : startEdit(p)} disabled={busy}><Pencil size={13} /></button>
               {p.profile_index !== 1 && (
                 <button className="btn btn-danger btn-sm" onClick={() => remove(p)} disabled={busy}><Trash2 size={13} /></button>
               )}
             </div>
+          </div>
+          {editing === p.profile_index && (
+            <div className="edit-card">
+              <div className="toolbar">
+                <input className="inline-input grow" maxLength={40} value={editName} onChange={e => setEditName(e.target.value)} placeholder="Profile name" />
+                <select className="inline-input" value={editAvatar} onChange={e => setEditAvatar(e.target.value)}>
+                  <option value="">Default avatar</option>
+                  {avatars.map(a => <option key={a.id} value={a.id}>{a.id}</option>)}
+                </select>
+                <button className="btn btn-primary" onClick={() => saveProfile(p)} disabled={busy}><Save size={14} /> Save</button>
+              </div>
+              <div className="pin-editor">
+                <div className="pin-title"><KeyRound size={14} /> {p.pin_enabled ? 'Change or remove PIN' : 'Set profile PIN'}</div>
+                {p.pin_enabled && <input className="inline-input" inputMode="numeric" maxLength={4} type="password" placeholder="Current PIN" value={currentPin} onChange={e => setCurrentPin(e.target.value.replace(/\D/g, '').slice(0, 4))} />}
+                <input className="inline-input" inputMode="numeric" maxLength={4} type="password" placeholder="New 4-digit PIN" value={newPin} onChange={e => setNewPin(e.target.value.replace(/\D/g, '').slice(0, 4))} />
+                {p.pin_enabled && <>
+                  <input className="inline-input" type="password" placeholder="Account password (PIN removal fallback)" value={accountPassword} onChange={e => setAccountPassword(e.target.value)} />
+                  <button className="btn btn-danger btn-sm" onClick={() => clearPin(p)} disabled={busy}>Remove PIN</button>
+                </>}
+              </div>
+            </div>
+          )}
           </div>
         ))}
       </div>
